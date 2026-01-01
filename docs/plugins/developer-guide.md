@@ -1179,10 +1179,9 @@ cargo clean && cargo build
 
 ## Further Reading
 
-- [Foundation API Documentation](../foundation/src/lib.rs)
-- [Plugin Macro Source](../foundation/src/plugin_interface/plugin_macro.rs)
-- [Example Plugins](../components/)
+- [Foundation API Reference](/docs/foundation/api-reference)
+- [Foundation Overview](/docs/foundation/intro)
 
 ---
 
-*Last updated: December 2025*
+*Last updated: January 2026*

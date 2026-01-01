@@ -617,6 +617,5 @@ foundation::plugin! {
 
 ## See Also
 
-- [Plugin Developer Guide](/docs/plugins/developer-guide) — Step-by-step plugin creation
-- [Plugin Reference](/docs/plugins/reference) — All 50+ built-in variations
-- [Architecture](/docs/foundation/architecture) — System internals
+- [Foundation Overview](/docs/foundation/intro) — Getting started with Foundation
+- [Pricing](/pricing) — License tiers and pricing
