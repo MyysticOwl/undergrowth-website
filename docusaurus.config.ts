@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Undergrowth',
-  tagline: 'Deep Roots, Strong Systems',
+  tagline: 'Automate Everything. Deploy Anywhere.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -42,15 +42,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/MyysticOwl/undergrowth-website/tree/main/',
         },
-        blog: {
-          showReadingTime: true,
-          editUrl: 'https://github.com/MyysticOwl/undergrowth-website/tree/main/',
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -64,7 +57,7 @@ const config: Config = {
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
-      respectPrefersColorScheme: true,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'Undergrowth',
@@ -75,15 +68,25 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'foundationSidebar',
           position: 'left',
-          label: 'Documentation',
+          label: 'Docs',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/MyysticOwl/undergrowth',
-          label: 'GitHub',
-          position: 'right',
+          type: 'docSidebar',
+          sidebarId: 'pluginsSidebar',
+          position: 'left',
+          label: 'Plugins',
+        },
+        {
+          to: '/pricing',
+          label: 'Pricing',
+          position: 'left',
+        },
+        {
+          to: '/download',
+          label: 'Download',
+          position: 'left',
         },
       ],
     },
@@ -91,15 +94,15 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Learn',
           items: [
             {
               label: 'Getting Started',
               to: '/docs/intro',
             },
             {
-              label: 'Plugin API',
-              to: '/docs/intro', // Placeholder until we have structure
+              label: 'Plugin Reference',
+              to: '/docs/plugins/reference',
             },
           ],
         },
@@ -107,8 +110,12 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/MyysticOwl/undergrowth',
+              label: 'GitHub Discussions',
+              href: 'https://github.com/MyysticOwl/undergrowth-website/discussions',
+            },
+            {
+              label: 'Discord',
+              href: 'https://discord.gg/undergrowth',
             },
           ],
         },
@@ -116,8 +123,16 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: 'Download',
+              to: '/download',
+            },
+            {
+              label: 'Pricing',
+              to: '/pricing',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/MyysticOwl/undergrowth-website',
             },
           ],
         },

@@ -1,0 +1,255 @@
+/* Pricing Page Styles */
+
+.pricingHeader {
+    padding: 4rem 0 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(46, 133, 85, 0.1) 0%, rgba(74, 167, 121, 0.1) 100%);
+}
+
+.headerSubtitle {
+    font-size: 1.25rem;
+    color: var(--ifm-color-emphasis-700);
+    margin-top: 0.5rem;
+}
+
+/* Pricing Cards Grid */
+.pricingSection {
+    padding: 3rem 0;
+}
+
+.pricingGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1100px) {
+    .pricingGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .pricingGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Individual Pricing Card */
+.pricingCard {
+    background: var(--ifm-card-background-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pricingCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pricingCard.highlighted {
+    border: 2px solid var(--ifm-color-primary);
+    background: linear-gradient(180deg, rgba(74, 167, 121, 0.05) 0%, transparent 100%);
+}
+
+.popularBadge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ifm-color-primary);
+    color: #fff;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tierName {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.priceContainer {
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--ifm-color-primary);
+}
+
+.period {
+    font-size: 1rem;
+    color: var(--ifm-color-emphasis-600);
+}
+
+.tierDescription {
+    color: var(--ifm-color-emphasis-700);
+    margin-bottom: 1.5rem;
+    min-height: 48px;
+}
+
+.featureList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    flex-grow: 1;
+}
+
+.featureItem {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.checkmark {
+    color: var(--ifm-color-primary);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.ctaButton {
+    width: 100%;
+    text-align: center;
+}
+
+/* Volume Discounts */
+.volumeSection {
+    padding: 2rem 0;
+}
+
+.volumeGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media (max-width: 700px) {
+    .volumeGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.volumeCard {
+    background: var(--ifm-card-background-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.volumeMachines {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.volumeDiscount {
+    color: var(--ifm-color-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.volumePrice {
+    color: var(--ifm-color-emphasis-600);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+/* Feature Comparison Table */
+.comparisonWrapper {
+    background: var(--ifm-background-surface-color);
+    padding: 3rem 0;
+}
+
+.comparisonSection {
+    overflow-x: auto;
+}
+
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.comparisonTable {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.comparisonTable th:first-child,
+.comparisonTable td:first-child {
+    text-align: left;
+}
+
+.comparisonTable th {
+    font-weight: 600;
+    background: var(--ifm-color-emphasis-100);
+}
+
+.highlightedColumn {
+    background: rgba(74, 167, 121, 0.1);
+}
+
+/* FAQ Section */
+.faqSection {
+    padding: 2rem 0;
+}
+
+.faqGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (max-width: 700px) {
+    .faqGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.faqItem h4 {
+    margin-bottom: 0.5rem;
+}
+
+.faqItem p {
+    color: var(--ifm-color-emphasis-700);
+    margin: 0;
+}
+
+/* Final CTA Section */
+.ctaSection {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, rgba(46, 133, 85, 0.1) 0%, rgba(74, 167, 121, 0.15) 100%);
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}

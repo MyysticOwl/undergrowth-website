@@ -1,0 +1,55 @@
+.useCases {
+    padding: 4rem 0;
+    background: var(--ifm-background-surface-color);
+}
+
+.useCaseCard {
+    background: var(--ifm-card-background-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 100%;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.useCaseCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.useCaseHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.useCaseIcon {
+    font-size: 2rem;
+}
+
+.useCaseHeader h3 {
+    margin: 0;
+}
+
+.useCaseDescription {
+    color: var(--ifm-color-emphasis-700);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.benefitTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.benefitTag {
+    background: rgba(74, 167, 121, 0.15);
+    color: var(--ifm-color-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
