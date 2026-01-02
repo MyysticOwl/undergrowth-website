@@ -14,6 +14,14 @@ const config: Config = {
     v4: true,
   },
 
+  scripts: [
+    {
+      src: 'https://assets.lemonsqueezy.com/lemon.js',
+      defer: true,
+    },
+  ],
+
+
   // Set the production url of your site here
   url: 'https://undergrowth.io',
   // Set the /<baseUrl>/ pathname under which your site is served

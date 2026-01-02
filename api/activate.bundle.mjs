@@ -1730,12 +1730,67 @@ async function handler(req, res) {
     return res.status(400).json({ error: "Email and License Key are required" });
   }
   try {
-    const edition = "pro";
-    const variant_name = "Pro License";
+    const LS_API_KEY = process.env.LEMONSQUEEZY_API_KEY;
+    let validatedLicense = null;
+    let edition = "community";
+    let variant_name = "Community License";
+    let expiryDateStr = null;
+    let customerEmail = null;
+    if (license_key.startsWith("ls_")) {
+    }
+    if (LS_API_KEY) {
+      const response = await fetch("https://api.lemonsqueezy.com/v1/licenses/activate", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          license_key,
+          instance_name: machine_id || "undergrowth-cli"
+        })
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("LemonSqueezy Error:", response.status, errorText);
+        return res.status(400).json({ error: "Invalid or incorrect license key." });
+      }
+      const data = await response.json();
+      if (!data.activated && !data.valid) {
+        return res.status(403).json({ error: "License key is not active or invalid." });
+      }
+      validatedLicense = data;
+      customerEmail = data.meta?.customer_email || data.user_email;
+      variant_name = data.meta?.variant_name || "Standard License";
+      if (data.license_key?.status === "expired") {
+        return res.status(403).json({ error: "License key has expired." });
+      }
+      expiryDateStr = data.license_key?.expires_at;
+      if (customerEmail && customerEmail.toLowerCase() !== email.toLowerCase()) {
+        return res.status(403).json({ error: "Email provided does not match the license owner." });
+      }
+      const nameLower = variant_name.toLowerCase();
+      if (nameLower.includes("enterprise")) edition = "enterprise";
+      else if (nameLower.includes("team")) edition = "team";
+      else if (nameLower.includes("pro")) edition = "pro";
+      else edition = "community";
+    } else {
+      console.warn("LEMONSQUEEZY_API_KEY not set. Skipping validation (DEV MODE).");
+      if (license_key === "test_key") {
+        edition = "pro";
+      } else {
+        return res.status(500).json({ error: "Server misconfiguration: Validation unavailable." });
+      }
+    }
     const issued = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
-    const expiresDate = /* @__PURE__ */ new Date();
-    expiresDate.setFullYear(expiresDate.getFullYear() + 3);
-    const expires = expiresDate.toISOString().split("T")[0];
+    let expires = null;
+    if (expiryDateStr) {
+      expires = expiryDateStr.split("T")[0];
+    } else {
+      const expiresDate = /* @__PURE__ */ new Date();
+      expiresDate.setFullYear(expiresDate.getFullYear() + (edition === "community" ? 10 : 1));
+      expires = expiresDate.toISOString().split("T")[0];
+    }
     const header = {
       version: 2,
       edition,
