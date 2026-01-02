@@ -13,7 +13,7 @@ const KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_productio
 const FIXED_NONCE_STR = "ug_lic_nonce";
 
 // Import features from shared configuration (single source of truth)
-import featuresConfig from '../shared/features.json' assert { type: 'json' };
+import featuresConfig from '../shared/features.json' with { type: 'json' };
 
 // Extract features by tier from the shared config
 const FEATURES = Object.fromEntries(
