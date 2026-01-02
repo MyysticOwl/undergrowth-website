@@ -3,12 +3,20 @@
         "api/activate.bundle.mjs": {
             "memory": 1024,
             "maxDuration": 10
+        },
+        "api/webhook.bundle.mjs": {
+            "memory": 1024,
+            "maxDuration": 30
         }
     },
     "rewrites": [
         {
             "source": "/api/activate",
             "destination": "/api/activate.bundle"
+        },
+        {
+            "source": "/api/webhook",
+            "destination": "/api/webhook.bundle"
         }
     ]
 }
