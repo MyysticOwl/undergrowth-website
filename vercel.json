@@ -1,9 +1,14 @@
 {
-    "installCommand": "npm install && cd api && npm install",
     "functions": {
-        "api/*.mjs": {
+        "api/activate.bundle.mjs": {
             "memory": 1024,
             "maxDuration": 10
         }
-    }
+    },
+    "rewrites": [
+        {
+            "source": "/api/activate",
+            "destination": "/api/activate.bundle"
+        }
+    ]
 }

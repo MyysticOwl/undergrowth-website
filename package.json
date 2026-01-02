@@ -5,7 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "npm run build:api && docusaurus build",
+    "build:api": "esbuild api/activate.mjs --bundle --platform=node --target=node20 --format=esm --outfile=api/activate.bundle.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -32,6 +33,7 @@
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
+    "esbuild": "^0.24.0",
     "typescript": "~5.6.2"
   },
   "browserslist": {
