@@ -28,9 +28,11 @@ export default async function handler(req, res) {
 
     // Workaround: Vercel might parse body or not depending on content-type
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    console.log('Activation Request Body:', JSON.stringify(body)); // DEBUG: Log payload
     const { email, license_key, machine_id } = body || {};
 
     if (!email || !license_key) {
+        console.error('Missing required fields:', { email: !!email, license_key: !!license_key });
         return res.status(400).json({ error: 'Email and License Key are required' });
     }
 
