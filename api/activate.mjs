@@ -6,6 +6,7 @@ import * as ed from '@noble/ed25519';
 
 // Configure ed25519 to use sha512 (required for @noble/ed25519 v3+)
 ed.etc.sha512Sync = (...m) => sha512(ed.etc.concatBytes(...m));
+ed.etc.sha512Async = async (...m) => sha512(ed.etc.concatBytes(...m));
 
 // --- Configuration ---
 const KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_production";
