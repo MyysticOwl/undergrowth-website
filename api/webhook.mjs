@@ -280,7 +280,7 @@ export default async function handler(req, res) {
                         </ul>
                     </li>
                     <li>Restart Undergrowth</li>
-                    <li>Verify with <code>undergrowth --license-info</code></li>
+                    <li>Verify with <code>undergrowth --license-info</code> or type <code>license</code> in the interactive shell</li>
                 </ol>
                 <p>If you have any questions, reply to this email or visit <a href="https://undergrowth.io/docs">our documentation</a>.</p>
                 <p>Happy automating!</p>
