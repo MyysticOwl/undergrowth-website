@@ -107,6 +107,18 @@ const tiers: PricingTier[] = [
     },
 ];
 
+type VolumeDiscount = {
+    machines: string;
+    discount: string;
+    price: string;
+};
+
+const volumeDiscounts: VolumeDiscount[] = [
+    { machines: '3+', discount: '15%', price: '~$84/machine' },
+    { machines: '5+', discount: '25%', price: '~$74/machine' },
+    { machines: '10+', discount: '40%', price: '~$59/machine' },
+];
+
 function PricingCard({ tier }: { tier: PricingTier }) {
     return (
         <div className={clsx(styles.pricingCard, tier.highlighted && styles.highlighted)}>
