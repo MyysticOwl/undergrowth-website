@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "npm run build:api && docusaurus build",
+    "build": "docusaurus build",
     "build:api": "esbuild api/activate.mjs --bundle --platform=node --target=node20 --format=esm --outfile=api/activate.bundle.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
