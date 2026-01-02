@@ -3474,123 +3474,123 @@ var require_ingestSourceIn = __commonJS({
         };
       },
       _toJsonObject(self) {
-        let config;
+        let config2;
         switch (self.type) {
           case "generic-webhook":
-            config = {};
+            config2 = {};
             break;
           case "cron":
-            config = cronConfig_1.CronConfigSerializer._toJsonObject(self.config);
+            config2 = cronConfig_1.CronConfigSerializer._toJsonObject(self.config);
             break;
           case "adobe-sign":
-            config = adobeSignConfig_1.AdobeSignConfigSerializer._toJsonObject(self.config);
+            config2 = adobeSignConfig_1.AdobeSignConfigSerializer._toJsonObject(self.config);
             break;
           case "beehiiv":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "brex":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "checkbook":
-            config = checkbookConfig_1.CheckbookConfigSerializer._toJsonObject(self.config);
+            config2 = checkbookConfig_1.CheckbookConfigSerializer._toJsonObject(self.config);
             break;
           case "clerk":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "docusign":
-            config = docusignConfig_1.DocusignConfigSerializer._toJsonObject(self.config);
+            config2 = docusignConfig_1.DocusignConfigSerializer._toJsonObject(self.config);
             break;
           case "easypost":
-            config = easypostConfig_1.EasypostConfigSerializer._toJsonObject(self.config);
+            config2 = easypostConfig_1.EasypostConfigSerializer._toJsonObject(self.config);
             break;
           case "github":
-            config = githubConfig_1.GithubConfigSerializer._toJsonObject(self.config);
+            config2 = githubConfig_1.GithubConfigSerializer._toJsonObject(self.config);
             break;
           case "guesty":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "hubspot":
-            config = hubspotConfig_1.HubspotConfigSerializer._toJsonObject(self.config);
+            config2 = hubspotConfig_1.HubspotConfigSerializer._toJsonObject(self.config);
             break;
           case "incident-io":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "lithic":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "nash":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "orum-io":
-            config = orumIoConfig_1.OrumIoConfigSerializer._toJsonObject(self.config);
+            config2 = orumIoConfig_1.OrumIoConfigSerializer._toJsonObject(self.config);
             break;
           case "panda-doc":
-            config = pandaDocConfig_1.PandaDocConfigSerializer._toJsonObject(self.config);
+            config2 = pandaDocConfig_1.PandaDocConfigSerializer._toJsonObject(self.config);
             break;
           case "port-io":
-            config = portIoConfig_1.PortIoConfigSerializer._toJsonObject(self.config);
+            config2 = portIoConfig_1.PortIoConfigSerializer._toJsonObject(self.config);
             break;
           case "pleo":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "replicate":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "resend":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "rutter":
-            config = rutterConfig_1.RutterConfigSerializer._toJsonObject(self.config);
+            config2 = rutterConfig_1.RutterConfigSerializer._toJsonObject(self.config);
             break;
           case "safebase":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "sardine":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "segment":
-            config = segmentConfig_1.SegmentConfigSerializer._toJsonObject(self.config);
+            config2 = segmentConfig_1.SegmentConfigSerializer._toJsonObject(self.config);
             break;
           case "shopify":
-            config = shopifyConfig_1.ShopifyConfigSerializer._toJsonObject(self.config);
+            config2 = shopifyConfig_1.ShopifyConfigSerializer._toJsonObject(self.config);
             break;
           case "slack":
-            config = slackConfig_1.SlackConfigSerializer._toJsonObject(self.config);
+            config2 = slackConfig_1.SlackConfigSerializer._toJsonObject(self.config);
             break;
           case "stripe":
-            config = stripeConfig_1.StripeConfigSerializer._toJsonObject(self.config);
+            config2 = stripeConfig_1.StripeConfigSerializer._toJsonObject(self.config);
             break;
           case "stych":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "svix":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "zoom":
-            config = zoomConfig_1.ZoomConfigSerializer._toJsonObject(self.config);
+            config2 = zoomConfig_1.ZoomConfigSerializer._toJsonObject(self.config);
             break;
           case "telnyx":
-            config = telnyxConfig_1.TelnyxConfigSerializer._toJsonObject(self.config);
+            config2 = telnyxConfig_1.TelnyxConfigSerializer._toJsonObject(self.config);
             break;
           case "vapi":
-            config = vapiConfig_1.VapiConfigSerializer._toJsonObject(self.config);
+            config2 = vapiConfig_1.VapiConfigSerializer._toJsonObject(self.config);
             break;
           case "open-ai":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "render":
-            config = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
+            config2 = svixConfig_1.SvixConfigSerializer._toJsonObject(self.config);
             break;
           case "veriff":
-            config = veriffConfig_1.VeriffConfigSerializer._toJsonObject(self.config);
+            config2 = veriffConfig_1.VeriffConfigSerializer._toJsonObject(self.config);
             break;
           case "airwallex":
-            config = airwallexConfig_1.AirwallexConfigSerializer._toJsonObject(self.config);
+            config2 = airwallexConfig_1.AirwallexConfigSerializer._toJsonObject(self.config);
             break;
         }
         return {
           type: self.type,
-          config,
+          config: config2,
           metadata: self.metadata,
           name: self.name,
           uid: self.uid
@@ -4071,123 +4071,123 @@ var require_ingestSourceOut = __commonJS({
         };
       },
       _toJsonObject(self) {
-        let config;
+        let config2;
         switch (self.type) {
           case "generic-webhook":
-            config = {};
+            config2 = {};
             break;
           case "cron":
-            config = cronConfig_1.CronConfigSerializer._toJsonObject(self.config);
+            config2 = cronConfig_1.CronConfigSerializer._toJsonObject(self.config);
             break;
           case "adobe-sign":
-            config = adobeSignConfigOut_1.AdobeSignConfigOutSerializer._toJsonObject(self.config);
+            config2 = adobeSignConfigOut_1.AdobeSignConfigOutSerializer._toJsonObject(self.config);
             break;
           case "beehiiv":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "brex":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "checkbook":
-            config = checkbookConfigOut_1.CheckbookConfigOutSerializer._toJsonObject(self.config);
+            config2 = checkbookConfigOut_1.CheckbookConfigOutSerializer._toJsonObject(self.config);
             break;
           case "clerk":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "docusign":
-            config = docusignConfigOut_1.DocusignConfigOutSerializer._toJsonObject(self.config);
+            config2 = docusignConfigOut_1.DocusignConfigOutSerializer._toJsonObject(self.config);
             break;
           case "easypost":
-            config = easypostConfigOut_1.EasypostConfigOutSerializer._toJsonObject(self.config);
+            config2 = easypostConfigOut_1.EasypostConfigOutSerializer._toJsonObject(self.config);
             break;
           case "github":
-            config = githubConfigOut_1.GithubConfigOutSerializer._toJsonObject(self.config);
+            config2 = githubConfigOut_1.GithubConfigOutSerializer._toJsonObject(self.config);
             break;
           case "guesty":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "hubspot":
-            config = hubspotConfigOut_1.HubspotConfigOutSerializer._toJsonObject(self.config);
+            config2 = hubspotConfigOut_1.HubspotConfigOutSerializer._toJsonObject(self.config);
             break;
           case "incident-io":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "lithic":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "nash":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "orum-io":
-            config = orumIoConfigOut_1.OrumIoConfigOutSerializer._toJsonObject(self.config);
+            config2 = orumIoConfigOut_1.OrumIoConfigOutSerializer._toJsonObject(self.config);
             break;
           case "panda-doc":
-            config = pandaDocConfigOut_1.PandaDocConfigOutSerializer._toJsonObject(self.config);
+            config2 = pandaDocConfigOut_1.PandaDocConfigOutSerializer._toJsonObject(self.config);
             break;
           case "port-io":
-            config = portIoConfigOut_1.PortIoConfigOutSerializer._toJsonObject(self.config);
+            config2 = portIoConfigOut_1.PortIoConfigOutSerializer._toJsonObject(self.config);
             break;
           case "pleo":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "replicate":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "resend":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "rutter":
-            config = rutterConfigOut_1.RutterConfigOutSerializer._toJsonObject(self.config);
+            config2 = rutterConfigOut_1.RutterConfigOutSerializer._toJsonObject(self.config);
             break;
           case "safebase":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "sardine":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "segment":
-            config = segmentConfigOut_1.SegmentConfigOutSerializer._toJsonObject(self.config);
+            config2 = segmentConfigOut_1.SegmentConfigOutSerializer._toJsonObject(self.config);
             break;
           case "shopify":
-            config = shopifyConfigOut_1.ShopifyConfigOutSerializer._toJsonObject(self.config);
+            config2 = shopifyConfigOut_1.ShopifyConfigOutSerializer._toJsonObject(self.config);
             break;
           case "slack":
-            config = slackConfigOut_1.SlackConfigOutSerializer._toJsonObject(self.config);
+            config2 = slackConfigOut_1.SlackConfigOutSerializer._toJsonObject(self.config);
             break;
           case "stripe":
-            config = stripeConfigOut_1.StripeConfigOutSerializer._toJsonObject(self.config);
+            config2 = stripeConfigOut_1.StripeConfigOutSerializer._toJsonObject(self.config);
             break;
           case "stych":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "svix":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "zoom":
-            config = zoomConfigOut_1.ZoomConfigOutSerializer._toJsonObject(self.config);
+            config2 = zoomConfigOut_1.ZoomConfigOutSerializer._toJsonObject(self.config);
             break;
           case "telnyx":
-            config = telnyxConfigOut_1.TelnyxConfigOutSerializer._toJsonObject(self.config);
+            config2 = telnyxConfigOut_1.TelnyxConfigOutSerializer._toJsonObject(self.config);
             break;
           case "vapi":
-            config = vapiConfigOut_1.VapiConfigOutSerializer._toJsonObject(self.config);
+            config2 = vapiConfigOut_1.VapiConfigOutSerializer._toJsonObject(self.config);
             break;
           case "open-ai":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "render":
-            config = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
+            config2 = svixConfigOut_1.SvixConfigOutSerializer._toJsonObject(self.config);
             break;
           case "veriff":
-            config = veriffConfigOut_1.VeriffConfigOutSerializer._toJsonObject(self.config);
+            config2 = veriffConfigOut_1.VeriffConfigOutSerializer._toJsonObject(self.config);
             break;
           case "airwallex":
-            config = airwallexConfigOut_1.AirwallexConfigOutSerializer._toJsonObject(self.config);
+            config2 = airwallexConfigOut_1.AirwallexConfigOutSerializer._toJsonObject(self.config);
             break;
         }
         return {
           type: self.type,
-          config,
+          config: config2,
           createdAt: self.createdAt,
           id: self.id,
           ingestUrl: self.ingestUrl,
@@ -6325,20 +6325,20 @@ var require_sha256 = __commonJS({
         return digest;
       }
       exports2.hmac = hmac;
-      function fillBuffer(buffer, hmac2, info, counter) {
+      function fillBuffer(buffer2, hmac2, info, counter) {
         var num = counter[0];
         if (num === 0) {
           throw new Error("hkdf: cannot expand more");
         }
         hmac2.reset();
         if (num > 1) {
-          hmac2.update(buffer);
+          hmac2.update(buffer2);
         }
         if (info) {
           hmac2.update(info);
         }
         hmac2.update(counter);
-        hmac2.finish(buffer);
+        hmac2.finish(buffer2);
         counter[0]++;
       }
       var hkdfSalt = new Uint8Array(exports2.digestLength);
@@ -6352,18 +6352,18 @@ var require_sha256 = __commonJS({
         var counter = new Uint8Array([1]);
         var okm = hmac(salt, key);
         var hmac_ = new HMAC(okm);
-        var buffer = new Uint8Array(hmac_.digestLength);
-        var bufpos = buffer.length;
+        var buffer2 = new Uint8Array(hmac_.digestLength);
+        var bufpos = buffer2.length;
         var out = new Uint8Array(length);
         for (var i = 0; i < length; i++) {
-          if (bufpos === buffer.length) {
-            fillBuffer(buffer, hmac_, info, counter);
+          if (bufpos === buffer2.length) {
+            fillBuffer(buffer2, hmac_, info, counter);
             bufpos = 0;
           }
-          out[i] = buffer[bufpos++];
+          out[i] = buffer2[bufpos++];
         }
         hmac_.clean();
-        buffer.fill(0);
+        buffer2.fill(0);
         counter.fill(0);
         return out;
       }
@@ -7691,7 +7691,7 @@ var HashMD = class {
   update(data) {
     aexists(this);
     abytes(data);
-    const { view, buffer, blockLen } = this;
+    const { view, buffer: buffer2, blockLen } = this;
     const len = data.length;
     for (let pos = 0; pos < len; ) {
       const take = Math.min(blockLen - this.pos, len - pos);
@@ -7701,7 +7701,7 @@ var HashMD = class {
           this.process(dataView, pos);
         continue;
       }
-      buffer.set(data.subarray(pos, pos + take), this.pos);
+      buffer2.set(data.subarray(pos, pos + take), this.pos);
       this.pos += take;
       pos += take;
       if (this.pos === blockLen) {
@@ -7717,16 +7717,16 @@ var HashMD = class {
     aexists(this);
     aoutput(out, this);
     this.finished = true;
-    const { buffer, view, blockLen, isLE: isLE2 } = this;
+    const { buffer: buffer2, view, blockLen, isLE: isLE2 } = this;
     let { pos } = this;
-    buffer[pos++] = 128;
+    buffer2[pos++] = 128;
     clean(this.buffer.subarray(pos));
     if (this.padOffset > blockLen - pos) {
       this.process(view, 0);
       pos = 0;
     }
     for (let i = pos; i < blockLen; i++)
-      buffer[i] = 0;
+      buffer2[i] = 0;
     view.setBigUint64(blockLen - 8, BigInt(this.length * 8), isLE2);
     this.process(view, 0);
     const oview = createView(out);
@@ -7741,22 +7741,22 @@ var HashMD = class {
       oview.setUint32(4 * i, state[i], isLE2);
   }
   digest() {
-    const { buffer, outputLen } = this;
-    this.digestInto(buffer);
-    const res = buffer.slice(0, outputLen);
+    const { buffer: buffer2, outputLen } = this;
+    this.digestInto(buffer2);
+    const res = buffer2.slice(0, outputLen);
     this.destroy();
     return res;
   }
   _cloneInto(to) {
     to ||= new this.constructor();
     to.set(...this.get());
-    const { blockLen, buffer, length, finished, destroyed, pos } = this;
+    const { blockLen, buffer: buffer2, length, finished, destroyed, pos } = this;
     to.destroyed = destroyed;
     to.finished = finished;
     to.length = length;
     to.pos = pos;
     if (length % blockLen)
-      to.buffer.set(buffer);
+      to.buffer.set(buffer2);
     return to;
   }
   clone() {
@@ -8620,7 +8620,7 @@ var Poly1305 = class {
     aexists2(this);
     abytes2(data);
     data = copyBytes(data);
-    const { buffer, blockLen } = this;
+    const { buffer: buffer2, blockLen } = this;
     const len = data.length;
     for (let pos = 0; pos < len; ) {
       const take = Math.min(blockLen - this.pos, len - pos);
@@ -8629,11 +8629,11 @@ var Poly1305 = class {
           this.process(data, pos);
         continue;
       }
-      buffer.set(data.subarray(pos, pos + take), this.pos);
+      buffer2.set(data.subarray(pos, pos + take), this.pos);
       this.pos += take;
       pos += take;
       if (this.pos === blockLen) {
-        this.process(buffer, 0, false);
+        this.process(buffer2, 0, false);
         this.pos = 0;
       }
     }
@@ -8646,13 +8646,13 @@ var Poly1305 = class {
     aexists2(this);
     aoutput2(out, this);
     this.finished = true;
-    const { buffer, h: h2 } = this;
+    const { buffer: buffer2, h: h2 } = this;
     let { pos } = this;
     if (pos) {
-      buffer[pos++] = 1;
+      buffer2[pos++] = 1;
       for (; pos < 16; pos++)
-        buffer[pos] = 0;
-      this.process(buffer, 0, true);
+        buffer2[pos] = 0;
+      this.process(buffer2, 0, true);
     }
     this.finalize();
     let opos = 0;
@@ -8663,9 +8663,9 @@ var Poly1305 = class {
     return out;
   }
   digest() {
-    const { buffer, outputLen } = this;
-    this.digestInto(buffer);
-    const res = buffer.slice(0, outputLen);
+    const { buffer: buffer2, outputLen } = this;
+    this.digestInto(buffer2);
+    const res = buffer2.slice(0, outputLen);
     this.destroy();
     return res;
   }
@@ -9433,36 +9433,54 @@ async function generateLicenseFile(email, edition, variantName, licenseKey) {
     signature: signatureBase64
   }, null, 2);
 }
+var config = {
+  api: {
+    bodyParser: false
+  }
+};
+async function buffer(readable) {
+  const chunks = [];
+  for await (const chunk of readable) {
+    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
+  }
+  return Buffer.concat(chunks);
+}
 async function handler(req, res) {
   console.log("Webhook Handler Hit:", req.method);
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
-  let rawBody = req.rawBody;
-  if (!rawBody) {
-    rawBody = typeof req.body === "string" ? req.body : JSON.stringify(req.body);
+  let rawBodyBuffer;
+  try {
+    rawBodyBuffer = await buffer(req);
+  } catch (e) {
+    console.error("Error reading request body:", e);
+    return res.status(500).json({ error: "Error reading body" });
   }
   const signature = req.headers["x-signature"];
   const secret = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET;
-  const isValid = verifySignature(rawBody, signature, secret);
+  const isValid = verifySignature(rawBodyBuffer, signature, secret);
   if (!isValid) {
     console.error("Invalid webhook signature");
     if (secret) {
       const hmac = crypto5.createHmac("sha256", secret);
-      const digest = hmac.update(rawBody).digest("hex");
+      const digest = hmac.update(rawBodyBuffer).digest("hex");
       console.log("Signature Debug:", {
         received: signature,
         calculated: digest,
-        bodyType: typeof req.body,
-        hasRawBody: !!req.rawBody,
-        bodyPreview: typeof rawBody === "string" ? rawBody.substring(0, 50) : "Buffer/Object"
+        bodyLength: rawBodyBuffer.length
       });
     } else {
       console.error("LEMON_SQUEEZY_WEBHOOK_SECRET is missing!");
     }
     return res.status(401).json({ error: "Invalid signature" });
   }
-  const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+  let body;
+  try {
+    body = JSON.parse(rawBodyBuffer.toString("utf8"));
+  } catch (e) {
+    return res.status(400).json({ error: "Invalid JSON" });
+  }
   const eventName = body.meta?.event_name;
   if (eventName !== "license_key_created") {
     console.log(`Ignoring event: ${eventName}`);
@@ -9551,6 +9569,7 @@ async function handler(req, res) {
   }
 }
 export {
+  config,
   handler as default
 };
 /*! Bundled license information:

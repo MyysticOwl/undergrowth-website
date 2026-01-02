@@ -121,6 +121,21 @@ async function generateLicenseFile(email, edition, variantName, licenseKey) {
     }, null, 2);
 }
 
+// Disable Vercel's default body parser so we can verify the raw signature
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
+
+async function buffer(readable) {
+    const chunks = [];
+    for await (const chunk of readable) {
+        chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+    }
+    return Buffer.concat(chunks);
+}
+
 export default async function handler(req, res) {
     console.log('Webhook Handler Hit:', req.method); // DEBUG: Confirm endpoint hit
     // Only accept POST
@@ -128,31 +143,42 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    // Get raw body for signature verification
-    // Vercel sometimes parses the body automatically. We need the raw buffer/string for signature verification.
-    let rawBody = req.rawBody;
-    if (!rawBody) {
-        rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+    let rawBodyBuffer;
+    try {
+        rawBodyBuffer = await buffer(req);
+    } catch (e) {
+        console.error('Error reading request body:', e);
+        return res.status(500).json({ error: 'Error reading body' });
     }
+
+    // We need string for verifySignature (which handles Buffer conversion internally usually, 
+    // but Noble's helpers might prefer Uint8Array or String. 
+    // LemonSqueezy sig is HMAC-SHA256 of the raw body bytes.
+    // crypto.createHmac.update() accepts Buffer or string. 
+    // verifySignature logic: hmac.update(payload)
+
+    // Convert buffer to string for safety in logic downstream, but keep buffer for sig verify if needed?
+    // Actually, hmac.update(buffer) is best.
 
     const signature = req.headers['x-signature'];
     const secret = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET;
 
     // Verify signature
-    const isValid = verifySignature(rawBody, signature, secret);
+    // Pass the BUFFER directly to verifySignature handles getting bytes correctly
+    // My verifySignature function: hmac.update(payload).digest('hex')
+    // payload can be buffer.
+
+    const isValid = verifySignature(rawBodyBuffer, signature, secret);
 
     if (!isValid) {
         console.error('Invalid webhook signature');
-        // DEBUG: Calculate what we expected (be careful not to expose secret in prod logs indefinitely, but useful now)
         if (secret) {
             const hmac = crypto.createHmac('sha256', secret);
-            const digest = hmac.update(rawBody).digest('hex');
+            const digest = hmac.update(rawBodyBuffer).digest('hex');
             console.log('Signature Debug:', {
                 received: signature,
                 calculated: digest,
-                bodyType: typeof req.body,
-                hasRawBody: !!req.rawBody,
-                bodyPreview: typeof rawBody === 'string' ? rawBody.substring(0, 50) : 'Buffer/Object'
+                bodyLength: rawBodyBuffer.length
             });
         } else {
             console.error('LEMON_SQUEEZY_WEBHOOK_SECRET is missing!');
@@ -160,7 +186,13 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: 'Invalid signature' });
     }
 
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    let body;
+    try {
+        body = JSON.parse(rawBodyBuffer.toString('utf8'));
+    } catch (e) {
+        return res.status(400).json({ error: 'Invalid JSON' });
+    }
+
     const eventName = body.meta?.event_name;
 
     // Process supported events
