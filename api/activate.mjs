@@ -126,7 +126,7 @@ export default async function handler(req, res) {
         }
 
         const header = {
-            version: 2,
+            version: 1,
             edition,
             email,
             issued,
@@ -139,7 +139,6 @@ export default async function handler(req, res) {
 
         const payload = {
             features: FEATURES[edition] || FEATURES.community,
-            entitlements: [],
             metadata: { source: 'web_activation' }
         };
 
