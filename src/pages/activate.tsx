@@ -50,12 +50,18 @@ export default function Activate(): JSX.Element {
                 const text = await err.response.data.text();
                 try {
                     const json = JSON.parse(text);
-                    setError(json.error || 'Activation failed');
+                    const errorMsg = typeof json.error === 'string'
+                        ? json.error
+                        : (json.error?.message || JSON.stringify(json.error) || 'Activation failed');
+                    setError(errorMsg);
                 } catch {
                     setError(text || 'Activation failed');
                 }
             } else {
-                setError(err.message || 'Activation failed. Please try again.');
+                // Axios error handling
+                const msg = err.response?.data?.error || err.message || 'Activation failed';
+                const finalMsg = typeof msg === 'object' ? (msg.message || JSON.stringify(msg)) : msg;
+                setError(finalMsg);
             }
         } finally {
             setLoading(false);
