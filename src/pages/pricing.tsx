@@ -15,6 +15,7 @@ type PricingTier = {
     ctaLink: string;
     highlighted?: boolean;
     badge?: string;
+    className?: string;
 };
 
 const tiers: PricingTier[] = [
@@ -67,9 +68,10 @@ const tiers: PricingTier[] = [
             'Volume discounts available',
         ],
         cta: 'Buy Pro',
-        ctaLink: 'https://undergrowth.lemonsqueezy.com/buy/pro',
+        ctaLink: 'https://undergrowth.lemonsqueezy.com/checkout/buy/5ecf0b98-6a7a-457e-b119-0a358e710d92?embed=1',
         highlighted: true,
         badge: 'Most Popular',
+        className: 'lemonsqueezy-button',
     },
     {
         name: 'Team',
@@ -134,7 +136,7 @@ function PricingCard({ tier }: { tier: PricingTier }) {
                     <li key={idx}>{feature}</li>
                 ))}
             </ul>
-            <Link to={tier.ctaLink} className={clsx('button', tier.highlighted ? 'button--primary' : 'button--secondary', 'button--lg', styles.ctaButton)}>
+            <Link to={tier.ctaLink} className={clsx('button', tier.highlighted ? 'button--primary' : 'button--secondary', 'button--lg', styles.ctaButton, tier.className)}>
                 {tier.cta}
             </Link>
         </div>
@@ -364,7 +366,7 @@ export default function Pricing(): ReactNode {
                             <Link to="/download" className="button button--primary button--lg">
                                 Download Free
                             </Link>
-                            <Link to="https://undergrowth.lemonsqueezy.com/buy/pro" className="button button--secondary button--lg">
+                            <Link to="https://undergrowth.lemonsqueezy.com/checkout/buy/5ecf0b98-6a7a-457e-b119-0a358e710d92?embed=1" className="button button--secondary button--lg lemonsqueezy-button">
                                 Buy Pro — $99/year
                             </Link>
                         </div>

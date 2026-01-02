@@ -4,7 +4,7 @@ import { sha512 } from '@noble/hashes/sha2.js';
 import { chacha20poly1305 } from '@noble/ciphers/chacha.js';
 import * as ed from '@noble/ed25519';
 
-// Configure ed25519 to use sha512 (required for @noble/ed25519 v3+)
+// Configure ed25519 to use sha512 (required for @noble/ed25519)
 ed.etc.sha512Sync = (...m) => sha512(ed.etc.concatBytes(...m));
 ed.etc.sha512Async = async (...m) => sha512(ed.etc.concatBytes(...m));
 
@@ -12,12 +12,14 @@ ed.etc.sha512Async = async (...m) => sha512(ed.etc.concatBytes(...m));
 const KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_production";
 const FIXED_NONCE_STR = "ug_lic_nonce";
 
-const FEATURES = {
-    community: ['local_auth', 'plugin_sandbox'],
-    pro: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history'],
-    team: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history', 'team_sharing', 'sso'],
-    enterprise: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history', 'team_sharing', 'sso', 'audit_logs', 'compliance_tools']
-};
+// Import features from shared configuration (single source of truth)
+import featuresConfig from '../shared/features.json' assert { type: 'json' };
+
+// Extract features by tier from the shared config
+const FEATURES = Object.fromEntries(
+    Object.entries(featuresConfig.tiers).map(([tier, config]) => [tier, config.features])
+);
+
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -33,18 +35,99 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Determine Edition (Mock for now)
-        const edition = 'pro';
-        const variant_name = 'Pro License';
+        // --- LemonSqueezy Validation ---
+        // Verify license key and get details
+        const LS_API_KEY = process.env.LEMONSQUEEZY_API_KEY;
+        // Allows testing without a key if specifically allowed (e.g. dev mode), but standard flow requires it.
+        // For strictness, we might fallback to checking if it's set.
+
+        let validatedLicense = null;
+        let edition = 'community'; // Default fallback
+        let variant_name = 'Community License';
+        let expiryDateStr = null;
+        let customerEmail = null;
+
+        if (license_key.startsWith('ls_')) { // Heuristic checks if it looks like a LemonSqueezy key (often arbitrary though)
+            // Actually, let's just always try to validate if it's not a special dev key
+            // Or better: try to validate, and if it fails (and we are in prod), reject.
+        }
+
+        // We assume production always requires validation.
+        // Mocking can be done via dependency injection or environment in tests.
+
+        if (LS_API_KEY) {
+            const response = await fetch('https://api.lemonsqueezy.com/v1/licenses/activate', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    license_key: license_key,
+                    instance_name: machine_id || 'undergrowth-cli'
+                })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                // If 4xx, it means invalid key usually
+                console.error('LemonSqueezy Error:', response.status, errorText);
+                return res.status(400).json({ error: 'Invalid or incorrect license key.' });
+            }
+
+            const data = await response.json();
+
+            if (!data.activated && !data.valid) { // 'activated' is true if successful activation, 'valid' might be used purely for checking
+                return res.status(403).json({ error: 'License key is not active or invalid.' });
+            }
+
+            validatedLicense = data;
+            customerEmail = data.meta?.customer_email || data.user_email;
+            variant_name = data.meta?.variant_name || 'Standard License';
+
+            // Check expiry
+            if (data.license_key?.status === 'expired') {
+                return res.status(403).json({ error: 'License key has expired.' });
+            }
+
+            expiryDateStr = data.license_key?.expires_at; // ISO string
+
+            // Email Check
+            if (customerEmail && customerEmail.toLowerCase() !== email.toLowerCase()) {
+                return res.status(403).json({ error: 'Email provided does not match the license owner.' });
+            }
+
+            // Map Variant to Edition
+            const nameLower = variant_name.toLowerCase();
+            if (nameLower.includes('team')) edition = 'team';
+            else if (nameLower.includes('pro')) edition = 'pro';
+            else if (nameLower.includes('starter')) edition = 'starter';
+            else edition = 'community';
+
+        } else {
+            // Fallback for development/testing if no API key present (or valid dev keys)
+            console.warn('LEMONSQUEEZY_API_KEY not set. Skipping validation (DEV MODE).');
+            if (license_key === 'test_key') {
+                edition = 'pro';
+            } else {
+                return res.status(500).json({ error: 'Server misconfiguration: Validation unavailable.' });
+            }
+        }
 
         // Dates
         const issued = new Date().toISOString().split('T')[0];
-        const expiresDate = new Date();
-        expiresDate.setFullYear(expiresDate.getFullYear() + 3);
-        const expires = expiresDate.toISOString().split('T')[0];
+        // Use LemonSqueezy expiry if available, otherwise default logic
+        let expires = null;
+        if (expiryDateStr) {
+            expires = expiryDateStr.split('T')[0];
+        } else {
+            const expiresDate = new Date();
+            expiresDate.setFullYear(expiresDate.getFullYear() + (edition === 'community' ? 10 : 1));
+            expires = expiresDate.toISOString().split('T')[0];
+        }
 
         const header = {
-            version: 2,
+            version: 1,
             edition,
             email,
             issued,
@@ -57,7 +140,6 @@ export default async function handler(req, res) {
 
         const payload = {
             features: FEATURES[edition] || FEATURES.community,
-            entitlements: [],
             metadata: { source: 'web_activation' }
         };
 

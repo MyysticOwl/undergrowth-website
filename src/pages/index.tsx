@@ -30,10 +30,10 @@ function HomepageHeader() {
             Download Free
           </Link>
           <Link
-            className="button button--outline button--lg"
-            to="/pricing"
+            className="button button--outline button--lg lemonsqueezy-button"
+            to="https://undergrowth.lemonsqueezy.com/checkout/buy/5ecf0b98-6a7a-457e-b119-0a358e710d92?embed=1"
             style={{ marginLeft: '1rem', color: '#fff', borderColor: '#fff' }}>
-            View Pricing
+            Buy Now
           </Link>
         </div>
         <p className={styles.heroNote}>
