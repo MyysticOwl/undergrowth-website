@@ -82,7 +82,17 @@ export default async function handler(req, res) {
             throw new Error("Server misconfiguration: Missing PRIVATE_KEY_HEX");
         }
 
-        const signatureBytes = await ed.sign(messageHash, privateKeyHex);
+        // Convert hex string to Uint8Array (required by @noble/ed25519 v3+)
+        const hexToBytes = (hex) => {
+            const bytes = new Uint8Array(hex.length / 2);
+            for (let i = 0; i < bytes.length; i++) {
+                bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+            }
+            return bytes;
+        };
+        const privateKeyBytes = hexToBytes(privateKeyHex);
+
+        const signatureBytes = await ed.sign(messageHash, privateKeyBytes);
         const signatureBase64 = Buffer.from(signatureBytes).toString('base64');
 
         const licenseFile = {
