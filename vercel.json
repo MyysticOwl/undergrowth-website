@@ -1,4 +1,5 @@
 {
+    "installCommand": "npm install && cd api && npm install",
     "functions": {
         "api/*.mjs": {
             "memory": 1024,
