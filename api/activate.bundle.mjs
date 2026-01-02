@@ -1709,17 +1709,69 @@ var wNAF = (n) => {
   return { p, f };
 };
 
+// shared/features.json
+var features_default = {
+  version: "1.0.0",
+  description: "Undergrowth License Feature Definitions - Single Source of Truth",
+  tiers: {
+    community: {
+      features: [],
+      description: "Free tier with basic functionality - 3 workflows, 7-day history, 100 AI calls/day"
+    },
+    starter: {
+      features: [
+        "clean_export"
+      ],
+      description: "Entry-level paid tier - 10 workflows, 30-day history, 500 AI calls/day"
+    },
+    pro: {
+      features: [
+        "unlimited_workflows",
+        "no_badge",
+        "unlimited_history",
+        "unlimited_ai",
+        "clean_export"
+      ],
+      description: "Professional tier for power users - unlimited workflows, history, and AI"
+    },
+    team: {
+      features: [
+        "unlimited_workflows",
+        "no_badge",
+        "unlimited_history",
+        "unlimited_ai",
+        "clean_export",
+        "multi_user_auth",
+        "audit_log_export",
+        "priority_support",
+        "sso_oidc",
+        "volume_activation"
+      ],
+      description: "Team tier with collaboration features - all Pro features plus team capabilities"
+    }
+  },
+  feature_definitions: {
+    unlimited_workflows: "No limit on active workflows",
+    no_badge: "Remove 'Powered by Undergrowth' badge",
+    unlimited_history: "Unlimited execution history retention",
+    unlimited_ai: "Unlimited AI workflow generation calls",
+    clean_export: "Export workflows without attribution",
+    multi_user_auth: "Multi-user authentication support",
+    audit_log_export: "Export audit logs for compliance",
+    priority_support: "Priority customer support",
+    sso_oidc: "Single Sign-On via OIDC",
+    volume_activation: "Volume licensing for organizations"
+  }
+};
+
 // api/activate.mjs
 etc.sha512Sync = (...m) => sha512(etc.concatBytes(...m));
 etc.sha512Async = async (...m) => sha512(etc.concatBytes(...m));
 var KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_production";
 var FIXED_NONCE_STR = "ug_lic_nonce";
-var FEATURES = {
-  community: ["local_auth", "plugin_sandbox"],
-  pro: ["local_auth", "plugin_sandbox", "unlimited_workflows", "unlimited_history"],
-  team: ["local_auth", "plugin_sandbox", "unlimited_workflows", "unlimited_history", "team_sharing", "sso"],
-  enterprise: ["local_auth", "plugin_sandbox", "unlimited_workflows", "unlimited_history", "team_sharing", "sso", "audit_logs", "compliance_tools"]
-};
+var FEATURES = Object.fromEntries(
+  Object.entries(features_default.tiers).map(([tier, config]) => [tier, config.features])
+);
 async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
@@ -1770,9 +1822,9 @@ async function handler(req, res) {
         return res.status(403).json({ error: "Email provided does not match the license owner." });
       }
       const nameLower = variant_name.toLowerCase();
-      if (nameLower.includes("enterprise")) edition = "enterprise";
-      else if (nameLower.includes("team")) edition = "team";
+      if (nameLower.includes("team")) edition = "team";
       else if (nameLower.includes("pro")) edition = "pro";
+      else if (nameLower.includes("starter")) edition = "starter";
       else edition = "community";
     } else {
       console.warn("LEMONSQUEEZY_API_KEY not set. Skipping validation (DEV MODE).");
@@ -1792,7 +1844,7 @@ async function handler(req, res) {
       expires = expiresDate.toISOString().split("T")[0];
     }
     const header = {
-      version: 2,
+      version: 1,
       edition,
       email,
       issued,
@@ -1804,7 +1856,6 @@ async function handler(req, res) {
     };
     const payload = {
       features: FEATURES[edition] || FEATURES.community,
-      entitlements: [],
       metadata: { source: "web_activation" }
     };
     const encoder = new TextEncoder();

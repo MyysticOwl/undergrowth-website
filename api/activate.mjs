@@ -12,12 +12,13 @@ ed.etc.sha512Async = async (...m) => sha512(ed.etc.concatBytes(...m));
 const KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_production";
 const FIXED_NONCE_STR = "ug_lic_nonce";
 
-const FEATURES = {
-    community: [],
-    starter: ['clean_export'],
-    pro: ['unlimited_workflows', 'no_badge', 'unlimited_history', 'unlimited_ai', 'clean_export'],
-    team: ['unlimited_workflows', 'no_badge', 'unlimited_history', 'unlimited_ai', 'clean_export', 'multi_user_auth', 'audit_log_export', 'priority_support', 'sso_oidc', 'volume_activation']
-};
+// Import features from shared configuration (single source of truth)
+import featuresConfig from '../shared/features.json' assert { type: 'json' };
+
+// Extract features by tier from the shared config
+const FEATURES = Object.fromEntries(
+    Object.entries(featuresConfig.tiers).map(([tier, config]) => [tier, config.features])
+);
 
 
 export default async function handler(req, res) {
