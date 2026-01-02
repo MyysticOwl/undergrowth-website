@@ -8920,34 +8920,17 @@ var ed25519_CURVE = {
   Gx: 0x216936d3cd6e53fec0a4e231fdd6dc5c692cc7609525a7b2c9562d608f25d51an,
   Gy: 0x6666666666666666666666666666666666666666666666666666666666666658n
 };
-var { p: P, n: N, Gx, Gy, a: _a, d: _d, h } = ed25519_CURVE;
+var { p: P, n: N, Gx, Gy, a: _a, d: _d } = ed25519_CURVE;
+var h = 8n;
 var L = 32;
 var L2 = 64;
-var captureTrace = (...args) => {
-  if ("captureStackTrace" in Error && typeof Error.captureStackTrace === "function") {
-    Error.captureStackTrace(...args);
-  }
-};
-var err = (message = "") => {
-  const e = new Error(message);
-  captureTrace(e, err);
-  throw e;
+var err = (m = "") => {
+  throw new Error(m);
 };
 var isBig = (n) => typeof n === "bigint";
 var isStr = (s) => typeof s === "string";
 var isBytes3 = (a) => a instanceof Uint8Array || ArrayBuffer.isView(a) && a.constructor.name === "Uint8Array";
-var abytes3 = (value, length, title = "") => {
-  const bytes = isBytes3(value);
-  const len = value?.length;
-  const needsLen = length !== void 0;
-  if (!bytes || needsLen && len !== length) {
-    const prefix = title && `"${title}" `;
-    const ofLen = needsLen ? ` of length ${length}` : "";
-    const got = bytes ? `length=${len}` : `type=${typeof value}`;
-    err(prefix + "expected Uint8Array" + ofLen + ", got " + got);
-  }
-  return value;
-};
+var abytes3 = (a, l) => !isBytes3(a) || typeof l === "number" && l > 0 && a.length !== l ? err("Uint8Array expected") : a;
 var u8n = (len) => new Uint8Array(len);
 var u8fr = (buf) => Uint8Array.from(buf);
 var padh = (n, pad) => n.toString(16).padStart(pad, "0");
@@ -8980,8 +8963,9 @@ var hexToBytes = (hex) => {
   }
   return array;
 };
+var toU8 = (a, len) => abytes3(isStr(a) ? hexToBytes(a) : u8fr(abytes3(a)), len);
 var cr = () => globalThis?.crypto;
-var subtle = () => cr()?.subtle ?? err("crypto.subtle must be defined, consider polyfill");
+var subtle = () => cr()?.subtle ?? err("crypto.subtle must be defined");
 var concatBytes2 = (...arrs) => {
   const r = u8n(arrs.reduce((sum, a) => sum + abytes3(a).length, 0));
   let pad = 0;
@@ -8996,7 +8980,7 @@ var randomBytes2 = (len = L) => {
   return c.getRandomValues(u8n(len));
 };
 var big = BigInt;
-var assertRange = (n, min, max, msg = "bad number: out of range") => isBig(n) && min <= n && n < max ? n : err(msg);
+var arange = (n, min, max, msg = "bad number: out of range") => isBig(n) && min <= n && n < max ? n : err(msg);
 var M = (a, b = P) => {
   const r = a % b;
   return r >= 0n ? r : b + r;
@@ -9014,7 +8998,7 @@ var invert = (num, md) => {
   return b === 1n ? M(x, md) : err("no inverse");
 };
 var callHash = (name) => {
-  const fn = hashes[name];
+  const fn = etc[name];
   if (typeof fn !== "function")
     err("hashes." + name + " not set");
   return fn;
@@ -9024,20 +9008,17 @@ var B256 = 2n ** 256n;
 var Point = class _Point {
   static BASE;
   static ZERO;
-  X;
-  Y;
-  Z;
-  T;
-  constructor(X, Y, Z, T) {
+  ex;
+  ey;
+  ez;
+  et;
+  constructor(ex, ey, ez, et) {
     const max = B256;
-    this.X = assertRange(X, 0n, max);
-    this.Y = assertRange(Y, 0n, max);
-    this.Z = assertRange(Z, 1n, max);
-    this.T = assertRange(T, 0n, max);
+    this.ex = arange(ex, 0n, max);
+    this.ey = arange(ey, 0n, max);
+    this.ez = arange(ez, 1n, max);
+    this.et = arange(et, 0n, max);
     Object.freeze(this);
-  }
-  static CURVE() {
-    return ed25519_CURVE;
   }
   static fromAffine(p) {
     return new _Point(p.x, p.y, 1n, M(p.x * p.y));
@@ -9050,7 +9031,7 @@ var Point = class _Point {
     normed[31] = lastByte & ~128;
     const y = bytesToNumLE(normed);
     const max = zip215 ? B256 : P;
-    assertRange(y, 0n, max);
+    arange(y, 0n, max);
     const y2 = M(y * y);
     const u = M(y2 - 1n);
     const v = M(d * y2 + 1n);
@@ -9065,23 +9046,14 @@ var Point = class _Point {
       x = M(-x);
     return new _Point(x, y, 1n, M(x * y));
   }
-  static fromHex(hex, zip215) {
-    return _Point.fromBytes(hexToBytes(hex), zip215);
-  }
-  get x() {
-    return this.toAffine().x;
-  }
-  get y() {
-    return this.toAffine().y;
-  }
   /** Checks if the point is valid and on-curve. */
   assertValidity() {
     const a = _a;
     const d = _d;
     const p = this;
     if (p.is0())
-      return err("bad point: ZERO");
-    const { X, Y, Z, T } = p;
+      throw new Error("bad point: ZERO");
+    const { ex: X, ey: Y, ez: Z, et: T } = p;
     const X2 = M(X * X);
     const Y2 = M(Y * Y);
     const Z2 = M(Z * Z);
@@ -9090,17 +9062,17 @@ var Point = class _Point {
     const left = M(Z2 * M(aX2 + Y2));
     const right = M(Z4 + M(d * M(X2 * Y2)));
     if (left !== right)
-      return err("bad point: equation left != right (1)");
+      throw new Error("bad point: equation left != right (1)");
     const XY = M(X * Y);
     const ZT = M(Z * T);
     if (XY !== ZT)
-      return err("bad point: equation left != right (2)");
+      throw new Error("bad point: equation left != right (2)");
     return this;
   }
   /** Equality check: compare points P&Q. */
   equals(other) {
-    const { X: X1, Y: Y1, Z: Z1 } = this;
-    const { X: X2, Y: Y2, Z: Z2 } = apoint(other);
+    const { ex: X1, ey: Y1, ez: Z1 } = this;
+    const { ex: X2, ey: Y2, ez: Z2 } = apoint(other);
     const X1Z2 = M(X1 * Z2);
     const X2Z1 = M(X2 * Z1);
     const Y1Z2 = M(Y1 * Z2);
@@ -9112,11 +9084,11 @@ var Point = class _Point {
   }
   /** Flip point over y coordinate. */
   negate() {
-    return new _Point(M(-this.X), this.Y, this.Z, M(-this.T));
+    return new _Point(M(-this.ex), this.ey, this.ez, M(-this.et));
   }
   /** Point doubling. Complete formula. Cost: `4M + 4S + 1*a + 6add + 1*2`. */
   double() {
-    const { X: X1, Y: Y1, Z: Z1 } = this;
+    const { ex: X1, ey: Y1, ez: Z1 } = this;
     const a = _a;
     const A = M(X1 * X1);
     const B = M(Y1 * Y1);
@@ -9135,8 +9107,8 @@ var Point = class _Point {
   }
   /** Point addition. Complete formula. Cost: `8M + 1*k + 8add + 1*2`. */
   add(other) {
-    const { X: X1, Y: Y1, Z: Z1, T: T1 } = this;
-    const { X: X2, Y: Y2, Z: Z2, T: T2 } = apoint(other);
+    const { ex: X1, ey: Y1, ez: Z1, et: T1 } = this;
+    const { ex: X2, ey: Y2, ez: Z2, et: T2 } = apoint(other);
     const a = _a;
     const d = _d;
     const A = M(X1 * X2);
@@ -9153,9 +9125,6 @@ var Point = class _Point {
     const Z3 = M(F * G2);
     return new _Point(X3, Y3, Z3, T3);
   }
-  subtract(other) {
-    return this.add(apoint(other).negate());
-  }
   /**
    * Point-by-scalar multiplication. Scalar must be in range 1 <= n < CURVE.n.
    * Uses {@link wNAF} for base point.
@@ -9166,7 +9135,7 @@ var Point = class _Point {
   multiply(n, safe = true) {
     if (!safe && (n === 0n || this.is0()))
       return I;
-    assertRange(n, 1n, N);
+    arange(n, 1n, N);
     if (n === 1n)
       return this;
     if (this.equals(G))
@@ -9181,20 +9150,15 @@ var Point = class _Point {
     }
     return p;
   }
-  multiplyUnsafe(scalar) {
-    return this.multiply(scalar, false);
-  }
   /** Convert point to 2d xy affine point. (X, Y, Z) ∋ (x=X/Z, y=Y/Z) */
   toAffine() {
-    const { X, Y, Z } = this;
+    const { ex: x, ey: y, ez: z } = this;
     if (this.equals(I))
       return { x: 0n, y: 1n };
-    const iz = invert(Z, P);
-    if (M(Z * iz) !== 1n)
+    const iz = invert(z, P);
+    if (M(z * iz) !== 1n)
       err("invalid inverse");
-    const x = M(X * iz);
-    const y = M(Y * iz);
-    return { x, y };
+    return { x: M(x * iz), y: M(y * iz) };
   }
   toBytes() {
     const { x, y } = this.assertValidity().toAffine();
@@ -9205,6 +9169,7 @@ var Point = class _Point {
   toHex() {
     return bytesToHex2(this.toBytes());
   }
+  // encode to hex string
   clearCofactor() {
     return this.multiply(big(h), false);
   }
@@ -9217,12 +9182,24 @@ var Point = class _Point {
       p = p.add(this);
     return p.is0();
   }
+  static fromHex(hex, zip215) {
+    return _Point.fromBytes(toU8(hex), zip215);
+  }
+  get x() {
+    return this.toAffine().x;
+  }
+  get y() {
+    return this.toAffine().y;
+  }
+  toRawBytes() {
+    return this.toBytes();
+  }
 };
 var G = new Point(Gx, Gy, 1n, M(Gx * Gy));
 var I = new Point(0n, 1n, 1n, 0n);
 Point.BASE = G;
 Point.ZERO = I;
-var numTo32bLE = (num) => hexToBytes(padh(assertRange(num, 0n, B256), L2)).reverse();
+var numTo32bLE = (num) => hexToBytes(padh(arange(num, 0n, B256), L2)).reverse();
 var bytesToNumLE = (b) => big("0x" + bytesToHex2(u8fr(abytes3(b)).reverse()));
 var pow2 = (x, power) => {
   let r = x;
@@ -9268,7 +9245,7 @@ var uvRatio = (u, v) => {
   return { isValid: useRoot1 || useRoot2, value: x };
 };
 var modL_LE = (hash) => modN(bytesToNumLE(hash));
-var sha512s = (...m) => callHash("sha512")(concatBytes2(...m));
+var sha512s = (...m) => callHash("sha512Sync")(...m);
 var hash2extK = (hashed) => {
   const head = hashed.slice(0, L);
   head[0] &= 248;
@@ -9280,7 +9257,7 @@ var hash2extK = (hashed) => {
   const pointBytes = point.toBytes();
   return { head, prefix, scalar, point, pointBytes };
 };
-var getExtendedPublicKey = (secretKey) => hash2extK(sha512s(abytes3(secretKey, L)));
+var getExtendedPublicKey = (priv) => hash2extK(sha512s(toU8(priv, L)));
 var hashFinishS = (res) => res.finish(sha512s(res.hashable));
 var _sign = (e, rBytes, msg) => {
   const { pointBytes: P2, scalar: s } = e;
@@ -9293,27 +9270,25 @@ var _sign = (e, rBytes, msg) => {
   };
   return { hashable, finish };
 };
-var sign = (message, secretKey) => {
-  const m = abytes3(message);
-  const e = getExtendedPublicKey(secretKey);
+var sign = (msg, privKey) => {
+  const m = toU8(msg);
+  const e = getExtendedPublicKey(privKey);
   const rBytes = sha512s(e.prefix, m);
   return hashFinishS(_sign(e, rBytes, m));
 };
 var etc = {
+  sha512Async: async (...messages) => {
+    const s = subtle();
+    const m = concatBytes2(...messages);
+    return u8n(await s.digest("SHA-512", m.buffer));
+  },
+  sha512Sync: void 0,
   bytesToHex: bytesToHex2,
   hexToBytes,
   concatBytes: concatBytes2,
   mod: M,
   invert,
   randomBytes: randomBytes2
-};
-var hashes = {
-  sha512Async: async (message) => {
-    const s = subtle();
-    const m = concatBytes2(message);
-    return u8n(await s.digest("SHA-512", m.buffer));
-  },
-  sha512: void 0
 };
 var W = 8;
 var scalarBits = 256;
@@ -9365,8 +9340,6 @@ var wNAF = (n) => {
       p = p.add(ctneg(isNeg, comp[offP]));
     }
   }
-  if (n !== 0n)
-    err("invalid wnaf");
   return { p, f };
 };
 
