@@ -88,6 +88,12 @@ const config: Config = {
           label: 'Download',
           position: 'left',
         },
+        {
+          to: '/activate',
+          label: 'Activate',
+          position: 'right',
+          className: 'button button--primary button--sm navbar-cta-button',
+        },
       ],
     },
     footer: {
@@ -133,6 +139,10 @@ const config: Config = {
             {
               label: 'GitHub',
               href: 'https://github.com/MyysticOwl/undergrowth-website',
+            },
+            {
+              label: 'Activate License',
+              to: '/activate',
             },
           ],
         },
