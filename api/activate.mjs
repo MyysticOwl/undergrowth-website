@@ -1,7 +1,7 @@
 
-import { sha256 } from '@noble/hashes/sha256';
-import { sha512 } from '@noble/hashes/sha512';
-import { chacha20poly1305 } from '@noble/ciphers/chacha';
+import { sha256 } from '@noble/hashes/sha2.js';
+import { sha512 } from '@noble/hashes/sha2.js';
+import { chacha20poly1305 } from '@noble/ciphers/chacha.js';
 import * as ed from '@noble/ed25519';
 
 // Configure ed25519 to use sha512 (required for @noble/ed25519 v3+)
