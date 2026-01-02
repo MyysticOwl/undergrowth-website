@@ -90,7 +90,7 @@ const tiers: PricingTier[] = [
     },
     {
         name: 'Enterprise',
-        price: '$699+',
+        price: '$999+',
         period: '/year',
         description: 'For organizations requiring compliance and custom solutions.',
         features: [

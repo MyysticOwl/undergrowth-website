@@ -7,6 +7,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "build:api": "esbuild api/activate.mjs --bundle --platform=node --target=node20 --format=esm --outfile=api/activate.bundle.mjs",
+    "build:webhook": "esbuild api/webhook.mjs --bundle --platform=node --target=node20 --format=esm --outfile=api/webhook.bundle.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -27,7 +28,8 @@
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "resend": "^6.6.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.9.2",
