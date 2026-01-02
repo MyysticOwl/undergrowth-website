@@ -13,11 +13,12 @@ const KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_productio
 const FIXED_NONCE_STR = "ug_lic_nonce";
 
 const FEATURES = {
-    community: ['local_auth', 'plugin_sandbox'],
-    pro: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history'],
-    team: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history', 'team_sharing', 'sso'],
-    enterprise: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history', 'team_sharing', 'sso', 'audit_logs', 'compliance_tools']
+    community: [],
+    starter: ['clean_export'],
+    pro: ['unlimited_workflows', 'no_badge', 'unlimited_history', 'unlimited_ai', 'clean_export'],
+    team: ['unlimited_workflows', 'no_badge', 'unlimited_history', 'unlimited_ai', 'clean_export', 'multi_user_auth', 'audit_log_export', 'priority_support', 'sso_oidc', 'volume_activation']
 };
+
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
@@ -40,7 +41,7 @@ export default async function handler(req, res) {
         // For strictness, we might fallback to checking if it's set.
 
         let validatedLicense = null;
-        let edition = 'community'; // Default fallback or error
+        let edition = 'community'; // Default fallback
         let variant_name = 'Community License';
         let expiryDateStr = null;
         let customerEmail = null;
@@ -97,9 +98,9 @@ export default async function handler(req, res) {
 
             // Map Variant to Edition
             const nameLower = variant_name.toLowerCase();
-            if (nameLower.includes('enterprise')) edition = 'enterprise';
-            else if (nameLower.includes('team')) edition = 'team';
+            if (nameLower.includes('team')) edition = 'team';
             else if (nameLower.includes('pro')) edition = 'pro';
+            else if (nameLower.includes('starter')) edition = 'starter';
             else edition = 'community';
 
         } else {
