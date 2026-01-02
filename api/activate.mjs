@@ -72,9 +72,13 @@ export default async function handler(req, res) {
 
             if (!response.ok) {
                 const errorText = await response.text();
-                // If 4xx, it means invalid key usually
                 console.error('LemonSqueezy Error:', response.status, errorText);
-                return res.status(400).json({ error: 'Invalid or incorrect license key.' });
+                let detail = 'Invalid or incorrect license key.';
+                try {
+                    const json = JSON.parse(errorText);
+                    if (json.error) detail = json.error;
+                } catch { }
+                return res.status(400).json({ error: detail });
             }
 
             const data = await response.json();

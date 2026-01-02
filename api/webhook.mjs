@@ -122,47 +122,101 @@ async function generateLicenseFile(email, edition, variantName, licenseKey) {
 }
 
 export default async function handler(req, res) {
+    console.log('Webhook Handler Hit:', req.method); // DEBUG: Confirm endpoint hit
     // Only accept POST
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
     // Get raw body for signature verification
-    const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+    // Vercel sometimes parses the body automatically. We need the raw buffer/string for signature verification.
+    let rawBody = req.rawBody;
+    if (!rawBody) {
+        rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+    }
+
     const signature = req.headers['x-signature'];
     const secret = process.env.LEMON_SQUEEZY_WEBHOOK_SECRET;
 
     // Verify signature
-    if (!verifySignature(rawBody, signature, secret)) {
+    const isValid = verifySignature(rawBody, signature, secret);
+
+    if (!isValid) {
         console.error('Invalid webhook signature');
+        // DEBUG: Calculate what we expected (be careful not to expose secret in prod logs indefinitely, but useful now)
+        if (secret) {
+            const hmac = crypto.createHmac('sha256', secret);
+            const digest = hmac.update(rawBody).digest('hex');
+            console.log('Signature Debug:', {
+                received: signature,
+                calculated: digest,
+                bodyType: typeof req.body,
+                hasRawBody: !!req.rawBody,
+                bodyPreview: typeof rawBody === 'string' ? rawBody.substring(0, 50) : 'Buffer/Object'
+            });
+        } else {
+            console.error('LEMON_SQUEEZY_WEBHOOK_SECRET is missing!');
+        }
         return res.status(401).json({ error: 'Invalid signature' });
     }
 
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const eventName = body.meta?.event_name;
 
-    // Only process order_created events
-    if (eventName !== 'order_created') {
+    // Process supported events
+    if (eventName !== 'license_key_created') {
         console.log(`Ignoring event: ${eventName}`);
         return res.status(200).json({ message: 'Event ignored' });
     }
 
     try {
-        // Extract order data
         const data = body.data;
-        const attrs = data.attributes;
-        const email = attrs.user_email;
-        const licenseKey = attrs.first_order_item?.license_key || `LS-${data.id}`;
-        const variantName = attrs.first_order_item?.variant_name || 'Unknown';
+        const attributes = data.attributes;
 
-        if (!email) {
-            console.error('No email in order data');
-            return res.status(400).json({ error: 'No email in order' });
+        const email = attributes.user_email;
+        const licenseKey = attributes.key;
+        const orderId = attributes.order_id;
+        let variantName = 'Unknown';
+
+        // "license_key_created" guarantees the key exists, but lacks variant_name.
+        // We must fetch the order to get the variant name for correct edition/features.
+
+        console.log(`Processing license_key_created for Order ${orderId}`);
+
+        // Fetch Order to get Variant Name
+        const lsApiKey = process.env.LEMONSQUEEZY_API_KEY;
+        if (lsApiKey) {
+            try {
+                const orderRes = await fetch(`https://api.lemonsqueezy.com/v1/orders/${orderId}`, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${lsApiKey}`
+                    }
+                });
+
+                if (orderRes.ok) {
+                    const orderJson = await orderRes.json();
+                    variantName = orderJson.data?.attributes?.first_order_item?.variant_name;
+                    console.log(`Fetched Variant Name: ${variantName}`);
+                } else {
+                    console.error(`Failed to fetch order ${orderId}: ${orderRes.status}`);
+                }
+            } catch (e) {
+                console.error('Error fetching order details:', e);
+            }
+        } else {
+            console.warn('LEMONSQUEEZY_API_KEY missing - cannot fetch variant name. Defaulting.');
         }
 
-        // Map variant to edition
+        variantName = variantName || 'Unknown';
         const edition = mapVariantToEdition(variantName);
-        console.log(`Processing order for ${email}: ${variantName} -> ${edition}`);
+
+        if (!email) {
+            console.error('No email in data');
+            return res.status(400).json({ error: 'No email in data' });
+        }
+
+        console.log(`Processing license for ${email}: ${variantName} -> ${edition} (Key: ${licenseKey?.substring(0, 5)}...)`);
 
         // Generate license file
         const licenseContent = await generateLicenseFile(email, edition, variantName, licenseKey);
