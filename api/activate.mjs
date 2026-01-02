@@ -4,7 +4,7 @@ import { sha512 } from '@noble/hashes/sha2.js';
 import { chacha20poly1305 } from '@noble/ciphers/chacha.js';
 import * as ed from '@noble/ed25519';
 
-// Configure ed25519 to use sha512 (required for @noble/ed25519 v3+)
+// Configure ed25519 to use sha512 (required for @noble/ed25519)
 ed.etc.sha512Sync = (...m) => sha512(ed.etc.concatBytes(...m));
 ed.etc.sha512Async = async (...m) => sha512(ed.etc.concatBytes(...m));
 
