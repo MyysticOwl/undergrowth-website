@@ -9343,18 +9343,69 @@ var wNAF = (n) => {
   return { p, f };
 };
 
+// shared/features.json
+var features_default = {
+  version: "1.0.0",
+  description: "Undergrowth License Feature Definitions - Single Source of Truth",
+  tiers: {
+    community: {
+      features: [],
+      description: "Free tier with basic functionality - 3 workflows, 7-day history, 100 AI calls/day"
+    },
+    starter: {
+      features: [
+        "clean_export"
+      ],
+      description: "Entry-level paid tier - 10 workflows, 30-day history, 500 AI calls/day"
+    },
+    pro: {
+      features: [
+        "unlimited_workflows",
+        "no_badge",
+        "unlimited_history",
+        "unlimited_ai",
+        "clean_export"
+      ],
+      description: "Professional tier for power users - unlimited workflows, history, and AI"
+    },
+    team: {
+      features: [
+        "unlimited_workflows",
+        "no_badge",
+        "unlimited_history",
+        "unlimited_ai",
+        "clean_export",
+        "multi_user_auth",
+        "audit_log_export",
+        "priority_support",
+        "sso_oidc",
+        "volume_activation"
+      ],
+      description: "Team tier with collaboration features - all Pro features plus team capabilities"
+    }
+  },
+  feature_definitions: {
+    unlimited_workflows: "No limit on active workflows",
+    no_badge: "Remove 'Powered by Undergrowth' badge",
+    unlimited_history: "Unlimited execution history retention",
+    unlimited_ai: "Unlimited AI workflow generation calls",
+    clean_export: "Export workflows without attribution",
+    multi_user_auth: "Multi-user authentication support",
+    audit_log_export: "Export audit logs for compliance",
+    priority_support: "Priority customer support",
+    sso_oidc: "Single Sign-On via OIDC",
+    volume_activation: "Volume licensing for organizations"
+  }
+};
+
 // api/webhook.mjs
 etc.sha512Sync = (...m) => sha512(etc.concatBytes(...m));
 etc.sha512Async = async (...m) => sha512(etc.concatBytes(...m));
 var KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_production";
 var FIXED_NONCE_STR = "ug_lic_nonce";
-var FEATURES = {
-  community: ["local_auth", "plugin_sandbox"],
-  starter: ["local_auth", "plugin_sandbox", "no_badge", "clean_export"],
-  pro: ["local_auth", "plugin_sandbox", "unlimited_workflows", "unlimited_history", "unlimited_ai", "no_badge", "clean_export"],
-  team: ["local_auth", "plugin_sandbox", "unlimited_workflows", "unlimited_history", "unlimited_ai", "no_badge", "clean_export", "multi_user_auth", "rbac", "audit_export"],
-  enterprise: ["local_auth", "plugin_sandbox", "unlimited_workflows", "unlimited_history", "unlimited_ai", "no_badge", "clean_export", "multi_user_auth", "rbac", "audit_export", "sso_oidc", "volume_activation"]
-};
+var FEATURES = Object.fromEntries(
+  Object.entries(features_default.tiers).map(([tier, config2]) => [tier, config2.features])
+);
 function mapVariantToEdition(variantName) {
   const name = (variantName || "").toLowerCase();
   if (name.includes("enterprise")) return "enterprise";

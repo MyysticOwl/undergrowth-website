@@ -13,13 +13,13 @@ ed.etc.sha512Async = async (...m) => sha512(ed.etc.concatBytes(...m));
 const KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_production";
 const FIXED_NONCE_STR = "ug_lic_nonce";
 
-const FEATURES = {
-    community: ['local_auth', 'plugin_sandbox'],
-    starter: ['local_auth', 'plugin_sandbox', 'no_badge', 'clean_export'],
-    pro: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history', 'unlimited_ai', 'no_badge', 'clean_export'],
-    team: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history', 'unlimited_ai', 'no_badge', 'clean_export', 'multi_user_auth', 'rbac', 'audit_export'],
-    enterprise: ['local_auth', 'plugin_sandbox', 'unlimited_workflows', 'unlimited_history', 'unlimited_ai', 'no_badge', 'clean_export', 'multi_user_auth', 'rbac', 'audit_export', 'sso_oidc', 'volume_activation']
-};
+// Import features from shared configuration (single source of truth)
+import featuresConfig from '../shared/features.json' with { type: 'json' };
+
+// Extract features by tier from the shared config
+const FEATURES = Object.fromEntries(
+    Object.entries(featuresConfig.tiers).map(([tier, config]) => [tier, config.features])
+);
 
 // Map LemonSqueezy variant names to editions
 function mapVariantToEdition(variantName) {
