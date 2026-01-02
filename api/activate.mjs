@@ -1,7 +1,11 @@
 
 import { sha256 } from '@noble/hashes/sha256';
+import { sha512 } from '@noble/hashes/sha512';
 import { chacha20poly1305 } from '@noble/ciphers/chacha';
 import * as ed from '@noble/ed25519';
+
+// Configure ed25519 to use sha512 (required for @noble/ed25519 v3+)
+ed.etc.sha512Sync = (...m) => sha512(ed.etc.concatBytes(...m));
 
 // --- Configuration ---
 const KEY_DERIVATION_SECRET = "undergrowth_license_key_v1_change_me_in_production";
