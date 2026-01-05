@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Undergrowth',
   tagline: 'Automate Everything. Deploy Anywhere.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/processed_logo.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -60,8 +60,8 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // Undergrowth social card
+    image: 'img/undergrowth-social-card.png',
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
@@ -71,20 +71,32 @@ const config: Config = {
       title: 'Undergrowth',
       logo: {
         alt: 'Undergrowth Logo',
-        src: 'img/logo.svg',
+        src: 'img/processed_logo.png',
       },
       items: [
         {
           type: 'docSidebar',
+          sidebarId: 'tutorialSidebar',
+          position: 'left',
+          label: 'Getting Started',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'foundationSidebar',
           position: 'left',
-          label: 'Docs',
+          label: 'API',
         },
         {
           type: 'docSidebar',
           sidebarId: 'pluginsSidebar',
           position: 'left',
           label: 'Plugins',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'aiSidebar',
+          position: 'left',
+          label: 'AI',
         },
         {
           to: '/pricing',

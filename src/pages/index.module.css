@@ -4,19 +4,22 @@
  */
 
 .heroBanner {
-  padding: 6rem 0 4rem;
-  text-align: center;
+  padding: 8rem 0;
   position: relative;
   overflow: hidden;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('@site/static/img/hero_bg.png');
+  background-image: linear-gradient(rgba(10, 11, 13, 0.9), rgba(10, 11, 13, 0.95)), url('@site/static/img/hero_nerve_center.png');
   background-size: cover;
   background-position: center;
   color: #fff;
+  display: flex;
+  align-items: center;
+  min-height: 80vh;
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 4rem 2rem;
+    padding: 6rem 1rem;
+    text-align: center;
   }
 }
 
@@ -33,7 +36,7 @@
   font-size: 3.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  background: linear-gradient(120deg, #76d4a4, #4aa779);
+  background: linear-gradient(to right, #00f2ff, #10b981);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -181,4 +184,15 @@
   justify-content: center;
   margin-top: 1.5rem;
   flex-wrap: wrap;
+}
+
+/* Hero Image */
+.heroImage {
+  display: block;
+  max-width: 600px;
+  width: 100%;
+  margin: 2rem auto 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px 0 rgba(0, 118, 255, 0.39);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

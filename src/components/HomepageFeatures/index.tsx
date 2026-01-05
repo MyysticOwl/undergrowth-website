@@ -72,8 +72,8 @@ const FeatureList: FeatureItem[] = [
     benefit: 'Built for compliance',
     description: (
       <>
-        Role-based access control, SSO/OIDC integration, comprehensive audit logging,
-        and encrypted database storage. Ready for regulated industries.
+        Future-proof security with <strong>RBAC, SSO, and OIDC</strong> (Coming Soon).
+        Designed for compliance with planned audit logging and encrypted asset protection.
       </>
     ),
   },

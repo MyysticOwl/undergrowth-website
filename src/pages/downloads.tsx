@@ -163,7 +163,7 @@ function QuickStart() {
                     <div className={styles.stepContent}>
                         <Heading as="h4">Open Web UI</Heading>
                         <p>
-                            Visit <code>http://localhost:8080</code> in your browser to access the dashboard.
+                            Visit <code>http://localhost:8096</code> in your browser to access the dashboard.
                         </p>
                     </div>
                 </div>
@@ -171,6 +171,9 @@ function QuickStart() {
             <div className={styles.docLinks}>
                 <Link to="/docs/intro" className="button button--secondary">
                     📚 Documentation
+                </Link>
+                <Link to="/docs/ai/ollama-setup" className="button button--secondary">
+                    🤖 AI Setup Guide
                 </Link>
                 <Link to="https://github.com/MyysticOwl/undergrowth" className="button button--secondary">
                     ⚙️ GitHub Repository

@@ -28,9 +28,8 @@ const tiers: PricingTier[] = [
             '3 active workflows',
             '7-day execution history',
             '100 AI calls/day',
-            'All 50+ plugins',
+            'All Core plugins (50+)',
             'Web UI & Sprout CLI',
-            '"Powered by" badge',
         ],
         cta: 'Download Free',
         ctaLink: '/download',
@@ -44,8 +43,6 @@ const tiers: PricingTier[] = [
             '10 active workflows',
             '30-day execution history',
             '500 AI calls/day',
-            'Badge removed',
-            'Clean blueprint exports',
             'Email support',
             '1 machine license',
         ],
@@ -61,8 +58,6 @@ const tiers: PricingTier[] = [
             'Unlimited workflows',
             'Unlimited history',
             'Unlimited AI calls',
-            'Badge removed',
-            'Clean blueprint exports',
             'Priority email support',
             '1 machine license',
             'Volume discounts available',
@@ -81,9 +76,9 @@ const tiers: PricingTier[] = [
         features: [
             'Everything in Pro',
             '5 team seats included',
-            'Multi-user authentication',
-            'Role-based access control',
-            'Audit log export',
+            'Multi-user authentication (Coming Soon)',
+            'Role-based access control (Coming Soon)',
+            'Audit log export (Coming Soon)',
             'Team blueprint sharing',
             'Priority email support',
         ],
@@ -97,10 +92,8 @@ const tiers: PricingTier[] = [
         description: 'For organizations requiring compliance and custom solutions.',
         features: [
             'Everything in Team',
-            'SSO/OIDC integration',
+            'SSO/OIDC integration (Coming Soon)',
             'Volume licensing',
-            '99.9% SLA',
-            '24/7 support',
             'Custom plugin development',
             'Dedicated success manager',
         ],
@@ -177,6 +170,14 @@ function ComparisonTable() {
                             <td>Unlimited</td>
                         </tr>
                         <tr>
+                            <td>Local AI Runtime</td>
+                            <td>Integrated (Cortex)</td>
+                            <td>Integrated (Cortex)</td>
+                            <td>Integrated (Cortex)</td>
+                            <td>Integrated (Cortex)</td>
+                            <td>Integrated (Cortex)</td>
+                        </tr>
+                        <tr>
                             <td>AI Calls/Day</td>
                             <td>100</td>
                             <td>500</td>
@@ -193,44 +194,28 @@ function ComparisonTable() {
                             <td>Volume</td>
                         </tr>
                         <tr>
-                            <td>"Powered by" Badge</td>
-                            <td>Visible</td>
-                            <td>Removed</td>
-                            <td>Removed</td>
-                            <td>Removed</td>
-                            <td>Custom</td>
-                        </tr>
-                        <tr>
-                            <td>Blueprint Export</td>
-                            <td>Watermarked</td>
-                            <td>Clean</td>
-                            <td>Clean</td>
-                            <td>Clean</td>
-                            <td>Clean</td>
-                        </tr>
-                        <tr>
                             <td>Multi-User Auth</td>
                             <td>—</td>
                             <td>—</td>
                             <td>—</td>
-                            <td>✓</td>
-                            <td>✓</td>
+                            <td>✓ (Soon)</td>
+                            <td>✓ (Soon)</td>
                         </tr>
                         <tr>
                             <td>RBAC</td>
                             <td>—</td>
                             <td>—</td>
                             <td>—</td>
-                            <td>✓</td>
-                            <td>✓</td>
+                            <td>✓ (Soon)</td>
+                            <td>✓ (Soon)</td>
                         </tr>
                         <tr>
                             <td>Audit Logs</td>
                             <td>—</td>
                             <td>—</td>
                             <td>—</td>
-                            <td>✓</td>
-                            <td>✓</td>
+                            <td>✓ (Soon)</td>
+                            <td>✓ (Soon)</td>
                         </tr>
                         <tr>
                             <td>SSO/OIDC</td>
@@ -238,7 +223,7 @@ function ComparisonTable() {
                             <td>—</td>
                             <td>—</td>
                             <td>—</td>
-                            <td>✓</td>
+                            <td>✓ (Soon)</td>
                         </tr>
                         <tr>
                             <td>SLA</td>
@@ -254,7 +239,7 @@ function ComparisonTable() {
                             <td>Email</td>
                             <td>Priority</td>
                             <td>Priority</td>
-                            <td>24/7</td>
+                            <td>Priority</td>
                         </tr>
                     </tbody>
                 </table>
