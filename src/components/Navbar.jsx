@@ -7,6 +7,7 @@ import './Navbar.css';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showActivateModal, setShowActivateModal] = useState(false);
+  const [email, setEmail] = useState('');
   const [licenseKey, setLicenseKey] = useState('');
   const [status, setStatus] = useState('idle'); // idle, loading, success, error
   const [message, setMessage] = useState('');
@@ -22,7 +23,7 @@ const Navbar = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ licenseKey }),
+        body: JSON.stringify({ email, licenseKey }),
       });
 
       const data = await response.json();
@@ -32,6 +33,7 @@ const Navbar = () => {
         setMessage(data.message || 'License activated successfully!');
         setTimeout(() => {
           setShowActivateModal(false);
+          setEmail('');
           setLicenseKey('');
           setStatus('idle');
           setMessage('');
@@ -97,6 +99,20 @@ const Navbar = () => {
                     {message}
                   </div>
                 )}
+
+                <div className="form-group">
+                  <label htmlFor="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="form-input"
+                    required
+                    disabled={status === 'loading'}
+                  />
+                </div>
 
                 <div className="form-group">
                   <label htmlFor="licenseKey">License Key</label>
