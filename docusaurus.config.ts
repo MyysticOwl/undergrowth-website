@@ -99,6 +99,11 @@ const config: Config = {
           label: 'AI',
         },
         {
+          to: '/samples',
+          label: 'Blueprints',
+          position: 'left',
+        },
+        {
           to: '/pricing',
           label: 'Pricing',
           position: 'left',

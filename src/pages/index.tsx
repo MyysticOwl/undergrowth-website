@@ -191,6 +191,13 @@ export default function Home(): ReactNode {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
+        <section className="container text--center margin-bottom--xl">
+          <Link
+            className="button button--secondary button--lg"
+            to="/samples">
+            See More Workflow Blueprints →
+          </Link>
+        </section>
         <BentoGrid />
         <HomepageUseCases />
         <PricingPreview />
