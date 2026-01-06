@@ -1,4 +1,5 @@
 {
+    "outputDirectory": "dist",
     "functions": {
         "api/activate.bundle.mjs": {
             "memory": 1024,
