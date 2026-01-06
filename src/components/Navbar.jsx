@@ -20,7 +20,7 @@ const Navbar = () => {
           <HashLink smooth to="/#roles" onClick={() => setIsOpen(false)}>For You</HashLink>
           <HashLink smooth to="/#pricing" onClick={() => setIsOpen(false)}>Pricing</HashLink>
           <Link to="/docs" onClick={() => setIsOpen(false)}>Docs</Link>
-          <a href="https://github.com/MyysticOwl/undergrowth/releases" target="_blank" rel="noopener noreferrer" className="btn-primary" onClick={() => setIsOpen(false)}>
+          <a href="https://github.com/MyysticOwl/undergrowth-website/releases" target="_blank" rel="noopener noreferrer" className="btn-primary" onClick={() => setIsOpen(false)}>
             Download
           </a>
         </div>

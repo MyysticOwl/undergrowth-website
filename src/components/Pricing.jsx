@@ -8,7 +8,7 @@ const plans = [
     price: 'Free',
     features: ['3 active workflows', '100 AI calls/day', 'Community Support'],
     cta: 'Get Started',
-    link: 'https://github.com/MyysticOwl/undergrowth/releases',
+    link: 'https://github.com/MyysticOwl/undergrowth-website/releases',
     primary: false
   },
   {

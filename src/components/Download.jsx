@@ -14,7 +14,7 @@ const Download = () => {
                         </p>
 
                         <div className="download-actions">
-                            <a href="https://github.com/MyysticOwl/undergrowth/releases" target="_blank" rel="noopener noreferrer" className="btn-primary btn-large">
+                            <a href="https://github.com/MyysticOwl/undergrowth-website/releases" target="_blank" rel="noopener noreferrer" className="btn-primary btn-large">
                                 <DownloadIcon size={24} />
                                 Download Latest Release
                             </a>
