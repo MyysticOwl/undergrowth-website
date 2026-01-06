@@ -1,0 +1,99 @@
+.pricing-section {
+    padding: 8rem 0;
+    background: var(--bg-primary);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+    .pricing-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+}
+
+.pricing-card {
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+
+.pricing-card.primary {
+    border: 1px solid var(--accent-primary);
+    background: rgba(16, 185, 129, 0.05);
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.pricing-card.primary:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-primary);
+    color: white;
+    padding: 0.25rem 1rem;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.plan-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.plan-price {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.period {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 2.5rem;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.plan-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.check-icon {
+    color: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.btn-plan {
+    width: 100%;
+    margin-top: auto;
+    justify-content: center;
+}

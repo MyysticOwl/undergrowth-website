@@ -1,8 +1,0 @@
-# Exclude source API files - only deploy bundles
-api/activate.mjs
-api/webhook.mjs
-api/package.json
-
-# Standard ignores
-node_modules
-.git
