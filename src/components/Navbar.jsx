@@ -23,7 +23,7 @@ const Navbar = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, licenseKey }),
+        body: JSON.stringify({ email, license_key: licenseKey }),
       });
 
       const data = await response.json();
