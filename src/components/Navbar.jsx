@@ -26,11 +26,28 @@ const Navbar = () => {
         body: JSON.stringify({ email, license_key: licenseKey }),
       });
 
-      const data = await response.json();
-
       if (response.ok) {
+        // Get the filename from Content-Disposition header or use default
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let filename = 'license.undergrowth';
+        if (contentDisposition) {
+          const match = contentDisposition.match(/filename="?([^";\n]+)"?/);
+          if (match) filename = match[1];
+        }
+
+        // Create blob from response and trigger download
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+
         setStatus('success');
-        setMessage(data.message || 'License activated successfully!');
+        setMessage('License activated! Download starting...');
         setTimeout(() => {
           setShowActivateModal(false);
           setEmail('');
@@ -39,6 +56,7 @@ const Navbar = () => {
           setMessage('');
         }, 3000);
       } else {
+        const data = await response.json();
         setStatus('error');
         setMessage(data.error || 'Activation failed. Please check your key.');
       }
