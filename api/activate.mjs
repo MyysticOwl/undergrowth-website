@@ -197,7 +197,7 @@ export default async function handler(req, res) {
         const finalJson = JSON.stringify(licenseFile, null, 2);
 
         res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Content-Disposition', `attachment; filename="license_${edition}.undergrowth"`);
+        res.setHeader('Content-Disposition', 'attachment; filename="license.undergrowth"');
         res.status(200).send(finalJson);
 
     } catch (error) {
