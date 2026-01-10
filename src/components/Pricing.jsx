@@ -17,7 +17,7 @@ const plans = [
     period: '/year',
     features: ['10 active workflows', '500 AI calls/day', 'Email Support'],
     cta: 'Choose Starter',
-    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/5ecf0b98-6a7a-457e-b119-0a358e710d92?embed=1',
+    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
     primary: false
   },
   {
@@ -26,7 +26,7 @@ const plans = [
     period: '/year',
     features: ['Unlimited workflows', 'Unlimited AI', 'Priority Support'],
     cta: 'Choose Pro',
-    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/5ecf0b98-6a7a-457e-b119-0a358e710d92?embed=1',
+    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
     primary: true
   },
   {
@@ -35,7 +35,7 @@ const plans = [
     period: '/year',
     features: ['5 seats', 'RBAC', 'Audit logs', 'Dedicated Support'],
     cta: 'Choose Team',
-    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/5ecf0b98-6a7a-457e-b119-0a358e710d92?embed=1',
+    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
     primary: false
   },
   {
@@ -86,7 +86,7 @@ const Pricing = () => {
 
               <a
                 href={plan.link}
-                className={`btn-plan ${plan.primary ? 'btn-primary' : 'btn-secondary'}`}
+                className={`btn-plan ${plan.primary ? 'btn-primary' : 'btn-secondary'} lemonsqueezy-button`}
                 target={plan.link.startsWith('http') ? "_blank" : "_self"}
                 rel="noopener noreferrer"
               >
