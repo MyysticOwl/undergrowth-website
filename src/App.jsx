@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Plugins from './pages/Plugins';
 import DocsLayout from './layouts/DocsLayout';
 import DocPage from './pages/DocPage';
 
@@ -9,6 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/plugins" element={<Plugins />} />
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={<DocPage />} />
           <Route path=":slug" element={<DocPage />} />

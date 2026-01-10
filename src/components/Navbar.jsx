@@ -79,6 +79,7 @@ const Navbar = () => {
             <HashLink smooth to="/#features" onClick={() => setIsOpen(false)}>Features</HashLink>
             <HashLink smooth to="/#roles" onClick={() => setIsOpen(false)}>For You</HashLink>
             <HashLink smooth to="/#pricing" onClick={() => setIsOpen(false)}>Pricing</HashLink>
+            <Link to="/plugins" onClick={() => setIsOpen(false)}>Plugins</Link>
             <Link to="/docs" onClick={() => setIsOpen(false)}>Docs</Link>
             <button className="btn-text" onClick={() => { setIsOpen(false); setShowActivateModal(true); }}>
               Activate

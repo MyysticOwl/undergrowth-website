@@ -1,0 +1,1035 @@
+[
+  {
+    "name": "RSS",
+    "description": "RSS and Atom feed reader for news, blogs, and podcasts",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "read_feed",
+        "icon": "\ud83d\udcf0",
+        "description": "Fetches and parses RSS/Atom feeds, emitting items as JSON.",
+        "tags": [
+          "Communication",
+          "HTTP",
+          "RSS"
+        ]
+      }
+    ],
+    "category": "communication"
+  },
+  {
+    "name": "JSON Table",
+    "description": "Aggregate JSON messages into tabular format with field selection and size limits",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "json_table",
+        "icon": "\ud83d\udccb",
+        "description": "Accumulates JSON objects into a table structure for aggregation.",
+        "tags": [
+          "Data",
+          "Analytics"
+        ]
+      }
+    ],
+    "category": "data"
+  },
+  {
+    "name": "Memory",
+    "description": "Vector memory for RAG and semantic search - embeddings, storage, and similarity search",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "embed",
+        "icon": "\ud83d\udd22",
+        "description": "Generate vector embeddings from text.",
+        "tags": [
+          "AI",
+          "LLM",
+          "Memory"
+        ]
+      },
+      {
+        "id": "store",
+        "icon": "\ud83d\udcbe",
+        "description": "Store text and embeddings in vector database.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Cache"
+        ]
+      },
+      {
+        "id": "search",
+        "icon": "\ud83d\udd0e",
+        "description": "Semantic similarity search.",
+        "tags": [
+          "AI",
+          "LLM",
+          "Memory"
+        ]
+      }
+    ],
+    "category": "data"
+  },
+  {
+    "name": "Data Transform",
+    "description": "Advanced data manipulation utilities",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "parse_csv",
+        "icon": "\ud83d\udcc4",
+        "description": "Parses CSV string data into JSON objects.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      },
+      {
+        "id": "stringify_csv",
+        "icon": "\ud83d\udcdd",
+        "description": "Converts JSON objects into CSV string format.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      },
+      {
+        "id": "regex_match",
+        "icon": "\ud83d\udd0e",
+        "description": "Extracts data from strings using Regular Expressions.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      },
+      {
+        "id": "regex_replace",
+        "icon": "\u270f\ufe0f",
+        "description": "Replaces text in strings using Regular Expressions.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      },
+      {
+        "id": "format_date",
+        "icon": "\ud83d\udcc5",
+        "description": "Parses and reformats date/time strings.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      }
+    ],
+    "category": "data"
+  },
+  {
+    "name": "Alert",
+    "description": "Conditional monitoring and alerting plugin with threshold, pattern, heartbeat, and correlation support",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "threshold_alert",
+        "icon": "\ud83d\udcca",
+        "description": "Monitors numeric fields against thresholds (<, >, ==, between, outside).",
+        "tags": [
+          "Monitoring",
+          "Alerting"
+        ]
+      },
+      {
+        "id": "pattern_alert",
+        "icon": "\ud83d\udd0d",
+        "description": "Detects text patterns in fields using Regular Expressions.",
+        "tags": [
+          "Monitoring",
+          "Alerting"
+        ]
+      },
+      {
+        "id": "heartbeat_watchdog",
+        "icon": "\ud83d\udc93",
+        "description": "Watchdog that alerts if signals aren't received within an expected interval.",
+        "tags": [
+          "Monitoring",
+          "Health"
+        ]
+      },
+      {
+        "id": "http_health_check",
+        "icon": "\ud83c\udfe5",
+        "description": "Polls an external HTTP endpoint and alerts if it returns an error status or unexpected body.",
+        "tags": [
+          "Monitoring",
+          "Health"
+        ]
+      },
+      {
+        "id": "correlation_alert",
+        "icon": "\ud83d\udd17",
+        "description": "Complex alerting that triggers only when multiple conditions are met within a time window.",
+        "tags": [
+          "Monitoring",
+          "Alerting"
+        ]
+      },
+      {
+        "id": "rate_limit_alert",
+        "icon": "\u26a1",
+        "description": "Monitors the frequency of events and alerts if the rate is too high or too low.",
+        "tags": [
+          "Monitoring",
+          "Metrics"
+        ]
+      },
+      {
+        "id": "change_alert",
+        "icon": "\ud83d\udd04",
+        "description": "Alerts when a field value change is detected between consecutive events.",
+        "tags": [
+          "Monitoring",
+          "Alerting"
+        ]
+      }
+    ],
+    "category": "monitoring"
+  },
+  {
+    "name": "Process",
+    "description": "External process execution",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "run_command",
+        "icon": "\u2699\ufe0f",
+        "description": "Executes external system commands and captures stdout/stderr.",
+        "tags": [
+          "Utility",
+          "Debug"
+        ]
+      }
+    ],
+    "category": "utility"
+  },
+  {
+    "name": "Time",
+    "description": "Time-based triggers and delays",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "time_interval",
+        "icon": "\u23f1\ufe0f",
+        "description": "Emits events at specified time intervals.",
+        "tags": [
+          "Time",
+          "Schedule"
+        ]
+      },
+      {
+        "id": "time_delay",
+        "icon": "\u23f3",
+        "description": "Pauses workflow execution for a specified duration.",
+        "tags": [
+          "Time",
+          "Delay"
+        ]
+      },
+      {
+        "id": "time_trigger",
+        "icon": "\ud83d\udd50",
+        "description": "Triggers at a specific time of day (24h format).",
+        "tags": [
+          "Time",
+          "Schedule"
+        ]
+      }
+    ],
+    "category": "primitives"
+  },
+  {
+    "name": "Scheduler",
+    "description": "Calendar-aware scheduling beyond basic timers",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "cron_schedule",
+        "icon": "\ud83d\udcc5",
+        "description": "Triggers workflow execution based on a cron schedule.",
+        "tags": [
+          "Time",
+          "Schedule"
+        ]
+      },
+      {
+        "id": "calendar_schedule",
+        "icon": "\ud83d\uddd3\ufe0f",
+        "description": "Triggers on specific dates and times defined in a calendar list.",
+        "tags": [
+          "Time",
+          "Schedule"
+        ]
+      },
+      {
+        "id": "solar_event",
+        "icon": "\ud83c\udf05",
+        "description": "Triggers based on solar events (sunrise, sunset) for a given location.",
+        "tags": [
+          "Time",
+          "Schedule"
+        ]
+      }
+    ],
+    "category": "primitives"
+  },
+  {
+    "name": "Math",
+    "description": "Mathematical operations and signal generation",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "arithmetic",
+        "icon": "\u2795",
+        "description": "Basic arithmetic operations (add, sub, mul, div, etc.) on numeric fields.",
+        "tags": [
+          "Math",
+          "Logic"
+        ]
+      },
+      {
+        "id": "trigonometry",
+        "icon": "\ud83d\udcd0",
+        "description": "Advanced trigonometric and logarithmic functions.",
+        "tags": [
+          "Math",
+          "Logic"
+        ]
+      },
+      {
+        "id": "generator",
+        "icon": "\u3030\ufe0f",
+        "description": "Generates periodic signals or noise for testing and control.",
+        "tags": [
+          "Math",
+          "Logic"
+        ]
+      }
+    ],
+    "category": "primitives"
+  },
+  {
+    "name": "Logic",
+    "description": "Conditional execution and decision-making",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "if_else",
+        "icon": "\u2753",
+        "description": "Standard If/Then/Else branch. Outputs one of two values based on a boolean condition.",
+        "tags": [
+          "Logic"
+        ]
+      },
+      {
+        "id": "compare_values",
+        "icon": "\u2696\ufe0f",
+        "description": "Compares two field values using standard operators (==, !=, <, >, etc.) and outputs a boolean result.",
+        "tags": [
+          "Logic"
+        ]
+      },
+      {
+        "id": "logic_threshold",
+        "icon": "\ud83d\udcca",
+        "description": "Triggers only when a numeric value crosses a specific threshold in a defined direction.",
+        "tags": [
+          "Logic"
+        ]
+      },
+      {
+        "id": "logic_gate",
+        "icon": "\ud83d\udea6",
+        "description": "Standard Boolean logic gates (AND, OR, XOR, etc.) for combining multiple conditions.",
+        "tags": [
+          "Logic"
+        ]
+      },
+      {
+        "id": "switch",
+        "icon": "\ud83d\udd00",
+        "description": "Content-based router for AI tool dispatch. Routes messages to different outputs based on field value matching.",
+        "tags": [
+          "Logic"
+        ]
+      },
+      {
+        "id": "filter",
+        "icon": "\ud83e\uddf9",
+        "description": "Selectively passes and unwraps messages based on routing port metadata.",
+        "tags": [
+          "Logic"
+        ]
+      }
+    ],
+    "category": "primitives"
+  },
+  {
+    "name": "JSON",
+    "description": "Transform and emit JSON objects",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "generate_json",
+        "icon": "\ud83d\udcac",
+        "description": "Generates or modifies JSON objects. Supports dynamic field generation with counters, timestamps, and random values.",
+        "tags": [
+          "Input",
+          "Static"
+        ]
+      },
+      {
+        "id": "extract_json",
+        "icon": "\ud83d\udd0d",
+        "description": "Extracts data from JSON using JSONPath expressions.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      },
+      {
+        "id": "render_template",
+        "icon": "\ud83d\udd28",
+        "description": "Constructs a new string or JSON from input fields using templates.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      },
+      {
+        "id": "filter_json",
+        "icon": "\ud83d\udd2c",
+        "description": "Passes through JSON objects that meet specified filtering conditions.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      },
+      {
+        "id": "map_fields",
+        "icon": "\ud83d\uddfa\ufe0f",
+        "description": "Maps and transforms fields from one structure to another.",
+        "tags": [
+          "Data",
+          "Transform"
+        ]
+      }
+    ],
+    "category": "primitives"
+  },
+  {
+    "name": "Utility",
+    "description": "Basic utility tools",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "console_logger",
+        "icon": "\ud83d\udcdd",
+        "description": "Logs input to stdout.",
+        "tags": [
+          "Utility",
+          "Debug"
+        ]
+      }
+    ],
+    "category": "primitives"
+  },
+  {
+    "name": "MQTT",
+    "description": "Connect to external MQTT brokers to publish and subscribe to topics",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "mqtt_publish",
+        "icon": "\ud83d\udce4",
+        "description": "Publishes JSON data as strings to an MQTT topic with configurable QoS and retention.",
+        "tags": [
+          "IoT",
+          "Protocol",
+          "MQTT"
+        ]
+      },
+      {
+        "id": "mqtt_subscribe",
+        "icon": "\ud83d\udce5",
+        "description": "Subscribes to an MQTT topic and emits received messages as native JSON.",
+        "tags": [
+          "IoT",
+          "Protocol",
+          "MQTT"
+        ]
+      }
+    ],
+    "category": "protocols"
+  },
+  {
+    "name": "Http",
+    "description": "HTTP request and listener capabilities",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "http_server",
+        "icon": "\ud83c\udf10",
+        "description": "Starts an HTTP server to receive webhooks and API requests.",
+        "tags": [
+          "Communication",
+          "HTTP"
+        ]
+      },
+      {
+        "id": "http_request",
+        "icon": "\ud83d\udd17",
+        "description": "Sends HTTP/HTTPS requests to external APIs.",
+        "tags": [
+          "Communication",
+          "HTTP"
+        ]
+      }
+    ],
+    "category": "protocols"
+  },
+  {
+    "name": "Notify",
+    "description": "Alert operators when conditions are met",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "send_email",
+        "icon": "\ud83d\udce7",
+        "description": "Sends email notifications via SMTP.",
+        "tags": [
+          "Communication",
+          "Notification"
+        ]
+      },
+      {
+        "id": "send_sms",
+        "icon": "\ud83d\udcf1",
+        "description": "Sends SMS alerts via Twilio API.",
+        "tags": [
+          "Communication",
+          "Notification"
+        ]
+      },
+      {
+        "id": "send_push",
+        "icon": "\ud83d\udd14",
+        "description": "Sends mobile push notifications via Pushover or Gotify.",
+        "tags": [
+          "Communication",
+          "Notification"
+        ]
+      },
+      {
+        "id": "call_webhook",
+        "icon": "\ud83e\ude9d",
+        "description": "Triggers external systems via HTTP webhooks.",
+        "tags": [
+          "Communication",
+          "Notification"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "Weather",
+    "description": "Weather data from Open-Meteo (free, no API key)",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "current",
+        "icon": "\ud83c\udf21\ufe0f",
+        "description": "Fetches current weather conditions for a location.",
+        "tags": [
+          "Communication",
+          "HTTP",
+          "Weather"
+        ]
+      },
+      {
+        "id": "forecast",
+        "icon": "\ud83d\udcc5",
+        "description": "Fetches multi-day weather forecast for a location.",
+        "tags": [
+          "Communication",
+          "HTTP",
+          "Weather"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "SQLite",
+    "description": "Embedded SQL database for local persistence",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "sql_query",
+        "icon": "\ud83d\udd0d",
+        "description": "Executes a SELECT query and returns the results as a JSON array.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "sql_insert",
+        "icon": "\u2795",
+        "description": "Inserts a new row into the specified table using fields from the input JSON.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "sql_upsert",
+        "icon": "\ud83d\udd04",
+        "description": "Inserts or updates a row based on whether it already exists (idempotent write).",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "sql_delete",
+        "icon": "\ud83d\uddd1\ufe0f",
+        "description": "Deletes rows from a table that match specified conditions.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "Redis",
+    "description": "Fast key-value cache with pub/sub",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "redis_cache",
+        "icon": "\ud83d\udcbe",
+        "description": "Unified cache operations (GET/SET/DEL) with configurable operation type.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Cache"
+        ]
+      },
+      {
+        "id": "redis_publish",
+        "icon": "\ud83d\udce4",
+        "description": "Publishes a message to a Redis Pub/Sub channel.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Cache"
+        ]
+      },
+      {
+        "id": "redis_subscribe",
+        "icon": "\ud83d\udce5",
+        "description": "Subscribes to a Redis Pub/Sub channel and emits messages as they arrive.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Cache"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "File",
+    "description": "Read/write files to disk",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "write_file",
+        "icon": "\ud83d\udcc4",
+        "description": "Writes data to files on disk. Parent directories are created automatically.",
+        "tags": [
+          "Data",
+          "Storage",
+          "File"
+        ]
+      },
+      {
+        "id": "read_file",
+        "icon": "\ud83d\udcd6",
+        "description": "Reads existing files from disk and emits their content as JSON.",
+        "tags": [
+          "Data",
+          "Storage",
+          "File"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "AI",
+    "description": "AI/LLM capabilities for text completion, chat, agents, and workflow generation",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "ai_chat",
+        "icon": "\ud83d\udcac",
+        "description": "General-purpose AI assistant for text completion and chat. Supports Ollama, OpenAI, and Anthropic.",
+        "tags": [
+          "AI",
+          "LLM"
+        ]
+      },
+      {
+        "id": "ai_agent",
+        "icon": "\ud83e\udde0",
+        "description": "Autonomous AI agent with ReAct tool-use loop. Can call tools and reason step-by-step.",
+        "tags": [
+          "AI",
+          "LLM"
+        ]
+      },
+      {
+        "id": "generate_workflow",
+        "icon": "\u2728",
+        "description": "Generates executable Undergrowth workflows from natural language descriptions.",
+        "tags": [
+          "AI",
+          "LLM"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "Vision",
+    "description": "Computer vision algorithms including motion and object detection.",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "motion_detector",
+        "icon": "\ud83c\udfc3",
+        "description": "Detects motion between frames.",
+        "tags": [
+          "AI",
+          "Vision"
+        ]
+      },
+      {
+        "id": "object_detect",
+        "icon": "\ud83c\udfaf",
+        "description": "Detects objects using YOLOv8 ONNX model.",
+        "tags": [
+          "AI",
+          "Vision"
+        ]
+      },
+      {
+        "id": "face_detect",
+        "icon": "\ud83d\ude00",
+        "description": "Detects faces and landmarks.",
+        "tags": [
+          "AI",
+          "Vision"
+        ]
+      },
+      {
+        "id": "zone_crossing",
+        "icon": "\ud83d\udea7",
+        "description": "Tracks objects and detects zone/line crossing events.",
+        "tags": [
+          "AI",
+          "Vision"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "MjpegView",
+    "description": "Serves input binary frames as an MJPEG stream over HTTP for debugging/visualization.",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "stream_server",
+        "icon": "\ud83d\udcfa",
+        "description": "Starts an HTTP server serving the MJPEG stream",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "Crypto",
+    "description": "Cryptographic utilities",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "generate_hash",
+        "icon": "#\ufe0f\u20e3",
+        "description": "Computes cryptographic hashes (MD5, SHA256) for data verification.",
+        "tags": [
+          "Security",
+          "Crypto"
+        ]
+      },
+      {
+        "id": "hmac_sign",
+        "icon": "\ud83d\udd0f",
+        "description": "Signs messages using HMAC with a secret key.",
+        "tags": [
+          "Security",
+          "Crypto"
+        ]
+      },
+      {
+        "id": "hmac_verify",
+        "icon": "\u2705",
+        "description": "Verifies HMAC signatures using a secret key.",
+        "tags": [
+          "Security",
+          "Crypto"
+        ]
+      },
+      {
+        "id": "generate_uuid",
+        "icon": "\ud83c\udd94",
+        "description": "Generates random UUID v4 strings.",
+        "tags": [
+          "Security",
+          "Crypto"
+        ]
+      },
+      {
+        "id": "generate_bytes",
+        "icon": "\ud83c\udfb2",
+        "description": "Generates cryptographically secure random bytes in hex or base64.",
+        "tags": [
+          "Security",
+          "Crypto"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "System",
+    "description": "System resource monitoring",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "cpu_metrics",
+        "icon": "\ud83d\udda5\ufe0f",
+        "description": "Monitors host CPU usage metrics.",
+        "tags": [
+          "System",
+          "Monitor",
+          "CPU"
+        ]
+      },
+      {
+        "id": "memory_usage",
+        "icon": "\ud83d\udcc8",
+        "description": "Provides memory utilization metrics.",
+        "tags": [
+          "System",
+          "Monitor",
+          "CPU"
+        ]
+      },
+      {
+        "id": "disk_usage",
+        "icon": "\ud83d\udcbe",
+        "description": "Monitors disk space utilization.",
+        "tags": [
+          "System",
+          "Monitor",
+          "Storage"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "Camera",
+    "description": "Capture video streams from local cameras",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "webcam_stream",
+        "icon": "\ud83d\udcf7",
+        "description": "Captures JPEG frames from a webcam device.",
+        "tags": [
+          "IoT",
+          "Peripherals"
+        ]
+      },
+      {
+        "id": "mock_stream",
+        "icon": "\ud83e\uddea",
+        "description": "Generates synthetic video frames.",
+        "tags": [
+          "IoT",
+          "Peripherals"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "timeseries",
+    "description": "Time-series storage and analytics pack",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "store",
+        "icon": "\ud83d\udcbe",
+        "description": "Stores time-series data points into local SQLite database.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "query",
+        "icon": "\ud83d\udd0e",
+        "description": "Queries time-series data from local storage.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "window_aggregate",
+        "icon": "\ud83d\udcca",
+        "description": "Calculates rolling window statistics (mean, max, etc.).",
+        "tags": [
+          "Data",
+          "Analytics"
+        ]
+      },
+      {
+        "id": "anomaly",
+        "icon": "\ud83d\udea8",
+        "description": "Detects anomalies using Z-Score statistical analysis.",
+        "tags": [
+          "Data",
+          "Analytics"
+        ]
+      },
+      {
+        "id": "downsample",
+        "icon": "\ud83d\udcc9",
+        "description": "Downsamples historical data to reduce storage size.",
+        "tags": [
+          "Data",
+          "Analytics"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "Dashboard",
+    "description": "Real-time visualization widgets for the Dashboard view",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "gauge",
+        "icon": "\u23f1\ufe0f",
+        "description": "Real-time gauge displaying a single numeric value",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
+      },
+      {
+        "id": "chart",
+        "icon": "\ud83d\udcc8",
+        "description": "Real-time time-series chart",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
+      },
+      {
+        "id": "status",
+        "icon": "\ud83d\udea6",
+        "description": "Status light indicator (ok/warning/critical)",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
+      },
+      {
+        "id": "stat",
+        "icon": "\ud83d\udd22",
+        "description": "Big number display with trend indicator",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
+      },
+      {
+        "id": "log",
+        "icon": "\ud83d\udcdc",
+        "description": "Scrolling text log display",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
+      },
+      {
+        "id": "alerts",
+        "icon": "\ud83d\udd14",
+        "description": "Alert feed with severity indicators",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "name": "Cortex",
+    "description": "Embedded LLM inference engine - Run GGUF models locally without external dependencies",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "ai_inference",
+        "icon": "\u26a1",
+        "description": "Direct LLM inference using locally loaded GGUF model. No Ollama required.",
+        "tags": [
+          "AI",
+          "LLM",
+          "Cortex"
+        ]
+      }
+    ],
+    "category": "domain"
+  }
+]
