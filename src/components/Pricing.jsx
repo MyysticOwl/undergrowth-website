@@ -55,6 +55,13 @@ const plans = [
 ];
 
 const Pricing = () => {
+  React.useEffect(() => {
+    // Re-initialize Lemon Squeezy when component mounts to attach event listeners to new buttons
+    if (window.createLemonSqueezy) {
+      window.createLemonSqueezy();
+    }
+  }, []);
+
   return (
     <section id="pricing" className="pricing-section">
       <div className="container">
