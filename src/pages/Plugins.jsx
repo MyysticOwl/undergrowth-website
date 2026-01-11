@@ -28,9 +28,6 @@ const CATEGORIES = [
 
 const PluginCard = ({ plugin }) => {
     const category = getCategory(plugin);
-    const displayedVariations = plugin.variations.slice(0, 3);
-    const remainingCount = plugin.variations.length - 3;
-
     return (
         <div className="plugin-card glass-panel">
             <div className="plugin-header">
@@ -51,14 +48,11 @@ const PluginCard = ({ plugin }) => {
 
             <div className="plugin-variations">
                 <div className="tags-container">
-                    {displayedVariations.map(v => (
+                    {plugin.variations.map(v => (
                         <span key={v.id} className="tag-chip" title={v.description}>
                             {v.icon} {v.id}
                         </span>
                     ))}
-                    {remainingCount > 0 && (
-                        <span className="tag-chip more-chip">+{remainingCount} more</span>
-                    )}
                 </div>
             </div>
         </div>
