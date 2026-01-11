@@ -7,7 +7,7 @@ const SHOWCASE_ITEMS = [
         id: 'blueprints',
         title: 'Visual Workflow Design',
         description: 'Design complex automation flows with our drag-and-drop blueprint editor. Visualize logic, data flow, and dependencies in real-time.',
-        image: '/releases/blueprint_screentshot.png', // Note: using existing file path
+        image: '/blueprint_screentshot.png',
         tag: 'Design'
     },
     {

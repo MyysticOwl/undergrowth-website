@@ -27,14 +27,14 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subtitle">
-                        <span className="text-gradient" style={{ fontWeight: 600 }}>Automate Everything. Runs Anywhere.</span>
+                        <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>No Cloud Required. One Binary. Zero Dependencies.</span>
                         <br />
-                        From Local LLMs to Enterprise Clusters.
-                        Build complex workflows without writing code, or extend with Rust.
+                        Build powerful workflows that run everywhere from tiny edge devices
+                        to enterprise servers. Your data stays yours.
                     </p>
 
                     <div className="hero-actions">
-                        <a href="https://github.com/MyysticOwl/undergrowth-website" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                        <a href="https://github.com/MyysticOwl/undergrowth" target="_blank" rel="noopener noreferrer" className="btn-primary">
                             <Download size={20} />
                             Download Now
                         </a>
@@ -46,14 +46,15 @@ const Hero = () => {
                 </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="hero-visual"
                 >
                     <div className="glass-panel visual-card">
-                        <img src="/undergrowth-social-card.png" alt="Undergrowth Interface" className="hero-image" />
+                        <img src="/hero_nerve_center.png" alt="Undergrowth Nerve Center" className="hero-image" />
                         <div className="visual-glow"></div>
+                        <div className="visual-overlay"></div>
                     </div>
                 </motion.div>
             </div>

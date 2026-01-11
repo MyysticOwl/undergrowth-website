@@ -1,45 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import pluginsData from '../data/plugins.json';
-import { Search, Grid, List as ListIcon } from 'lucide-react';
+import { Search, Brain, Cpu, Database, Wrench, Settings, Activity, Box } from 'lucide-react';
 import './Plugins.css';
 
+// Helper to guess category if not present
+const getCategory = (plugin) => {
+    const text = (plugin.name + plugin.description).toLowerCase();
+    if (plugin.category) return plugin.category; // If data already has it
+    if (text.includes('ai') || text.includes('llm') || text.includes('chat') || text.includes('rag')) return 'AI';
+    if (text.includes('camera') || text.includes('video') || text.includes('mqtt') || text.includes('serial') || text.includes('gpio')) return 'IoT';
+    if (text.includes('database') || text.includes('sql') || text.includes('store') || text.includes('csv')) return 'Data';
+    if (text.includes('http') || text.includes('request') || text.includes('api')) return 'Network';
+    if (text.includes('time') || text.includes('cron') || text.includes('loop')) return 'Utility';
+    return 'System';
+};
+
+const CATEGORIES = [
+    { id: 'All', label: 'All Plugins', icon: <Box size={16} /> },
+    { id: 'AI', label: 'AI & Intelligence', icon: <Brain size={16} /> },
+    { id: 'IoT', label: 'IoT & Hardware', icon: <Cpu size={16} /> },
+    { id: 'Data', label: 'Data & Storage', icon: <Database size={16} /> },
+    { id: 'Utility', label: 'Utilities', icon: <Wrench size={16} /> },
+    { id: 'System', label: 'System', icon: <Settings size={16} /> },
+];
+
 const PluginCard = ({ plugin }) => {
-    // Variations chips
-    // Limit to showing first few if too many?
+    const category = getCategory(plugin);
+    const displayedVariations = plugin.variations.slice(0, 3);
+    const remainingCount = plugin.variations.length - 3;
 
     return (
         <div className="plugin-card glass-panel">
             <div className="plugin-header">
                 <div className="plugin-icon-container">
-                    {/* Show icon of first variation or generic if empty? */}
                     <span className="plugin-icon">
                         {plugin.variations[0]?.icon || "🧩"}
                     </span>
                 </div>
                 <div className="plugin-info">
-                    <div className="plugin-title-row">
-                        <h3 className="plugin-name">{plugin.name}</h3>
+                    <div className="plugin-top-row">
+                        <span className={`category-badge cat-${category.toLowerCase()}`}>{category}</span>
                         <span className="plugin-version">v{plugin.version}</span>
                     </div>
+                    <h3 className="plugin-name">{plugin.name}</h3>
                     <p className="plugin-desc">{plugin.description}</p>
                 </div>
             </div>
 
-            <div className="plugin-stats">
-                {/* e.g. "3 variations" */}
-                <span className="var-count">{plugin.variations.length} variations</span>
-            </div>
-
             <div className="plugin-variations">
-                <h4 className="label-tiny">VARIATIONS</h4>
                 <div className="tags-container">
-                    {plugin.variations.map(v => (
+                    {displayedVariations.map(v => (
                         <span key={v.id} className="tag-chip" title={v.description}>
                             {v.icon} {v.id}
                         </span>
                     ))}
+                    {remainingCount > 0 && (
+                        <span className="tag-chip more-chip">+{remainingCount} more</span>
+                    )}
                 </div>
             </div>
         </div>
@@ -48,15 +67,23 @@ const PluginCard = ({ plugin }) => {
 
 const Plugins = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [activeCategory, setActiveCategory] = useState('All');
 
-    // Sort plugins alphabetically
-    const sortedPlugins = [...pluginsData].sort((a, b) => a.name.localeCompare(b.name));
+    // Enrich and sort
+    const processedPlugins = useMemo(() => {
+        return pluginsData.map(p => ({ ...p, category: getCategory(p) }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+    }, []);
 
-    const filteredPlugins = sortedPlugins.filter(p =>
-        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.variations.some(v => v.id.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    const filteredPlugins = processedPlugins.filter(p => {
+        const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            p.variations.some(v => v.id.toLowerCase().includes(searchTerm.toLowerCase()));
+
+        const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+
+        return matchesSearch && matchesCategory;
+    });
 
     return (
         <div className="page-wrapper">
@@ -68,18 +95,29 @@ const Plugins = () => {
                     <p className="subtitle">Extensive collection of automation capabilities.</p>
                 </div>
 
-                <div className="toolbar glass-panel">
-                    <div className="search-box">
-                        <Search size={20} className="search-icon" />
+                <div className="toolbar-container">
+                    <div className="category-tabs">
+                        {CATEGORIES.map(cat => (
+                            <button
+                                key={cat.id}
+                                className={`cat-tab ${activeCategory === cat.id ? 'active' : ''}`}
+                                onClick={() => setActiveCategory(cat.id)}
+                            >
+                                {cat.icon}
+                                {cat.label}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="search-bar glass-panel">
+                        <Search size={18} className="search-icon" />
                         <input
                             type="text"
                             placeholder="Search plugins..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
-                    </div>
-                    <div className="stats-badge">
-                        {filteredPlugins.length} available
+                        <span className="count-badge">{filteredPlugins.length}</span>
                     </div>
                 </div>
 
@@ -91,7 +129,9 @@ const Plugins = () => {
 
                 {filteredPlugins.length === 0 && (
                     <div className="empty-state">
-                        <p>No plugins found matching "{searchTerm}"</p>
+                        <div className="empty-icon">🔍</div>
+                        <h3>No plugins found</h3>
+                        <p>Try adjusting your search or category filter.</p>
                     </div>
                 )}
             </main>
