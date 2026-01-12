@@ -803,31 +803,50 @@
         "id": "append_row",
         "icon": "\u2795",
         "description": "Appends rows to a spreadsheet",
-        "tags": []
+        "tags": [
+          "Integration",
+          "Google",
+          "Database"
+        ]
       },
       {
         "id": "read_sheet",
         "icon": "\ud83d\udd0d",
         "description": "Reads values from a spreadsheet",
-        "tags": []
+        "tags": [
+          "Integration",
+          "Google",
+          "Database"
+        ]
       },
       {
         "id": "update_range",
         "icon": "\u270f\ufe0f",
         "description": "Updates a range in a spreadsheet",
-        "tags": []
+        "tags": [
+          "Integration",
+          "Google",
+          "Database"
+        ]
       },
       {
         "id": "clear_range",
         "icon": "\ud83d\uddd1\ufe0f",
         "description": "Clears a range in a spreadsheet",
-        "tags": []
+        "tags": [
+          "Integration",
+          "Google",
+          "Database"
+        ]
       },
       {
         "id": "get_spreadsheet",
         "icon": "\ud83d\udcc4",
         "description": "Gets spreadsheet metadata",
-        "tags": []
+        "tags": [
+          "Integration",
+          "Google"
+        ]
       }
     ],
     "category": "integrations"

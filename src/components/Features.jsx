@@ -6,7 +6,7 @@ const features = [
     {
         icon: <Rocket size={32} />, // Reusing Rocket or importing Globe if available
         title: 'Universal Connectivity',
-        description: 'MCP-Native. Connect to Google Drive, Slack, GitHub, and Postgres instantly using standard Model Context Protocol servers. No custom code required.'
+        description: 'MCP-Native. Universal connectivity through the Model Context Protocol.'
     },
     {
         icon: <Palette size={32} />,

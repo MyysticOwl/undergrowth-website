@@ -26,3 +26,66 @@
     color: var(--text-tertiary);
     font-size: 0.875rem;
 }
+
+.install-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.install-method {
+    text-align: left;
+}
+
+.install-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terminal-block {
+    background: #0f0f0f;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+    font-family: 'Fira Code', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: border-color 0.2s;
+}
+
+.terminal-block:hover {
+    border-color: var(--primary);
+}
+
+.terminal-block code {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-right: 1rem;
+}
+
+.copy-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-btn:hover {
+    color: var(--primary);
+}

@@ -6,7 +6,7 @@ const plans = [
   {
     name: 'Community',
     price: 'Free',
-    features: ['3 active workflows', '100 AI calls/day', 'Community Support'],
+    features: ['3 active workflows', '100 AI calls/day'],
     cta: 'Get Started',
     link: 'https://github.com/MyysticOwl/undergrowth-website/releases',
     primary: false
@@ -15,7 +15,7 @@ const plans = [
     name: 'Starter',
     price: '$49',
     period: '/year',
-    features: ['10 active workflows', '500 AI calls/day', 'Email Support'],
+    features: ['10 active workflows', '500 AI calls/day'],
     cta: 'Choose Starter',
     link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
     primary: false
@@ -24,7 +24,7 @@ const plans = [
     name: 'Pro',
     price: '$99',
     period: '/year',
-    features: ['Unlimited workflows', 'Unlimited AI', 'Priority Support'],
+    features: ['Unlimited workflows', 'Unlimited AI'],
     cta: 'Choose Pro',
     link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
     primary: true
@@ -33,7 +33,7 @@ const plans = [
     name: 'Team',
     price: '$249',
     period: '/year',
-    features: ['5 seats', 'RBAC', 'Audit logs', 'Dedicated Support'],
+    features: ['5 seats', 'RBAC', 'Audit logs'],
     cta: 'Choose Team',
     link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
     primary: false

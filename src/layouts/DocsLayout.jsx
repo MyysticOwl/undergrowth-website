@@ -12,6 +12,7 @@ const docsLinks = [
     { path: 'plugin-reference', title: 'Plugin Reference', file: 'PLUGIN_REFERENCE.md' },
     { path: 'plugin-style-guide', title: 'Plugin Style Guide', file: 'PLUGIN_STYLE_GUIDE.md' },
     { path: 'rest-api', title: 'REST API', file: 'REST_API_REFERENCE.md' },
+    { path: 'roadmap', title: 'Roadmap', file: 'roadmap.md' },
 ];
 
 const DocsLayout = () => {
