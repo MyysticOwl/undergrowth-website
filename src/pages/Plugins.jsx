@@ -5,15 +5,36 @@ import pluginsData from '../data/plugins.json';
 import { Search, Brain, Cpu, Database, Wrench, Settings, Activity, Box } from 'lucide-react';
 import './Plugins.css';
 
-// Helper to guess category if not present
 const getCategory = (plugin) => {
-    const text = (plugin.name + plugin.description).toLowerCase();
-    if (plugin.category) return plugin.category; // If data already has it
-    if (text.includes('ai') || text.includes('llm') || text.includes('chat') || text.includes('rag')) return 'AI';
+    // If data already has a category, try to map it to our UI categories
+    if (plugin.category) {
+        const cat = plugin.category.toLowerCase();
+
+        // Specific mappings
+        if (cat === 'data') return 'Data';
+        if (cat === 'protocols') return 'IoT';
+
+        // Group these under 'Utilities'
+        if (['communication', 'utility', 'integrations', 'primitives'].includes(cat)) return 'Utility';
+
+        // Group these under 'System'
+        if (['monitoring'].includes(cat)) return 'System';
+
+        // 'domain' and others fall through to text analysis for better classification
+        if (cat !== 'domain') {
+            // If it's something else but not 'domain', default to System or let text analysis handle it?
+            // Let's let it fall through just in case text analysis finds 'AI' or 'IoT' keywords.
+        }
+    }
+
+    const text = (plugin.name + plugin.description + (plugin.category || '')).toLowerCase();
+
+    if (text.includes('ai') || text.includes('llm') || text.includes('chat') || text.includes('rag') || text.includes('vision') || text.includes('detection')) return 'AI';
     if (text.includes('camera') || text.includes('video') || text.includes('mqtt') || text.includes('serial') || text.includes('gpio')) return 'IoT';
-    if (text.includes('database') || text.includes('sql') || text.includes('store') || text.includes('csv')) return 'Data';
-    if (text.includes('http') || text.includes('request') || text.includes('api')) return 'Network';
+    if (text.includes('database') || text.includes('sql') || text.includes('store') || text.includes('csv') || text.includes('json')) return 'Data';
+    if (text.includes('http') || text.includes('request') || text.includes('api')) return 'Utility'; // Network -> Utility
     if (text.includes('time') || text.includes('cron') || text.includes('loop')) return 'Utility';
+
     return 'System';
 };
 
