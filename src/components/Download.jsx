@@ -10,7 +10,7 @@ const Download = () => {
                     <div className="download-content">
                         <h2 className="section-title">Ready to Automate?</h2>
                         <p className="section-subtitle">
-                            Get started with Undergrowth today. Open source and free for likely use cases.
+                            Get started with Undergrowth today. Free for personal and non-commercial use.
                         </p>
 
                         <div className="install-options">
@@ -57,7 +57,7 @@ const Download = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
