@@ -27,10 +27,9 @@ const Hero = () => {
                     </h1>
 
                     <p className="hero-subtitle">
-                        <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>No Cloud Required. One Binary. Zero Dependencies.</span>
+                        <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Give your Agents the power to see, read, and act on your real-world data.</span>
                         <br />
-                        Build powerful workflows that run everywhere from tiny edge devices
-                        to enterprise servers. Your data stays yours.
+                        Now supporting the <strong>Model Context Protocol</strong> for universal, smarter connections to your external tools.
                     </p>
 
                     <div className="hero-actions">

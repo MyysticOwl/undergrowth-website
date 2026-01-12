@@ -18,6 +18,62 @@
     "category": "communication"
   },
   {
+    "name": "Slack",
+    "description": "Send messages and alerts to Slack",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "post_message",
+        "icon": "\ud83d\udcac",
+        "description": "Sends a message to Slack via Incoming Webhook.",
+        "tags": [
+          "Communication",
+          "Chat",
+          "Slack"
+        ]
+      },
+      {
+        "id": "upload_file",
+        "icon": "\ud83d\udcce",
+        "description": "Uploads a file to a Slack channel using the API.",
+        "tags": [
+          "Communication",
+          "File",
+          "Slack"
+        ]
+      }
+    ],
+    "category": "communication"
+  },
+  {
+    "name": "Discord",
+    "description": "Send messages and alerts to Discord",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "post_message",
+        "icon": "\ud83c\udfae",
+        "description": "Sends a message to Discord via Incoming Webhook.",
+        "tags": [
+          "Communication",
+          "Chat",
+          "Discord"
+        ]
+      },
+      {
+        "id": "embed",
+        "icon": "\ud83d\uddbc\ufe0f",
+        "description": "Sends a rich Embed to Discord via Webhook.",
+        "tags": [
+          "Communication",
+          "Chat",
+          "Discord"
+        ]
+      }
+    ],
+    "category": "communication"
+  },
+  {
     "name": "JSON Table",
     "description": "Aggregate JSON messages into tabular format with field selection and size limits",
     "version": "0.1.0",
@@ -120,6 +176,34 @@
         "tags": [
           "Data",
           "Transform"
+        ]
+      }
+    ],
+    "category": "data"
+  },
+  {
+    "name": "History",
+    "description": "Persistent chat history storage",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "load",
+        "icon": "\ud83d\udcd6",
+        "description": "Load chat history for a conversation ID.",
+        "tags": [
+          "Data",
+          "History",
+          "AI"
+        ]
+      },
+      {
+        "id": "save",
+        "icon": "\ud83d\udcbe",
+        "description": "Save a message to chat history.",
+        "tags": [
+          "Data",
+          "History",
+          "AI"
         ]
       }
     ],
@@ -369,6 +453,15 @@
         "description": "Selectively passes and unwraps messages based on routing port metadata.",
         "tags": [
           "Logic"
+        ]
+      },
+      {
+        "id": "iterate_list",
+        "icon": "\ud83d\udd01",
+        "description": "Iterates over a list of items from the input JSON and emits them one by one.",
+        "tags": [
+          "Logic",
+          "Flow"
         ]
       }
     ],
@@ -679,6 +772,136 @@
           "Data",
           "Storage",
           "File"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "Scraper",
+    "description": "Extract data from HTML and web content",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "scrape_html",
+        "icon": "\ud83d\udd77\ufe0f",
+        "description": "Extracts text or attributes from HTML using CSS selectors.",
+        "tags": [
+          "Web",
+          "Extraction"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "Google Sheets",
+    "description": "Integration with Google Sheets API",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "append_row",
+        "icon": "\u2795",
+        "description": "Appends rows to a spreadsheet",
+        "tags": []
+      },
+      {
+        "id": "read_sheet",
+        "icon": "\ud83d\udd0d",
+        "description": "Reads values from a spreadsheet",
+        "tags": []
+      },
+      {
+        "id": "update_range",
+        "icon": "\u270f\ufe0f",
+        "description": "Updates a range in a spreadsheet",
+        "tags": []
+      },
+      {
+        "id": "clear_range",
+        "icon": "\ud83d\uddd1\ufe0f",
+        "description": "Clears a range in a spreadsheet",
+        "tags": []
+      },
+      {
+        "id": "get_spreadsheet",
+        "icon": "\ud83d\udcc4",
+        "description": "Gets spreadsheet metadata",
+        "tags": []
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "Postgres",
+    "description": "PostgreSQL database integration for structured data persistence",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "query_db",
+        "icon": "\ud83d\udd0d",
+        "description": "Executes a SELECT query and returns the results as a JSON array.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "execute_raw",
+        "icon": "\u26a1",
+        "description": "Executes raw SQL commands and returns metadata about the execution.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "table_operation",
+        "icon": "\ud83d\udccb",
+        "description": "Perform managed CRUD operations on a specific table.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      },
+      {
+        "id": "call_procedure",
+        "icon": "\u2699\ufe0f",
+        "description": "Executes a stored procedure or function.",
+        "tags": [
+          "Data",
+          "Storage",
+          "Database"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
+    "name": "Model Context Protocol Host",
+    "description": "Model Context Protocol Host with Undergrowth Governance",
+    "version": "0.1.0",
+    "variations": [
+      {
+        "id": "tool_entry",
+        "icon": "\ud83d\udd27",
+        "description": "Workflow Entry Point for MCP Tools.",
+        "tags": [
+          "MCP",
+          "Workflow"
+        ]
+      },
+      {
+        "id": "execute_tool",
+        "icon": "\ud83c\udf09",
+        "description": "Execute tools dynamically from workflow data.",
+        "tags": [
+          "MCP",
+          "Bridge",
+          "Execution"
         ]
       }
     ],
@@ -1010,6 +1233,16 @@
           "Visualization",
           "View"
         ]
+      },
+      {
+        "id": "thinking_trace",
+        "icon": "\ud83e\udde0",
+        "description": "Real-time AI reasoning / scratchpad display",
+        "tags": [
+          "AI",
+          "Visualization",
+          "View"
+        ]
       }
     ],
     "category": "domain"
@@ -1026,6 +1259,17 @@
         "tags": [
           "AI",
           "LLM",
+          "Cortex"
+        ]
+      },
+      {
+        "id": "embed",
+        "icon": "\ud83d\udd21",
+        "description": "Generate vector embeddings using locally loaded GGUF model.",
+        "tags": [
+          "AI",
+          "LLM",
+          "Memory",
           "Cortex"
         ]
       }

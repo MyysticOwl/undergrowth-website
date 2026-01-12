@@ -4,6 +4,11 @@ import './Features.css';
 
 const features = [
     {
+        icon: <Rocket size={32} />, // Reusing Rocket or importing Globe if available
+        title: 'Universal Connectivity',
+        description: 'MCP-Native. Connect to Google Drive, Slack, GitHub, and Postgres instantly using standard Model Context Protocol servers. No custom code required.'
+    },
+    {
         icon: <Palette size={32} />,
         title: 'Visual Workflow Builder',
         description: 'Build complex automations without writing code. Drag-and-drop components onto a canvas, connect them visually, and deploy immediately.'
