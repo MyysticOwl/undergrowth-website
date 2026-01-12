@@ -18,6 +18,10 @@
         {
             "source": "/api/webhook",
             "destination": "/api/webhook.bundle"
+        },
+        {
+            "source": "/((?!api/).*)",
+            "destination": "/index.html"
         }
     ]
 }
