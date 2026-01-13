@@ -65,14 +65,15 @@ mkdir -p "$DATA_DIR"
 mkdir -p "$LOG_DIR"
 
 # 3. Download Binary
-URL="https://github.com/$REPO/releases/latest/download/undergrowth-${TARGET}.tar.gz"
+# 3. Download Binary
+URL="https://github.com/$REPO/releases/latest/download/undergrowth-${TARGET}.tar.xz"
 echo "  • Downloading from $URL..."
 
 TMP_DIR="$INSTALL_DIR/tmp"
 mkdir -p "$TMP_DIR"
 
 # Download and extract to tmp
-curl -L "$URL" | tar xz -C "$TMP_DIR"
+curl -L "$URL" | tar xf - -C "$TMP_DIR"
 
 # Find the extracted root folder (e.g. undergrowth-x86_64-unknown-linux-gnu)
 EXTRACTED_ROOT=$(find "$TMP_DIR" -maxdepth 1 -mindepth 1 -type d | head -n 1)

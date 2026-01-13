@@ -21,7 +21,7 @@ Write-Host "`n🌱 Installing Undergrowth..." -ForegroundColor Cyan
 
 # 1. Detect Architecture (Simplified for Windows)
 # Windows on Arm exists, but we'll default to x64 for now unless explicitly checked
-$Target = "x86_64-pc-windows-msvc"
+$Target = "x86_64-pc-windows-gnu"
 Write-Host "  • Target Platform: $Target"
 
 # 2. Prepare Directories
