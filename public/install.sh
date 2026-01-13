@@ -88,7 +88,14 @@ if [ -z "$EXTRACTED_ROOT" ]; then
 fi
 
 echo "  • Installing to $BIN_DIR..."
-# Move contents to BIN_DIR
+# Separate data from bin content
+if [ -d "$EXTRACTED_ROOT/data" ]; then
+    echo "  • Installing data files to $DATA_DIR..."
+    cp -r "$EXTRACTED_ROOT/data/"* "$DATA_DIR/"
+    rm -rf "$EXTRACTED_ROOT/data"
+fi
+
+# Move everything else (binaries, plugins, libs) to BIN_DIR
 cp -r "$EXTRACTED_ROOT/"* "$BIN_DIR/"
 rm -rf "$TMP_DIR"
 

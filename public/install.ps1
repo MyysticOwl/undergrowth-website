@@ -56,10 +56,28 @@ try {
     $SubDirs = Get-ChildItem -Path $TempDir -Directory
     if ($SubDirs.Count -eq 1) {
         $Root = $SubDirs[0].FullName
+
+        # Handle data directory if exists (separate from bin)
+        $SourceData = Join-Path -Path $Root -ChildPath "data"
+        if (Test-Path $SourceData) {
+             Write-Host "  • Installing data files to $DataDir..."
+             # Copy contents to allow merging with existing data dir
+             Get-ChildItem -Path $SourceData | Copy-Item -Destination $DataDir -Recurse -Force
+             Remove-Item -Path $SourceData -Recurse -Force
+        }
+
         Write-Host "  • Installing to $BinDir..."
         Get-ChildItem -Path $Root | Move-Item -Destination $BinDir -Force
     } else {
         # Fallback if flat zip (unlikely with cargo-dist but possible)
+        # Check for data in TempDir
+        $SourceData = Join-Path -Path $TempDir -ChildPath "data"
+        if (Test-Path $SourceData) {
+             Write-Host "  • Installing data files to $DataDir..."
+             Get-ChildItem -Path $SourceData | Copy-Item -Destination $DataDir -Recurse -Force
+             Remove-Item -Path $SourceData -Recurse -Force
+        }
+
         Write-Host "  • Installing flat zip to $BinDir..."
         Get-ChildItem -Path $TempDir | Move-Item -Destination $BinDir -Force
     }
