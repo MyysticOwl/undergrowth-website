@@ -12,10 +12,10 @@ const Footer = () => {
                         <p>
                             Enjoying the community edition? If Undergrowth has helped automate your world,
                             consider <a
-                                href="https://undergrowth.lemonsqueezy.com/donate"
+                                href="https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="donation-link"
+                                className="donation-link lemonsqueezy-button"
                             >leaving a donation</a> to support the creator and keep the project growing.
                         </p>
                     </div>
