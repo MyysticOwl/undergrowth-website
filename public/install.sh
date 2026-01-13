@@ -4,7 +4,7 @@ set -e
 # Undergrowth Installer
 # Usage: curl -fsSL https://.../install.sh | bash
 
-REPO="MyysticOwl/undergrowth"
+REPO="MyysticOwl/undergrowth-website"
 INSTALL_DIR="$HOME/.undergrowth"
 BIN_DIR="$INSTALL_DIR/bin"
 DATA_DIR="$INSTALL_DIR/data"
@@ -65,7 +65,6 @@ mkdir -p "$DATA_DIR"
 mkdir -p "$LOG_DIR"
 
 # 3. Download Binary
-# 3. Download Binary
 URL="https://github.com/$REPO/releases/latest/download/undergrowth-${TARGET}.tar.xz"
 echo "  • Downloading from $URL..."
 
@@ -73,7 +72,12 @@ TMP_DIR="$INSTALL_DIR/tmp"
 mkdir -p "$TMP_DIR"
 
 # Download and extract to tmp
-curl -L "$URL" | tar xf - -C "$TMP_DIR"
+# We use -f to fail on 404 and better handle redirects
+if ! curl -fsSL "$URL" | tar xJf - -C "$TMP_DIR"; then
+    echo -e "${RED}Error: Failed to download or extract the binary from $URL${NC}"
+    echo -e "${RED}This usually happens if the release asset is missing or the network is unstable.${NC}"
+    exit 1
+fi
 
 # Find the extracted root folder (e.g. undergrowth-x86_64-unknown-linux-gnu)
 EXTRACTED_ROOT=$(find "$TMP_DIR" -maxdepth 1 -mindepth 1 -type d | head -n 1)

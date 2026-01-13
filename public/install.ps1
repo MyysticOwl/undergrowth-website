@@ -4,7 +4,7 @@
 $ErrorActionPreference = 'Stop'
 
 # Configuration
-$Repo = "MyysticOwl/undergrowth"
+$Repo = "MyysticOwl/undergrowth-website"
 $InstallDir = "$HOME\.undergrowth"
 $BinDir = "$InstallDir\bin"
 $DataDir = "$InstallDir\data"
@@ -41,7 +41,14 @@ try {
     if (Test-Path $TempDir) { Remove-Item -Path $TempDir -Recurse -Force }
     New-Item -ItemType Directory -Force -Path $TempDir | Out-Null
 
-    Invoke-WebRequest -Uri $Url -OutFile $ZipFile
+    # We use -ErrorAction Stop to ensure failure triggers the catch block
+    Invoke-WebRequest -Uri $Url -OutFile $ZipFile -ErrorAction Stop
+    
+    # Verify file is not just an error page (e.g. 9 bytes "Not Found")
+    if ((Get-Item $ZipFile).Length -lt 1000) {
+        throw "Downloaded file is suspiciously small. It might be an error page instead of the zip archive."
+    }
+
     Expand-Archive -Path $ZipFile -DestinationPath $TempDir -Force
     Remove-Item -Path $ZipFile -Force
 
