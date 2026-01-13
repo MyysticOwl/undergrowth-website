@@ -19,10 +19,10 @@ const Download = () => {
                                     <span role="img" aria-label="linux">🐧</span> Linux / macOS
                                 </span>
                                 <div className="terminal-block">
-                                    <code>curl -fsSL https://undergrowth.ai/install.sh | bash</code>
+                                    <code>curl -fsSL https://undergrowth.io/install.sh | bash</code>
                                     <button
                                         className="copy-btn"
-                                        onClick={() => navigator.clipboard.writeText('curl -fsSL https://undergrowth.ai/install.sh | bash')}
+                                        onClick={() => navigator.clipboard.writeText('curl -fsSL https://undergrowth.io/install.sh | bash')}
                                         title="Copy to clipboard"
                                     >
                                         <Copy size={16} />
@@ -35,10 +35,10 @@ const Download = () => {
                                     <span role="img" aria-label="windows">🪟</span> Windows (PowerShell)
                                 </span>
                                 <div className="terminal-block">
-                                    <code>iwr -useb https://undergrowth.ai/install.ps1 | iex</code>
+                                    <code>iwr -useb https://undergrowth.io/install.ps1 | iex</code>
                                     <button
                                         className="copy-btn"
-                                        onClick={() => navigator.clipboard.writeText('iwr -useb https://undergrowth.ai/install.ps1 | iex')}
+                                        onClick={() => navigator.clipboard.writeText('iwr -useb https://undergrowth.io/install.ps1 | iex')}
                                         title="Copy to clipboard"
                                     >
                                         <Copy size={16} />
