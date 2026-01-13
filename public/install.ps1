@@ -74,10 +74,9 @@ try {
 $UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
 if ($UserPath -notlike "*$BinDir*") {
     Write-Host "  ℹ️  Adding $BinDir to User Path..." -ForegroundColor Cyan
-    # [Environment]::SetEnvironmentVariable("Path", "$UserPath;$BinDir", "User")
-    # Commented out auto-edit for safety until fully tested
-    Write-Host "      Run this to add to path:"
-    Write-Host "      [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path', 'User') + ';$BinDir', 'User')"
+    [Environment]::SetEnvironmentVariable("Path", "$UserPath;$BinDir", "User")
+    Write-Host "  ✅  Added $BinDir to User Path." -ForegroundColor Green
+    Write-Host "      You may need to restart your terminal to usage 'undergrowth'."
 }
 
 Write-Host "`n✅ Installation Complete!" -ForegroundColor Green

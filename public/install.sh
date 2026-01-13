@@ -114,9 +114,21 @@ case "$SHELL" in
 esac
 
 if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
-    echo -e "${BLUE}  ℹ️  $BIN_DIR is not in your PATH.${NC}"
-    echo "      Run the following to add it:"
-    echo "      echo 'export PATH=\"\$PATH:$BIN_DIR\"' >> $SHELL_CFG"
+    # Check if we can write to the config file
+    if [ -w "$SHELL_CFG" ]; then
+        if grep -q "$BIN_DIR" "$SHELL_CFG"; then
+            echo -e "${BLUE}  ℹ️  Path already exists in $SHELL_CFG, but not in current session.${NC}"
+        else
+            echo -e "${BLUE}  ℹ️  Adding $BIN_DIR to $SHELL_CFG...${NC}"
+            echo "" >> "$SHELL_CFG"
+            echo "# Undergrowth" >> "$SHELL_CFG"
+            echo "export PATH=\"\$PATH:$BIN_DIR\"" >> "$SHELL_CFG"
+        fi
+        echo -e "${BLUE}  ⚠️  Restart your shell or run 'source $SHELL_CFG' to use 'undergrowth' immediately.${NC}"
+    else
+        echo -e "${BLUE}  ℹ️  Could not write to $SHELL_CFG. Please add this manually:${NC}"
+        echo "      echo 'export PATH=\"\$PATH:$BIN_DIR\"' >> $SHELL_CFG"
+    fi
 fi
 
 echo -e "${GREEN}✅ Installation Complete!${NC}"
