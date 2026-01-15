@@ -133,6 +133,41 @@ When creating a new plugin variation, define these in the `plugin!` macro:
 - [ ] Icon is unique within the plugin
 - [ ] Icon represents the function, not the category
 - [ ] Role is semantically correct (Source/Process/Sink)
+- [ ] **Configuration ignores the `variation` parameter** - Use decoupled config structs instead of a shared enum with a `tag = "variation"` attribute.
+
+---
+
+## Configuration Guidelines
+
+### No Redundant Variation Field
+Plugins should **never** include a `variation` field in their configuration JSON. The engine already knows which variation it is loading from the component's ID. 
+
+**Bad (Redundant):**
+```json
+{
+  "variation": "arithmetic", // Don't do this!
+  "operation": "add",
+  "field_a": "x"
+}
+```
+
+**Good (Clean):**
+```json
+{
+  "operation": "add",
+  "field_a": "x"
+}
+```
+
+### Decoupled Config Structs
+Instead of sharing one large `enum` for all variations in a plugin package, each variation should define its own specific `Config` struct. This makes the configuration cleaner, more modular, and easier to document.
+
+```rust
+// Variation 1
+pub struct LogConfig { ... }
+// Variation 2
+pub struct AlertConfig { ... }
+```
 
 ---
 

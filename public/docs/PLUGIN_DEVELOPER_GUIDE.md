@@ -12,7 +12,8 @@ Build powerful automation components for the Undergrowth workflow engine.
 4. [Configuration & Schemas](#configuration--schemas) - Typed configs and UI hints
 5. [Testing Your Plugin](#testing-your-plugin) - Unit and integration testing
 6. [Best Practices](#best-practices) - Patterns for production plugins
-7. [Advanced Topics](#advanced-topics) - ABI, versioning, batch processing
+7. [Building for MCP](#building-for-mcp) - Native Plugins vs MCP Servers
+8. [Advanced Topics](#advanced-topics) - ABI, versioning, batch processing
 
 ---
 
@@ -64,7 +65,6 @@ crate-type = ["cdylib"]
 use foundation::plugin_interface::plugin::PluginApi;
 use foundation::plugin_interface::variations::VariationsApi;
 use foundation::plugin_interface::color_palette::PluginRole;
-use foundation::categories;
 use savefile_derive::savefile_abi_export;
 use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
@@ -86,13 +86,12 @@ foundation::plugin! {
     version: "0.1.0",
     author: "Your Name",
     description: "Echoes input data with optional prefix",
-    config: EchoConfig,
     variations: {
         "echo" => Echo { 
             icon: "📢", 
             role: PluginRole::Process, 
             description: "Echoes input data to output with optional prefix.", 
-            category: categories::UTILITY_DEBUG, 
+            tags: vec!["Utility", "Debug"],
             help: include_str!("help/echo.md") 
         },
     }
@@ -114,7 +113,7 @@ impl VariationHandlerType for Echo {
 
     async fn process(
         ctx: &PluginContext<EchoConfig>, 
-        data: Option<Vec<u8>>
+        data: Option<foundation::bytes::Bytes>
     ) -> Result<(), String> {
         // Parse incoming data as JSON
         let input: serde_json::Value = match data {
@@ -212,6 +211,7 @@ Variations declare a **role** that determines their visual appearance and expect
 | `Source` | Teal/Cyan | Generates events (timers, webhooks, file watchers) |
 | `Process` | Blue/Purple | Transforms data (AI, parsing, filtering) |
 | `Sink` | Orange/Red | Outputs data (file writes, notifications, databases) |
+| `Dashboard` | Cyan | Visualizes data (Live monitors, gauges, charts) |
 
 ### Component ID Format
 
@@ -251,7 +251,8 @@ pub struct PluginContext<C> {
 | `send_values<T: Serialize>(&[T])` | Batch send with serialization |
 | `send_blocking(Value)` | Async send with backpressure (waits if channel full) |
 | `send_batch_blocking(Vec<Value>)` | Batch send with backpressure |
-| `queue_depth() -> usize` | Current output queue depth (for custom backpressure) |
+| `publish_dashboard(key, value)` | Send data to the Live Monitor (WebSocket) |
+| `queue_depth() -> usize` | Current output queue depth |
 
 **Example:**
 
@@ -563,12 +564,35 @@ mod tests {
 
 ---
 
-## Best Practices
+### Decoupled Configuration Pattern
+
+Production plugins should use independent config structs for each variation. This avoids using the `#[serde(tag = "variation")]` pattern which introduces redundant fields in the configuration JSON.
+
+#### Implementation
+
+1. **Define separate structs**:
+```rust
+#[derive(Deserialize, JsonSchema)]
+pub struct MathConfig { ... }
+
+#[derive(Deserialize, JsonSchema)]
+pub struct TrigConfig { ... }
+```
+
+2. **Specify in `VariationHandlerType`**:
+```rust
+impl VariationHandlerType for Math {
+    type Config = MathConfig;
+}
+```
+
+3. **Register in `plugin!` macro**:
+The `plugin!` macro will automatically use the `type Config` from each handler implementation to deserialize the correct data for that variation.
 
 ### Error Handling
 
 ```rust
-async fn process(ctx: &PluginContext<MyConfig>, data: Option<Vec<u8>>) -> Result<(), String> {
+async fn process(ctx: &PluginContext<MyConfig>, data: Option<foundation::bytes::Bytes>) -> Result<(), String> {
     // Parse input with meaningful error
     let input: MyInput = match data {
         Some(bytes) => serde_json::from_slice(&bytes)
@@ -592,7 +616,7 @@ async fn process(ctx: &PluginContext<MyConfig>, data: Option<Vec<u8>>) -> Result
 Source variations loop indefinitely:
 
 ```rust
-async fn process(ctx: &PluginContext<MyConfig>, _data: Option<Vec<u8>>) -> Result<(), String> {
+async fn process(ctx: &PluginContext<MyConfig>, _data: Option<foundation::bytes::Bytes>) -> Result<(), String> {
     loop {
         // Do your triggering logic
         tokio::time::sleep(Duration::from_secs(ctx.config.interval)).await;
@@ -608,7 +632,7 @@ async fn process(ctx: &PluginContext<MyConfig>, _data: Option<Vec<u8>>) -> Resul
 Always use the sandboxed `data_dir`:
 
 ```rust
-async fn process(ctx: &PluginContext<MyConfig>, data: Option<Vec<u8>>) -> Result<(), String> {
+async fn process(ctx: &PluginContext<MyConfig>, data: Option<foundation::bytes::Bytes>) -> Result<(), String> {
     // Build path in sandbox
     let file_path = ctx.data_dir.join(&ctx.config.filename);
     
@@ -633,7 +657,7 @@ impl VariationHandlerType for MyBatchProcessor {
     
     fn process_batch(
         ctx: &PluginContext<Self::Config>,
-        batch: Vec<Option<Vec<u8>>>,
+        batch: Vec<Option<foundation::bytes::Bytes>>,
     ) -> impl Future<Output = Vec<Result<(), String>>> + Send {
         async move {
             let mut results = Vec::with_capacity(batch.len());
@@ -650,12 +674,46 @@ impl VariationHandlerType for MyBatchProcessor {
         }
     }
     
-    async fn process(ctx: &PluginContext<Self::Config>, data: Option<Vec<u8>>) -> Result<(), String> {
+    async fn process(ctx: &PluginContext<Self::Config>, data: Option<foundation::bytes::Bytes>) -> Result<(), String> {
         // ... single item processing
         Ok(())
     }
 }
 ```
+
+---
+
+## Building for MCP
+
+With the introduction of the Model Context Protocol (MCP), you now have two ways to extend Undergrowth:
+
+### Native Plugin vs. MCP Server
+
+| Feature | **Native Plugin** (`.dll`/`.so`) | **MCP Server** (External Process) |
+|:---|:---|:---|
+| **Language** | Rust (Required) | Python, TS, Go, Rust, etc. |
+| **Performance** | **High** (Run in-process) | **Medium** (IPC/Network overhead) |
+| **Integration** | Tight (Access to `PluginContext`, Data Dir) | Loose (Tool-call abstraction) |
+| **Distribution** | Undergrowth-specific | **Universal** (Works with Claude, Zed, etc.) |
+| **Use Case** | High-speed ETL, Hardware Control, UI Widgets | SaaS Integrations, Database connectors |
+
+**Recommendation:**
+- Build an **MCP Server** for generic integrations (Google Drive, Slack, Postgres) that you want to share with the wider AI ecosystem.
+- Build a **Native Plugin** for logic that requires tight event loops, raw byte processing, or custom UI widgets in the dashboard.
+
+### Connecting an MCP Server
+
+Undergrowth acts as an **MCP Host**. To use your MCP server:
+1. Ensure your server is executable (e.g., `uvx mcp-server-foo`).
+2. Use the `mcp:serve_stdio` variation in your workflow.
+3. Configure it with your command:
+   ```json
+   {
+     "command": "uvx",
+     "args": ["mcp-server-foo"]
+   }
+   ```
+4. The tools exposed by your server will become available to AI Agents in the workflow.
 
 ---
 
@@ -707,7 +765,7 @@ impl VariationHandlerType for MyVariation {
         Ok(())
     }
     
-    async fn process(ctx: &PluginContext<Self::Config>, data: Option<Vec<u8>>) -> Result<(), String> {
+    async fn process(ctx: &PluginContext<Self::Config>, data: Option<foundation::bytes::Bytes>) -> Result<(), String> {
         // Normal processing
         Ok(())
     }

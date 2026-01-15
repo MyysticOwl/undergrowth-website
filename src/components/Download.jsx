@@ -10,7 +10,7 @@ const Download = () => {
                     <div className="download-content">
                         <h2 className="section-title">Ready to Automate?</h2>
                         <p className="section-subtitle">
-                            Get started with Undergrowth today. Free for personal and non-commercial use.
+                            Free forever — up to 3 workflows, no credit card required.
                         </p>
 
                         <div className="install-options">
@@ -53,7 +53,7 @@ const Download = () => {
                                 View on GitHub
                             </a>
                         </div>
-                        <p className="version-text">Version 0.1.0 • Stable</p>
+                        <p className="version-text">Version 0.1.1 • Stable</p>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@ const Hero = () => {
                     className="hero-content"
                 >
                     <div className="hero-badge">
-                        <span>v0.1.0 Community Preview</span>
+                        <span>v0.1.1 — Free Forever. Start in 30 seconds.</span>
                     </div>
 
                     <h1 className="hero-title">

@@ -888,4 +888,4 @@ pub use base64;
 
 ---
 
-*Foundation API v0.1.0 | Undergrowth Plugin SDK*
+*Foundation API v0.1.1 | Undergrowth Plugin SDK*
