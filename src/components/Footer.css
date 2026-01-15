@@ -13,6 +13,24 @@
     gap: 30px;
 }
 
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-icon {
+    height: 48px;
+    width: 48px;
+}
+
+.footer-tagline {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
 .footer-donation {
     display: flex;
     flex-direction: column;

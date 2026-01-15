@@ -71,7 +71,7 @@ const Navbar = () => {
       <nav className="navbar glass-panel">
         <div className="container nav-container">
           <Link to="/" className="nav-logo">
-            <img src="/processed_logo.png" alt="Undergrowth Logo" className="logo-img" />
+            <img src="/icon.svg" alt="Undergrowth Logo" className="logo-img" />
             <span className="logo-text">Undergrowth</span>
           </Link>
 

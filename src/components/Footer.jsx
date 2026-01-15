@@ -7,6 +7,10 @@ const Footer = () => {
         <footer className="footer">
             <div className="container">
                 <div className="footer-content">
+                    <div className="footer-brand">
+                        <img src="/icon.svg" alt="Undergrowth" className="footer-icon" />
+                        <span className="footer-tagline">The Universal Nervous System</span>
+                    </div>
                     <div className="footer-donation">
                         <Heart size={18} className="heart-icon" />
                         <p>

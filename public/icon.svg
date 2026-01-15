@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="400" height="400">
+  <defs>
+    <!-- Deep space background gradient -->
+    <radialGradient id="spaceGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a1a14"/>
+      <stop offset="50%" stop-color="#061210"/>
+      <stop offset="100%" stop-color="#020807"/>
+    </radialGradient>
+
+    <!-- Neural glow effect -->
+    <filter id="neuralGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Intense glow for nodes -->
+    <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Synapse pulse gradient -->
+    <linearGradient id="synapseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#4ADE80" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#22C55E" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Central core gradient -->
+    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="40%" stop-color="#4ADE80"/>
+      <stop offset="70%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#1B4D3E"/>
+    </radialGradient>
+
+    <!-- Outer ring gradient -->
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#22C55E" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#4ADE80" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Transparent background - removed solid fill -->
+
+  <!-- Outer neural ring -->
+  <circle cx="100" cy="100" r="85" fill="none" stroke="url(#ringGrad)" stroke-width="1" opacity="0.5"/>
+  <circle cx="100" cy="100" r="75" fill="none" stroke="#22C55E" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Primary neural pathways - outer layer -->
+  <g filter="url(#neuralGlow)" opacity="0.9">
+    <!-- Top pathways -->
+    <path d="M100 15 Q100 40, 100 55" stroke="#22C55E" stroke-width="1.5" fill="none"/>
+    <path d="M100 15 Q130 35, 145 55" stroke="#22C55E" stroke-width="1" fill="none"/>
+    <path d="M100 15 Q70 35, 55 55" stroke="#22C55E" stroke-width="1" fill="none"/>
+
+    <!-- Right pathways -->
+    <path d="M185 100 Q160 100, 145 100" stroke="#22C55E" stroke-width="1.5" fill="none"/>
+    <path d="M185 100 Q165 70, 145 55" stroke="#22C55E" stroke-width="1" fill="none"/>
+    <path d="M185 100 Q165 130, 145 145" stroke="#22C55E" stroke-width="1" fill="none"/>
+
+    <!-- Bottom pathways -->
+    <path d="M100 185 Q100 160, 100 145" stroke="#22C55E" stroke-width="1.5" fill="none"/>
+    <path d="M100 185 Q130 165, 145 145" stroke="#22C55E" stroke-width="1" fill="none"/>
+    <path d="M100 185 Q70 165, 55 145" stroke="#22C55E" stroke-width="1" fill="none"/>
+
+    <!-- Left pathways -->
+    <path d="M15 100 Q40 100, 55 100" stroke="#22C55E" stroke-width="1.5" fill="none"/>
+    <path d="M15 100 Q35 70, 55 55" stroke="#22C55E" stroke-width="1" fill="none"/>
+    <path d="M15 100 Q35 130, 55 145" stroke="#22C55E" stroke-width="1" fill="none"/>
+  </g>
+
+  <!-- Secondary neural network - mid layer -->
+  <g filter="url(#neuralGlow)" opacity="0.95">
+    <!-- Diagonal connections -->
+    <path d="M55 55 Q80 70, 100 100" stroke="#4ADE80" stroke-width="1.2" fill="none"/>
+    <path d="M145 55 Q120 70, 100 100" stroke="#4ADE80" stroke-width="1.2" fill="none"/>
+    <path d="M145 145 Q120 130, 100 100" stroke="#4ADE80" stroke-width="1.2" fill="none"/>
+    <path d="M55 145 Q80 130, 100 100" stroke="#4ADE80" stroke-width="1.2" fill="none"/>
+
+    <!-- Cardinal connections -->
+    <path d="M100 55 L100 100" stroke="#4ADE80" stroke-width="1.5" fill="none"/>
+    <path d="M145 100 L100 100" stroke="#4ADE80" stroke-width="1.5" fill="none"/>
+    <path d="M100 145 L100 100" stroke="#4ADE80" stroke-width="1.5" fill="none"/>
+    <path d="M55 100 L100 100" stroke="#4ADE80" stroke-width="1.5" fill="none"/>
+
+    <!-- Cross connections -->
+    <path d="M55 55 Q100 55, 145 55" stroke="#22C55E" stroke-width="0.8" fill="none"/>
+    <path d="M55 145 Q100 145, 145 145" stroke="#22C55E" stroke-width="0.8" fill="none"/>
+    <path d="M55 55 Q55 100, 55 145" stroke="#22C55E" stroke-width="0.8" fill="none"/>
+    <path d="M145 55 Q145 100, 145 145" stroke="#22C55E" stroke-width="0.8" fill="none"/>
+  </g>
+
+  <!-- Tertiary fine neural web -->
+  <g opacity="0.6">
+    <path d="M70 40 Q85 55, 100 55" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+    <path d="M130 40 Q115 55, 100 55" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+    <path d="M160 70 Q145 85, 145 100" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+    <path d="M160 130 Q145 115, 145 100" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+    <path d="M130 160 Q115 145, 100 145" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+    <path d="M70 160 Q85 145, 100 145" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+    <path d="M40 130 Q55 115, 55 100" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+    <path d="M40 70 Q55 85, 55 100" stroke="#4ADE80" stroke-width="0.5" fill="none"/>
+  </g>
+
+  <!-- Outer neural nodes -->
+  <g filter="url(#nodeGlow)">
+    <!-- Cardinal outer nodes -->
+    <circle cx="100" cy="15" r="4" fill="#4ADE80"/>
+    <circle cx="185" cy="100" r="4" fill="#4ADE80"/>
+    <circle cx="100" cy="185" r="4" fill="#4ADE80"/>
+    <circle cx="15" cy="100" r="4" fill="#4ADE80"/>
+  </g>
+
+  <!-- Mid-layer nodes -->
+  <g filter="url(#nodeGlow)">
+    <!-- Corner nodes -->
+    <circle cx="55" cy="55" r="5" fill="#4ADE80"/>
+    <circle cx="145" cy="55" r="5" fill="#4ADE80"/>
+    <circle cx="145" cy="145" r="5" fill="#4ADE80"/>
+    <circle cx="55" cy="145" r="5" fill="#4ADE80"/>
+
+    <!-- Cardinal mid nodes -->
+    <circle cx="100" cy="55" r="4" fill="#86EFAC"/>
+    <circle cx="145" cy="100" r="4" fill="#86EFAC"/>
+    <circle cx="100" cy="145" r="4" fill="#86EFAC"/>
+    <circle cx="55" cy="100" r="4" fill="#86EFAC"/>
+  </g>
+
+  <!-- Small tertiary nodes -->
+  <g opacity="0.85">
+    <circle cx="70" cy="40" r="2" fill="#22C55E"/>
+    <circle cx="130" cy="40" r="2" fill="#22C55E"/>
+    <circle cx="160" cy="70" r="2" fill="#22C55E"/>
+    <circle cx="160" cy="130" r="2" fill="#22C55E"/>
+    <circle cx="130" cy="160" r="2" fill="#22C55E"/>
+    <circle cx="70" cy="160" r="2" fill="#22C55E"/>
+    <circle cx="40" cy="130" r="2" fill="#22C55E"/>
+    <circle cx="40" cy="70" r="2" fill="#22C55E"/>
+  </g>
+
+  <!-- Central core - the brain/hub -->
+  <circle cx="100" cy="100" r="18" fill="url(#coreGrad)" filter="url(#nodeGlow)"/>
+  <circle cx="100" cy="100" r="12" fill="#1B4D3E" opacity="0.5"/>
+  <circle cx="100" cy="100" r="8" fill="#86EFAC" opacity="0.95"/>
+  <circle cx="100" cy="100" r="4" fill="#ffffff" opacity="0.9"/>
+
+  <!-- Inner pulse rings -->
+  <circle cx="100" cy="100" r="25" fill="none" stroke="#4ADE80" stroke-width="0.8" opacity="0.6"/>
+  <circle cx="100" cy="100" r="32" fill="none" stroke="#22C55E" stroke-width="0.5" opacity="0.4"/>
+</svg>
