@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Maximize2 } from 'lucide-react';
+import { ChevronRight, Maximize2, X } from 'lucide-react';
 import './Showcase.css';
 
 const SHOWCASE_ITEMS = [
@@ -35,6 +35,7 @@ const SHOWCASE_ITEMS = [
 
 const Showcase = () => {
     const [activeItem, setActiveItem] = useState(0);
+    const [isLightboxOpen, setLightboxOpen] = useState(false);
 
     return (
         <section id="showcase" className="showcase-section">
@@ -76,7 +77,11 @@ const Showcase = () => {
                                     alt={item.title}
                                     className="showcase-image"
                                 />
-                                <button className="expand-btn" aria-label="View full image">
+                                <button
+                                    className="expand-btn"
+                                    aria-label="View full image"
+                                    onClick={() => setLightboxOpen(true)}
+                                >
                                     <Maximize2 size={18} />
                                 </button>
                             </div>
@@ -84,6 +89,21 @@ const Showcase = () => {
                     </div>
                 </div>
             </div>
+
+            {isLightboxOpen && (
+                <div className="lightbox-overlay" onClick={() => setLightboxOpen(false)}>
+                    <div className="lightbox-content" onClick={e => e.stopPropagation()}>
+                        <button className="lightbox-close" onClick={() => setLightboxOpen(false)}>
+                            <X size={24} />
+                        </button>
+                        <img
+                            src={SHOWCASE_ITEMS[activeItem].image}
+                            alt={SHOWCASE_ITEMS[activeItem].title}
+                            className="lightbox-image"
+                        />
+                    </div>
+                </div>
+            )}
         </section>
     );
 };
