@@ -2,6 +2,14 @@ import React from 'react';
 import { Check } from 'lucide-react';
 import './Pricing.css';
 
+// LemonSqueezy Variant UUIDs (each variant has its own checkout URL)
+const VARIANT_IDS = {
+  starter: '9d4ce9d4-a259-4bee-9b0f-db55b94b2156',
+  pro: 'e0dadd71-11db-4d52-bb68-40aae63eb08b',
+  team: 'e3bcd004-4146-475e-a925-9c34ae8b8738',
+};
+const checkoutUrl = (variantId) => `https://undergrowth.lemonsqueezy.com/checkout/buy/${variantId}?embed=1&logo=0`;
+
 const plans = [
   {
     name: 'Community',
@@ -17,7 +25,7 @@ const plans = [
     period: '/year',
     features: ['10 active workflows', '500 AI calls/day'],
     cta: 'Choose Starter',
-    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
+    link: checkoutUrl(VARIANT_IDS.starter),
     primary: false
   },
   {
@@ -26,7 +34,7 @@ const plans = [
     period: '/year',
     features: ['Unlimited workflows', 'Unlimited AI'],
     cta: 'Choose Pro',
-    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
+    link: checkoutUrl(VARIANT_IDS.pro),
     primary: true
   },
   {
@@ -35,7 +43,7 @@ const plans = [
     period: '/year',
     features: ['5 seats', 'RBAC', 'Audit logs'],
     cta: 'Choose Team',
-    link: 'https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0',
+    link: checkoutUrl(VARIANT_IDS.team),
     primary: false
   },
   {

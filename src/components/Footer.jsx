@@ -12,7 +12,7 @@ const Footer = () => {
                         <p>
                             Enjoying the community edition? If Undergrowth has helped automate your world,
                             consider <a
-                                href="https://undergrowth.lemonsqueezy.com/checkout/buy/0379c544-a7b0-4643-8ec4-2094090eb6e2?embed=1&logo=0"
+                                href="https://undergrowth.lemonsqueezy.com/checkout/buy/5a1d60df-5b51-4377-8ae0-1b07e8d374e7?embed=1&logo=0"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="donation-link lemonsqueezy-button"

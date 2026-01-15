@@ -23,6 +23,13 @@ const SHOWCASE_ITEMS = [
         description: 'Deploy advanced video analytics pipelines for motion detection, object recognition, and security monitoring on edge devices.',
         image: '/video_security_screenshot.png',
         tag: 'Computer Vision'
+    },
+    {
+        id: 'sentinel',
+        title: 'Industrial IoT Sentinel',
+        description: 'Monitor factory equipment with vibration sensors, trigger maintenance alerts, and log critical events—all running locally without cloud dependencies.',
+        image: '/Sentinel_screenshot.png',
+        tag: 'Industrial IoT'
     }
 ];
 
