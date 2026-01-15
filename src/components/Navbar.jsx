@@ -81,6 +81,7 @@ const Navbar = () => {
             <HashLink smooth to="/#pricing" onClick={() => setIsOpen(false)}>Pricing</HashLink>
             <Link to="/plugins" onClick={() => setIsOpen(false)}>Plugins</Link>
             <Link to="/docs" onClick={() => setIsOpen(false)}>Docs</Link>
+            <a href="https://github.com/MyysticOwl/undergrowth-community/discussions" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>Community</a>
             <button className="btn-text" onClick={() => { setIsOpen(false); setShowActivateModal(true); }}>
               Activate
             </button>

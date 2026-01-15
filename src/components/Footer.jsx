@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart } from 'lucide-react';
+import { Heart, Bug, Lightbulb, MessageCircle } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
@@ -11,6 +11,40 @@ const Footer = () => {
                         <img src="/icon.svg" alt="Undergrowth" className="footer-icon" />
                         <span className="footer-tagline">The Universal Nervous System</span>
                     </div>
+
+                    <div className="footer-community">
+                        <h4 className="footer-section-title">Community</h4>
+                        <div className="community-links">
+                            <a
+                                href="https://github.com/MyysticOwl/undergrowth-community/issues/new?labels=bug"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="community-link"
+                            >
+                                <Bug size={18} />
+                                <span>Report a Bug</span>
+                            </a>
+                            <a
+                                href="https://github.com/MyysticOwl/undergrowth-community/issues/new?labels=enhancement"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="community-link"
+                            >
+                                <Lightbulb size={18} />
+                                <span>Request a Feature</span>
+                            </a>
+                            <a
+                                href="https://github.com/MyysticOwl/undergrowth-community/discussions"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="community-link"
+                            >
+                                <MessageCircle size={18} />
+                                <span>Discussions</span>
+                            </a>
+                        </div>
+                    </div>
+
                     <div className="footer-donation">
                         <Heart size={18} className="heart-icon" />
                         <p>
