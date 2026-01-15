@@ -29,7 +29,7 @@ const Hero = () => {
                     <p className="hero-subtitle">
                         <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Give your Agents the power to see, read, and act on your real-world data.</span>
                         <br />
-                        Now supporting the <strong>Model Context Protocol</strong> for universal, smarter connections to your external tools.
+                        Now supporting the <strong>Model Context Protocol</strong> to Connect and Govern local and remote MCP servers. Integrate tools effortlessly.
                     </p>
 
                     <div className="hero-actions">

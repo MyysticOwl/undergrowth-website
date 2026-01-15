@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import McpShowcase from '../components/McpShowcase';
 import Showcase from '../components/Showcase';
 import Features from '../components/Features';
 import Roles from '../components/Roles';
@@ -14,6 +15,7 @@ const Home = () => {
         <div className="home-page">
             <Navbar />
             <Hero />
+            <McpShowcase />
             <Showcase />
             <Features />
             <Roles />

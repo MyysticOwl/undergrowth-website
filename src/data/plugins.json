@@ -795,6 +795,54 @@
     "category": "integrations"
   },
   {
+    "name": "Model Context Protocol Host",
+    "description": "Universal MCP Host with dynamic tool registration and governance",
+    "version": "0.4.0",
+    "variations": [
+      {
+        "id": "tool_entry",
+        "icon": "🔧",
+        "description": "Workflow Entry Point for MCP Tools.",
+        "tags": [
+          "MCP",
+          "Workflow"
+        ]
+      },
+      {
+        "id": "tool",
+        "icon": "🛠️",
+        "description": "Execute a specific MCP tool. Added via the MCP Connection Wizard.",
+        "tags": [
+          "MCP",
+          "Tool",
+          "Wizard"
+        ]
+      },
+      {
+        "id": "execute_tool",
+        "icon": "🌉",
+        "description": "Execute tools dynamically from workflow data.",
+        "tags": [
+          "MCP",
+          "Bridge",
+          "Execution"
+        ]
+      },
+      {
+        "id": "connect",
+        "icon": "🌐",
+        "description": "Connect to an MCP Server and register its tools as native variations.",
+        "tags": [
+          "MCP",
+          "Integration",
+          "External",
+          "Dynamic"
+        ]
+      }
+    ],
+    "category": "integrations"
+  },
+  {
     "name": "Google Sheets",
     "description": "Integration with Google Sheets API",
     "version": "0.1.0",

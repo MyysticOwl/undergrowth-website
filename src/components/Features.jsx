@@ -6,7 +6,7 @@ const features = [
     {
         icon: <Rocket size={32} />, // Reusing Rocket or importing Globe if available
         title: 'Universal Connectivity',
-        description: 'MCP-Native. Universal connectivity through the Model Context Protocol.'
+        description: 'MCP-Native. Connect, Govern, and Orchestrate local and remote MCP servers. Seamlessly integrate external tools as first-class citizens.'
     },
     {
         icon: <Palette size={32} />,
