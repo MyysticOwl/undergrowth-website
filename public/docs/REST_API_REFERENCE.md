@@ -62,8 +62,8 @@ The engine supports three authentication modes:
 | `/jobs/\{id\}/state` | GET | Get job state |
 | `/plugins` | GET | List loaded plugins |
 | `/plugins/available` | GET | List available plugins |
-| `/variations` | GET | List all variations |
-| `/variations/config-schema` | POST | Get config schema for variation |
+| `/tools` | GET | List all tools |
+| `/tools/config-schema` | POST | Get config schema for tool |
 | `/alerts` | GET | Get alerts |
 | `/alerts/summary` | GET | Alert summary |
 | `/alerts/count` | GET | Alert count |
@@ -227,23 +227,23 @@ List all loaded plugins.
     "version": "0.1.0",
     "author": "Shawn Ellis",
     "description": "Time-based triggers",
-    "variations": ["time_interval", "time_delay", "time_trigger"]
+    "tools": ["time_interval", "time_delay", "time_trigger"]
   }
 ]
 ```
 
 ---
 
-### GET /api/variations
+### GET /api/tools
 
-List all available variations.
+List all available tools.
 
 **Response:**
 ```json
 [
   {
     "package": "time",
-    "variation": "time_interval",
+    "tool": "time_interval",
     "icon": "⏱️",
     "color": "#9b59b6",
     "category": "Time/Schedule"
@@ -253,15 +253,15 @@ List all available variations.
 
 ---
 
-### POST /api/variations/config-schema
+### POST /api/tools/config-schema
 
-Get JSON Schema for a variation's configuration.
+Get JSON Schema for a tool's configuration.
 
 **Request:**
 ```json
 {
   "package": "time",
-  "variation": "time_interval"
+  "tool": "time_interval"
 }
 ```
 

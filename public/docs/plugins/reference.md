@@ -1,9 +1,9 @@
 # Plugin Library Reference 🧩
 
-Complete reference for all built-in plugin variations. Undergrowth uses a modular plugin architecture where each functionality is encapsulated in a DLL/Shared Object.
+Complete reference for all built-in plugin tools. Undergrowth uses a modular plugin architecture where each functionality is encapsulated in a DLL/Shared Object.
 
 > [!TIP]
-> This reference is a curated guide. For a complete list of all variations and their detailed JSON schemas, run:
+> This reference is a curated guide. For a complete list of all tools and their detailed JSON schemas, run:
 > ```bash
 > ./undergrowth component schemas
 > ```
@@ -160,7 +160,7 @@ Executes raw SQL commands (`INSERT`, `UPDATE`, `DELETE`, etc.) and returns execu
 
 ### `postgres:table_operation`
 **Icon:** 📋 | **Category:** `Data/Storage/Database`
-Managed CRUD variation for operations on a specific table (Insert, Update, Delete, Upsert).
+Managed CRUD tool for operations on a specific table (Insert, Update, Delete, Upsert).
 
 ### `postgres:call_procedure`
 **Icon:** ⚙️ | **Category:** `Data/Storage/Database`
@@ -324,13 +324,13 @@ Gets spreadsheet metadata (sheets, title, etc).
 
 ## 🔧 Plugin Component ID Format
 
-All component IDs follow the format: `\{package\}:\{variation\}:\{instance\}`
+All component IDs follow the format: `\{package\}:\{tool\}:\{instance\}`
 
 - **package**: The plugin name (e.g., `time`, `ai`, `sqlite`)
-- **variation**: The specific functionality (e.g., `time_interval`, `ai_chat`, `sql_query`)
+- **tool**: The specific functionality (e.g., `time_interval`, `ai_chat`, `sql_query`)
 - **instance**: A numeric identifier unique within the workflow (e.g., `0`, `1`)
 
-**Example:** `time:time_interval:0` - First instance of the time interval variation
+**Example:** `time:time_interval:0` - First instance of the time interval tool
 
 ---
 

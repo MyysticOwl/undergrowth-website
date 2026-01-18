@@ -63,14 +63,14 @@ crate-type = ["cdylib"]
 //! Echo plugin - demonstrates the minimal plugin structure.
 
 use foundation::plugin_interface::plugin::PluginApi;
-use foundation::plugin_interface::variations::VariationsApi;
+use foundation::plugin_interface::tools::ToolsApi;
 use foundation::plugin_interface::color_palette::PluginRole;
 use savefile_derive::savefile_abi_export;
 use serde::{Deserialize, Serialize};
 use schemars::JsonSchema;
 
-mod echo_variation;
-pub use echo_variation::Echo;
+mod echo_tool;
+pub use echo_tool::Echo;
 
 // Configuration struct - must implement these traits
 #[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
@@ -86,7 +86,7 @@ foundation::plugin! {
     version: "0.1.0",
     author: "Your Name",
     description: "Echoes input data with optional prefix",
-    variations: {
+    tools: {
         "echo" => Echo { 
             icon: "📢", 
             role: PluginRole::Process, 
@@ -98,17 +98,17 @@ foundation::plugin! {
 }
 ```
 
-### Step 4: Create `src/echo_variation.rs`
+### Step 4: Create `src/echo_tool.rs`
 
 ```rust
-//! Echo variation implementation
+//! Echo tool implementation
 
 use crate::EchoConfig;
-use foundation::{PluginContext, VariationHandlerType};
+use foundation::{PluginContext, ToolHandlerType};
 
 pub struct Echo;
 
-impl VariationHandlerType for Echo {
+impl ToolHandlerType for Echo {
     type Config = EchoConfig;
 
     async fn process(
@@ -184,7 +184,7 @@ Copy it to the engine's plugin directory and restart Undergrowth!
 │  • Plugin Loading  • Workflow Management  • Jobs    │
 ├─────────────────────────────────────────────────────┤
 │              Foundation (Public SDK)                │
-│  • PluginContext  • VariationHandlerType  • plugin! │
+│  • PluginContext  • ToolHandlerType  • plugin! │
 ├─────────────────────────────────────────────────────┤
 │              Your Plugins (DLLs/SOs)                │
 └─────────────────────────────────────────────────────┘
@@ -196,15 +196,15 @@ Copy it to the engine's plugin directory and restart Undergrowth!
 
 | Term | Definition |
 |------|------------|
-| **Plugin** | A compiled DLL/SO containing one or more variations |
-| **Variation** | A specific behavior within a plugin (e.g., `time_interval`, `time_delay`) |
+| **Plugin** | A compiled DLL/SO containing one or more tools |
+| **Tool** | A specific behavior within a plugin (e.g., `time_interval`, `time_delay`) |
 | **Workflow** | A graph of connected component instances |
 | **Job** | A running instance of a workflow |
-| **Component** | An instance of a variation in a workflow |
+| **Component** | An instance of a tool in a workflow |
 
 ### Plugin Roles
 
-Variations declare a **role** that determines their visual appearance and expected behavior:
+Tools declare a **role** that determines their visual appearance and expected behavior:
 
 | Role | Icon Color | Description |
 |------|------------|-------------|
@@ -215,7 +215,7 @@ Variations declare a **role** that determines their visual appearance and expect
 
 ### Component ID Format
 
-Every component in a workflow has a unique ID: `{package}:{variation}:{instance}`
+Every component in a workflow has a unique ID: `{package}:{tool}:{instance}`
 
 - `time:time_interval:0` — First timer interval
 - `ai:ai_chat:2` — Third AI chat component
@@ -226,7 +226,7 @@ Every component in a workflow has a unique ID: `{package}:{variation}:{instance}
 
 ### `PluginContext<C>`
 
-The primary interface for your variation logic. Provides typed configuration, output sending, logging, and alerting.
+The primary interface for your tool logic. Provides typed configuration, output sending, logging, and alerting.
 
 ```rust
 pub struct PluginContext<C> {
@@ -314,7 +314,7 @@ ctx.alert(AlertSeverity::Error, "API request failed")
 
 | Method | Description |
 |--------|-------------|
-| `variation() -> &str` | Get variation name (e.g., "echo") |
+| `tool() -> &str` | Get tool name (e.g., "echo") |
 | `id() -> String` | Full component ID (e.g., "job-123:echo:echo:0") |
 | `short_id() -> String` | Short ID (e.g., "echo:echo:0") |
 
@@ -327,13 +327,13 @@ ctx.alert(AlertSeverity::Error, "API request failed")
 
 ---
 
-### VariationHandlerType Trait
+### ToolHandlerType Trait
 
-The core trait you implement for each variation:
+The core trait you implement for each tool:
 
 ```rust
-pub trait VariationHandlerType: Send + Sync + 'static {
-    /// The config type for this variation (usually shared with other variations)
+pub trait ToolHandlerType: Send + Sync + 'static {
+    /// The config type for this tool (usually shared with other tools)
     type Config: Clone + Send + Sync + Default + DeserializeOwned + 'static;
     
     /// Process incoming data (REQUIRED)
@@ -388,15 +388,15 @@ foundation::plugin! {
     author: "Your Name",          // Author attribution
     description: "Description",   // What the plugin does
     config: MyConfig,             // Shared config type
-    variations: {
-        "variation_name" => VariationStruct { 
+    tools: {
+        "tool_name" => ToolStruct { 
             icon: "🎯",                           // Emoji icon
             role: PluginRole::Process,            // Source/Process/Sink
             description: "What this does",        // For UI
             category: categories::AI_LLM,         // Category path
             help: include_str!("help/file.md"),   // Help content
         },
-        // ... more variations
+        // ... more tools
     }
 }
 ```
@@ -488,7 +488,7 @@ mod tests {
     use foundation::test_utils::TestPluginContext;
 
     #[tokio::test]
-    async fn test_echo_variation() {
+    async fn test_echo_tool() {
         // Create test context with config
         let test_ctx = TestPluginContext::<EchoConfig>::with_config(
             EchoConfig { prefix: "[TEST] ".to_string() },
@@ -502,7 +502,7 @@ mod tests {
         // Prepare input data
         let input = serde_json::to_vec(&json!({"msg": "hello"})).unwrap();
         
-        // Call the variation
+        // Call the tool
         let result = Echo::process(&ctx, Some(input)).await;
         assert!(result.is_ok());
         
@@ -531,7 +531,7 @@ mod tests {
         let test_ctx = TestPluginContext::<EchoConfig>::new("echo", "echo");
         let ctx = test_ctx.plugin_context();
         
-        // Trigger an alert in your variation logic
+        // Trigger an alert in your tool logic
         ctx.alert_warning("Test alert").send().await;
         
         // Verify alerts
@@ -566,7 +566,7 @@ mod tests {
 
 ### Decoupled Configuration Pattern
 
-Production plugins should use independent config structs for each variation. This avoids using the `#[serde(tag = "variation")]` pattern which introduces redundant fields in the configuration JSON.
+Production plugins should use independent config structs for each tool. This avoids using the `#[serde(tag = "tool")]` pattern which introduces redundant fields in the configuration JSON.
 
 #### Implementation
 
@@ -579,15 +579,15 @@ pub struct MathConfig { ... }
 pub struct TrigConfig { ... }
 ```
 
-2. **Specify in `VariationHandlerType`**:
+2. **Specify in `ToolHandlerType`**:
 ```rust
-impl VariationHandlerType for Math {
+impl ToolHandlerType for Math {
     type Config = MathConfig;
 }
 ```
 
 3. **Register in `plugin!` macro**:
-The `plugin!` macro will automatically use the `type Config` from each handler implementation to deserialize the correct data for that variation.
+The `plugin!` macro will automatically use the `type Config` from each handler implementation to deserialize the correct data for that tool.
 
 ### Error Handling
 
@@ -611,9 +611,9 @@ async fn process(ctx: &PluginContext<MyConfig>, data: Option<foundation::bytes::
 }
 ```
 
-### Source Variations (Timers, Triggers)
+### Source Tools (Timers, Triggers)
 
-Source variations loop indefinitely:
+Source tools loop indefinitely:
 
 ```rust
 async fn process(ctx: &PluginContext<MyConfig>, _data: Option<foundation::bytes::Bytes>) -> Result<(), String> {
@@ -650,7 +650,7 @@ async fn process(ctx: &PluginContext<MyConfig>, data: Option<foundation::bytes::
 For transform/aggregation plugins processing many events:
 
 ```rust
-impl VariationHandlerType for MyBatchProcessor {
+impl ToolHandlerType for MyBatchProcessor {
     type Config = MyConfig;
     
     fn preferred_batch_size() -> usize { 100 }
@@ -705,7 +705,7 @@ With the introduction of the Model Context Protocol (MCP), you now have two ways
 
 Undergrowth acts as an **MCP Host**. To use your MCP server:
 1. Ensure your server is executable (e.g., `uvx mcp-server-foo`).
-2. Use the `mcp:serve_stdio` variation in your workflow.
+2. Use the `mcp:serve_stdio` tool in your workflow.
 3. Configure it with your command:
    ```json
    {
@@ -750,7 +750,7 @@ Version constants (from `foundation::version`):
 Use `on_start` and `on_stop` for initialization/cleanup:
 
 ```rust
-impl VariationHandlerType for MyVariation {
+impl ToolHandlerType for MyTool {
     type Config = MyConfig;
     
     async fn on_start(ctx: &PluginContext<Self::Config>) -> Result<(), String> {
@@ -799,7 +799,7 @@ Enable verbose logging during development:
 RUST_LOG=debug ./undergrowth
 ```
 
-Add debug output in your variation:
+Add debug output in your tool:
 
 ```rust
 ctx.info(format!("Config: {:?}", ctx.config));

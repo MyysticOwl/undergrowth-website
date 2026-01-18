@@ -55,14 +55,14 @@ Pastel (-200)        Base (-500)          Black (-950)
 ## Icon Guidelines
 
 ### Format
-- **Single emoji** per plugin variation
+- **Single emoji** per plugin tool
 - Inline with node name (not in a container box)
 - 16px font size
 
 ### Selection Principles
 1. **Function over category** - Icon should represent what the node *does*
 2. **Universal recognition** - Use commonly understood emoji
-3. **No duplicates** - Each variation should have a unique icon
+3. **No duplicates** - Each tool should have a unique icon
 
 ### Reference Icons by Category
 
@@ -117,10 +117,10 @@ Pastel (-200)        Base (-500)          Black (-950)
 
 ## Adding a New Plugin
 
-When creating a new plugin variation, define these in the `plugin!` macro:
+When creating a new plugin tool, define these in the `plugin!` macro:
 
 ```rust
-"variation_name" => VariationType { 
+"tool_name" => ToolType { 
     icon: "🔍",              // Single emoji
     role: PluginRole::Process, // Auto-derives color based on category
     description: "...",
@@ -133,19 +133,19 @@ When creating a new plugin variation, define these in the `plugin!` macro:
 - [ ] Icon is unique within the plugin
 - [ ] Icon represents the function, not the category
 - [ ] Role is semantically correct (Source/Process/Sink)
-- [ ] **Configuration ignores the `variation` parameter** - Use decoupled config structs instead of a shared enum with a `tag = "variation"` attribute.
+- [ ] **Configuration ignores the `tool` parameter** - Use decoupled config structs instead of a shared enum with a `tag = "tool"` attribute.
 
 ---
 
 ## Configuration Guidelines
 
-### No Redundant Variation Field
-Plugins should **never** include a `variation` field in their configuration JSON. The engine already knows which variation it is loading from the component's ID. 
+### No Redundant Tool Field
+Plugins should **never** include a `tool` field in their configuration JSON. The engine already knows which tool it is loading from the component's ID. 
 
 **Bad (Redundant):**
 ```json
 {
-  "variation": "arithmetic", // Don't do this!
+  "tool": "arithmetic", // Don't do this!
   "operation": "add",
   "field_a": "x"
 }
@@ -160,12 +160,12 @@ Plugins should **never** include a `variation` field in their configuration JSON
 ```
 
 ### Decoupled Config Structs
-Instead of sharing one large `enum` for all variations in a plugin package, each variation should define its own specific `Config` struct. This makes the configuration cleaner, more modular, and easier to document.
+Instead of sharing one large `enum` for all tools in a plugin package, each tool should define its own specific `Config` struct. This makes the configuration cleaner, more modular, and easier to document.
 
 ```rust
-// Variation 1
+// Tool 1
 pub struct LogConfig { ... }
-// Variation 2
+// Tool 2
 pub struct AlertConfig { ... }
 ```
 

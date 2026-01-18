@@ -54,7 +54,7 @@ const PluginCard = ({ plugin }) => {
             <div className="plugin-header">
                 <div className="plugin-icon-container">
                     <span className="plugin-icon">
-                        {plugin.variations[0]?.icon || "🧩"}
+                        {plugin.tools[0]?.icon || "🧩"}
                     </span>
                 </div>
                 <div className="plugin-info">
@@ -67,9 +67,9 @@ const PluginCard = ({ plugin }) => {
                 </div>
             </div>
 
-            <div className="plugin-variations">
+            <div className="plugin-tools">
                 <div className="tags-container">
-                    {plugin.variations.map(v => (
+                    {plugin.tools.map(v => (
                         <span key={v.id} className="tag-chip" title={v.description}>
                             {v.icon} {v.id}
                         </span>
@@ -93,7 +93,7 @@ const Plugins = () => {
     const filteredPlugins = processedPlugins.filter(p => {
         const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            p.variations.some(v => v.id.toLowerCase().includes(searchTerm.toLowerCase()));
+            p.tools.some(v => v.id.toLowerCase().includes(searchTerm.toLowerCase()));
 
         const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
 

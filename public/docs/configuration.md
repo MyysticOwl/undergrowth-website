@@ -12,7 +12,7 @@ The main configuration file is located at `data/app_config.yaml` by default.
 # Web Server Settings
 webserver:
   enabled: true
-  address: "0.0.0.0"
+  address: "localhost"
   port: 8096
 
 # Authentication (OIDC/Keycloak)
@@ -38,7 +38,7 @@ workflows: []
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `enabled` | bool | `true` | Enable/disable the Web UI and API. |
-| `address` | string | `"0.0.0.0"` | Bind address for the server. |
+| `address` | string | `"localhost"` | Bind address for the server. |
 | `port` | u16 | `8096` | Port for the server to listen on. |
 
 #### 🔐 Authentication (OIDC)
@@ -116,9 +116,9 @@ connectors:
 | `connectors` | array | Yes | List of connections between components. |
 
 ### Component ID Format
-The `id` field must follow the format: `{package}:{variation}:{instance}`.
+The `id` field must follow the format: `{package}:{tool}:{instance}`.
 - **package**: The name of the plugin library (e.g., `time`, `ai`).
-- **variation**: The specific behavior (e.g., `time_interval`, `ai_chat`).
+- **tool**: The specific behavior (e.g., `time_interval`, `ai_chat`).
 - **instance**: A numeric identifier (e.g., `0`, `1`) unique within the workflow.
 
 ---
@@ -213,4 +213,4 @@ A minimal setup with `time`, `logic`, and `file` typically starts in under **50m
 
 ---
 
-*For detailed variation configurations, see [Plugin Reference](./plugins/reference).*
+*For detailed tool configurations, see [Plugin Reference](./plugins/reference).*

@@ -156,5 +156,5 @@ Ready for more? Check out:
 - [CLI Reference](./cli-reference) - Complete command-line documentation
 - [API Reference](./foundation/api-reference) - REST API for automation
 - [Configuration](./configuration) - Detailed configuration options
-- [Plugin Reference](./plugins/reference) - Available plugins and variations
+- [Plugin Reference](./plugins/reference) - Available plugins and tools
 - [Plugin Developer Guide](./plugins/developer-guide) - Build your own plugins

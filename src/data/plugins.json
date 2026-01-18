@@ -3,7 +3,7 @@
     "name": "RSS",
     "description": "RSS and Atom feed reader for news, blogs, and podcasts",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "read_feed",
         "icon": "\ud83d\udcf0",
@@ -21,7 +21,7 @@
     "name": "Slack",
     "description": "Send messages and alerts to Slack",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "post_message",
         "icon": "\ud83d\udcac",
@@ -49,7 +49,7 @@
     "name": "Discord",
     "description": "Send messages and alerts to Discord",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "post_message",
         "icon": "\ud83c\udfae",
@@ -77,7 +77,7 @@
     "name": "JSON Table",
     "description": "Aggregate JSON messages into tabular format with field selection and size limits",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "json_table",
         "icon": "\ud83d\udccb",
@@ -94,7 +94,7 @@
     "name": "Memory",
     "description": "Vector memory for RAG and semantic search - embeddings, storage, and similarity search",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "embed",
         "icon": "\ud83d\udd22",
@@ -132,7 +132,7 @@
     "name": "Data Transform",
     "description": "Advanced data manipulation utilities",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "parse_csv",
         "icon": "\ud83d\udcc4",
@@ -185,7 +185,7 @@
     "name": "History",
     "description": "Persistent chat history storage",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "load",
         "icon": "\ud83d\udcd6",
@@ -213,7 +213,7 @@
     "name": "Alert",
     "description": "Conditional monitoring and alerting plugin with threshold, pattern, heartbeat, and correlation support",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "threshold_alert",
         "icon": "\ud83d\udcca",
@@ -284,7 +284,7 @@
     "name": "Process",
     "description": "External process execution",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "run_command",
         "icon": "\u2699\ufe0f",
@@ -301,7 +301,7 @@
     "name": "Time",
     "description": "Time-based triggers and delays",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "time_interval",
         "icon": "\u23f1\ufe0f",
@@ -336,7 +336,7 @@
     "name": "Scheduler",
     "description": "Calendar-aware scheduling beyond basic timers",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "cron_schedule",
         "icon": "\ud83d\udcc5",
@@ -371,7 +371,7 @@
     "name": "Math",
     "description": "Mathematical operations and signal generation",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "arithmetic",
         "icon": "\u2795",
@@ -406,7 +406,7 @@
     "name": "Logic",
     "description": "Conditional execution and decision-making",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "if_else",
         "icon": "\u2753",
@@ -471,7 +471,7 @@
     "name": "JSON",
     "description": "Transform and emit JSON objects",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "generate_json",
         "icon": "\ud83d\udcac",
@@ -524,7 +524,7 @@
     "name": "Utility",
     "description": "Basic utility tools",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "console_logger",
         "icon": "\ud83d\udcdd",
@@ -541,7 +541,7 @@
     "name": "MQTT",
     "description": "Connect to external MQTT brokers to publish and subscribe to topics",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "mqtt_publish",
         "icon": "\ud83d\udce4",
@@ -569,7 +569,7 @@
     "name": "Http",
     "description": "HTTP request and listener capabilities",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "http_server",
         "icon": "\ud83c\udf10",
@@ -595,7 +595,7 @@
     "name": "Notify",
     "description": "Alert operators when conditions are met",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "send_email",
         "icon": "\ud83d\udce7",
@@ -639,7 +639,7 @@
     "name": "Weather",
     "description": "Weather data from Open-Meteo (free, no API key)",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "current",
         "icon": "\ud83c\udf21\ufe0f",
@@ -667,7 +667,7 @@
     "name": "SQLite",
     "description": "Embedded SQL database for local persistence",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "sql_query",
         "icon": "\ud83d\udd0d",
@@ -715,7 +715,7 @@
     "name": "Redis",
     "description": "Fast key-value cache with pub/sub",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "redis_cache",
         "icon": "\ud83d\udcbe",
@@ -753,7 +753,7 @@
     "name": "File",
     "description": "Read/write files to disk",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "write_file",
         "icon": "\ud83d\udcc4",
@@ -781,7 +781,7 @@
     "name": "Scraper",
     "description": "Extract data from HTML and web content",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "scrape_html",
         "icon": "\ud83d\udd77\ufe0f",
@@ -795,58 +795,10 @@
     "category": "integrations"
   },
   {
-    "name": "Model Context Protocol Host",
-    "description": "Universal MCP Host with dynamic tool registration and governance",
-    "version": "0.4.0",
-    "variations": [
-      {
-        "id": "tool_entry",
-        "icon": "🔧",
-        "description": "Workflow Entry Point for MCP Tools.",
-        "tags": [
-          "MCP",
-          "Workflow"
-        ]
-      },
-      {
-        "id": "tool",
-        "icon": "🛠️",
-        "description": "Execute a specific MCP tool. Added via the MCP Connection Wizard.",
-        "tags": [
-          "MCP",
-          "Tool",
-          "Wizard"
-        ]
-      },
-      {
-        "id": "execute_tool",
-        "icon": "🌉",
-        "description": "Execute tools dynamically from workflow data.",
-        "tags": [
-          "MCP",
-          "Bridge",
-          "Execution"
-        ]
-      },
-      {
-        "id": "connect",
-        "icon": "🌐",
-        "description": "Connect to an MCP Server and register its tools as native variations.",
-        "tags": [
-          "MCP",
-          "Integration",
-          "External",
-          "Dynamic"
-        ]
-      }
-    ],
-    "category": "integrations"
-  },
-  {
     "name": "Google Sheets",
     "description": "Integration with Google Sheets API",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "append_row",
         "icon": "\u2795",
@@ -903,7 +855,7 @@
     "name": "Postgres",
     "description": "PostgreSQL database integration for structured data persistence",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "query_db",
         "icon": "\ud83d\udd0d",
@@ -949,9 +901,9 @@
   },
   {
     "name": "Model Context Protocol Host",
-    "description": "Model Context Protocol Host with Undergrowth Governance",
-    "version": "0.1.0",
-    "variations": [
+    "description": "Universal MCP Host with Dynamic Tool Registration and Governance",
+    "version": "0.4.0",
+    "tools": [
       {
         "id": "tool_entry",
         "icon": "\ud83d\udd27",
@@ -959,6 +911,16 @@
         "tags": [
           "MCP",
           "Workflow"
+        ]
+      },
+      {
+        "id": "tool",
+        "icon": "\ud83d\udee0\ufe0f",
+        "description": "Execute a specific MCP tool. Added via the MCP Connection Wizard.",
+        "tags": [
+          "MCP",
+          "Tool",
+          "Wizard"
         ]
       },
       {
@@ -970,6 +932,17 @@
           "Bridge",
           "Execution"
         ]
+      },
+      {
+        "id": "connect",
+        "icon": "\ud83c\udf10",
+        "description": "Connect to an MCP Server and register its tools as native tools.",
+        "tags": [
+          "MCP",
+          "Integration",
+          "External",
+          "Dynamic"
+        ]
       }
     ],
     "category": "integrations"
@@ -978,7 +951,7 @@
     "name": "AI",
     "description": "AI/LLM capabilities for text completion, chat, agents, and workflow generation",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "ai_chat",
         "icon": "\ud83d\udcac",
@@ -1013,7 +986,7 @@
     "name": "Vision",
     "description": "Computer vision algorithms including motion and object detection.",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "motion_detector",
         "icon": "\ud83c\udfc3",
@@ -1057,7 +1030,7 @@
     "name": "MjpegView",
     "description": "Serves input binary frames as an MJPEG stream over HTTP for debugging/visualization.",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "stream_server",
         "icon": "\ud83d\udcfa",
@@ -1074,7 +1047,7 @@
     "name": "Crypto",
     "description": "Cryptographic utilities",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "generate_hash",
         "icon": "#\ufe0f\u20e3",
@@ -1127,7 +1100,7 @@
     "name": "System",
     "description": "System resource monitoring",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "cpu_metrics",
         "icon": "\ud83d\udda5\ufe0f",
@@ -1165,7 +1138,7 @@
     "name": "Camera",
     "description": "Capture video streams from local cameras",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "webcam_stream",
         "icon": "\ud83d\udcf7",
@@ -1191,7 +1164,7 @@
     "name": "timeseries",
     "description": "Time-series storage and analytics pack",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "store",
         "icon": "\ud83d\udcbe",
@@ -1246,7 +1219,7 @@
     "name": "Dashboard",
     "description": "Real-time visualization widgets for the Dashboard view",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "gauge",
         "icon": "\u23f1\ufe0f",
@@ -1310,6 +1283,15 @@
           "Visualization",
           "View"
         ]
+      },
+      {
+        "id": "render_html",
+        "icon": "\ud83d\udcc4",
+        "description": "Displays HTML content in a dashboard widget",
+        "tags": [
+          "Visualization",
+          "View"
+        ]
       }
     ],
     "category": "domain"
@@ -1318,7 +1300,7 @@
     "name": "Cortex",
     "description": "Embedded LLM inference engine - Run GGUF models locally without external dependencies",
     "version": "0.1.0",
-    "variations": [
+    "tools": [
       {
         "id": "ai_inference",
         "icon": "\u26a1",

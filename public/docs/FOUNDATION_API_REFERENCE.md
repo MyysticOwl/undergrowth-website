@@ -9,7 +9,7 @@ Complete reference for the Undergrowth `foundation` crate - the public SDK for p
 1. [Overview](#overview)
 2. [Core Types](#core-types)
    - [PluginContext](#plugincontextc)
-   - [VariationHandlerType](#variationhandlertype-trait)
+   - [ToolHandlerType](#toolhandlertype-trait)
    - [ComponentInfo](#componentinfo)
 3. [Plugin Macro](#plugin-macro)
 4. [Category System](#category-system)
@@ -53,7 +53,7 @@ path = "../../../foundation"
 
 ### PluginContext\<C\>
 
-The primary interface for variation handlers. Provides typed configuration, output sending, logging, and alerting.
+The primary interface for tool handlers. Provides typed configuration, output sending, logging, and alerting.
 
 ```rust
 pub struct PluginContext<C> {
@@ -130,7 +130,7 @@ ctx.alert(AlertSeverity::Error, "API request failed")
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
-| `variation` | `fn variation(&self) -> &str` | Get variation name (e.g., "echo") |
+| `tool` | `fn tool(&self) -> &str` | Get tool name (e.g., "echo") |
 | `id` | `fn id(&self) -> String` | Full component ID (e.g., "job-123:echo:echo:0") |
 | `short_id` | `fn short_id(&self) -> String` | Short ID (e.g., "echo:echo:0") |
 
@@ -143,12 +143,12 @@ ctx.alert(AlertSeverity::Error, "API request failed")
 
 ---
 
-### VariationHandlerType Trait
+### ToolHandlerType Trait
 
-The core trait plugin authors implement for each variation.
+The core trait plugin authors implement for each tool.
 
 ```rust
-pub trait VariationHandlerType: Send + Sync + 'static {
+pub trait ToolHandlerType: Send + Sync + 'static {
     /// The config type this handler uses
     type Config: Clone + Send + Sync + Default + DeserializeOwned + 'static;
     
@@ -234,15 +234,15 @@ foundation::plugin! {
     author: "Your Name",          // Author attribution
     description: "Description",   // What the plugin does
     config: MyConfig,             // Shared config type
-    variations: {
-        "variation_name" => VariationStruct { 
+    tools: {
+        "tool_name" => ToolStruct { 
             icon: "🎯",                           // Emoji icon
             role: PluginRole::Process,            // Source/Process/Sink
             description: "What this does",        // For UI
             category: categories::AI_LLM,         // Category path
             help: include_str!("help/file.md"),   // Help content
         },
-        // ... more variations
+        // ... more tools
     }
 }
 ```
@@ -389,7 +389,7 @@ pub struct AlertSource {
     pub workflow_id: String,
     pub component_id: String,
     pub plugin_name: String,
-    pub variation: String,
+    pub tool: String,
 }
 ```
 
@@ -745,7 +745,7 @@ pub struct MockContext {
 }
 
 impl MockContext {
-    fn new(package: &str, variation: &str, instance: u64) -> Self;
+    fn new(package: &str, tool: &str, instance: u64) -> Self;
     fn with_config(self, config: impl Into<String>) -> Self;
     
     // Log inspection
@@ -776,9 +776,9 @@ pub struct TestPluginContext<C> {
 }
 
 impl<C: Clone + Send + Sync + Default + DeserializeOwned + 'static> TestPluginContext<C> {
-    fn new(package: &str, variation: &str) -> Self;
-    fn with_config(config: C, package: &str, variation: &str) -> Self;
-    fn with_instance(package: &str, variation: &str, instance: u64) -> Self;
+    fn new(package: &str, tool: &str) -> Self;
+    fn with_config(config: C, package: &str, tool: &str) -> Self;
+    fn with_instance(package: &str, tool: &str, instance: u64) -> Self;
     
     // Get the actual context for testing
     fn plugin_context(&self) -> PluginContext<C>;
@@ -806,12 +806,12 @@ mod tests {
     use foundation::test_utils::TestPluginContext;
 
     #[tokio::test]
-    async fn test_my_variation() {
+    async fn test_my_tool() {
         // Create test context with config
         let test_ctx = TestPluginContext::<MyConfig>::with_config(
             MyConfig { field: "value".to_string() },
             "mypackage",
-            "myvariation"
+            "mytool"
         );
         
         // Get the PluginContext
@@ -820,8 +820,8 @@ mod tests {
         // Prepare input
         let input = serde_json::to_vec(&json!({"test": true})).unwrap();
         
-        // Call variation
-        let result = MyVariation::process(&ctx, Some(input)).await;
+        // Call tool
+        let result = MyTool::process(&ctx, Some(input)).await;
         assert!(result.is_ok());
         
         // Check outputs
@@ -844,7 +844,7 @@ The `foundation` crate re-exports commonly used types at the root level:
 ```rust
 // Plugin context and handlers
 pub use plugin_interface::plugin_context::PluginContext;
-pub use plugin_interface::variation_handler::VariationHandlerType;
+pub use plugin_interface::tool_handler::ToolHandlerType;
 pub use plugin_interface::category::{Category, categories};
 pub use plugin_interface::plugin::ProcessingCapabilities;
 

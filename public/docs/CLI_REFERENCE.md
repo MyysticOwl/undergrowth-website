@@ -140,7 +140,7 @@ Execute a workflow YAML file immediately. The engine will load the components an
 - Use `--quiet` to suppress step-by-time progress logs.
 
 ### `workflow check <file>`
-Validates a workflow YAML file against the engine's schema and ensures all component variations are valid and loaded.
+Validates a workflow YAML file against the engine's schema and ensures all component tools are valid and loaded.
 
 ```bash
 ./undergrowth workflow check my_workflow.yaml
@@ -508,14 +508,14 @@ Logout from a remote server.
 Manage and inspect available plugin components.
 
 ### `component list`
-List all available plugin components and variations. Useful for finding exactly which `package:variation` you need for your workflow.
+List all available plugin components and tools. Useful for finding exactly which `package:tool` you need for your workflow.
 
 ```bash
 ./undergrowth component list
 ```
 
 ### `component schemas`
-Export the technical contract (Configuration schema, Inputs, Outputs) for every available component variation in the library as a single YAML reference file.
+Export the technical contract (Configuration schema, Inputs, Outputs) for every available component tool in the library as a single YAML reference file.
 
 ```bash
 ./undergrowth component schemas > components.yaml

@@ -156,5 +156,5 @@ Ready for more? Check out:
 - [CLI Reference](./CLI_REFERENCE.md) - Complete command-line documentation
 - [API Reference](./API_REFERENCE.md) - REST API for automation
 - [Configuration](./CONFIGURATION.md) - Detailed configuration options
-- [Plugin Reference](./PLUGIN_REFERENCE.md) - Available plugins and variations
+- [Plugin Reference](./PLUGIN_REFERENCE.md) - Available plugins and tools
 - [Plugin Developer Guide](./PLUGIN_DEVELOPER_GUIDE.md) - Build your own plugins
