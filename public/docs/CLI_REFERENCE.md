@@ -150,6 +150,18 @@ Validates a workflow YAML file against the engine's schema and ensures all compo
 - Performs deep validation of component existence in the library.
 - Returns exit code `1` if syntax or logical validation fails.
 
+### `workflow watch <file>`
+Starts a file watcher on the specified workflow YAML file. Automatically reloads and restarts the workflow whenever changes are saved. This provides an instant feedback loop for workflow development.
+
+```bash
+./undergrowth workflow watch my_workflow.yaml
+```
+
+**Developer Notes:**
+- Requires the `notify` system feature.
+- Gracefully stops the existing job before reloading the new definition.
+- Ideal for rapid iteration on complex logic.
+
 ### `workflow init <file>`
 Scaffolds a new workflow YAML file with a standard template (Timer + Logger) to jumpstart development.
 

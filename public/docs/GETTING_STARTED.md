@@ -58,10 +58,22 @@ Start the engine in default mode (Web UI + REPL):
 ### Accessing the Web UI
 Open your browser to [http://localhost:8096](http://localhost:8096).
 - **Default Username**: `admin`
-- **Default Password**: Provided in the terminal on **first boot only**. Check the logs/console output when you first start the engine.
+- **Default Username**: `admin`
+- **Default Password**: The engine generates a random password on first boot. **Check your terminal output**:
+  ```
+  ╔════════════════════════════════════════╗
+  ║       Initial Admin Password           ║
+  ║      admin / <random_password>         ║
+  ╚════════════════════════════════════════╝
+  ```
+
+> [!TIP]
+> **Can't find the port?** Check the logs for `Listening on 0.0.0.0:8096`. You can change the port in `data/app_config.yaml` or via `--port 9000`.
 
 > [!IMPORTANT]
 > Save the initial admin password! It is only displayed once on first boot.
+> 
+> *Note: If you have a Team license, you can create additional users with different roles (Admin, Operator, Viewer).*
 
 ### Using the REPL
 The terminal will show a `sprout>` prompt. Try these commands:
@@ -89,9 +101,10 @@ components:
       units: "seconds"
 
   - name: "AI Brain"
-    id: "ai:ai_chat:0"
+    id: "ai:ai_agent:0"
     config:
       prompt: "Say a short, unique greeting."
+      allowed_tools: []
 
   - name: "Save to File"
     id: "file:write_file:0"
@@ -102,8 +115,8 @@ components:
 
 connectors:
   - from: { component_id: "time:time_interval:0", port: "out" }
-    to: [{ component_id: "ai:ai_chat:0", port: "in" }]
-  - from: { component_id: "ai:ai_chat:0", port: "out" }
+    to: [{ component_id: "ai:ai_agent:0", port: "in" }]
+  - from: { component_id: "ai:ai_agent:0", port: "out" }
     to: [{ component_id: "file:write_file:0", port: "in" }]
 ```
 
@@ -138,6 +151,19 @@ The dashboard shows:
 2. View running jobs and their status
 3. Click a job to see real-time component states and data flow
 
+### Using Blueprints
+Blueprints are pre-made workflow templates.
+1. Click **Blueprints** in the sidebar.
+2. Browse the gallery (e.g., "Video Security", "Showcase Server").
+3. Click **Import** to create a new workflow from the template.
+4. The new workflow is now editable in your **Workflows** list.
+
+### Starting a Job Manually
+If a workflow is not set to `auto_start`:
+1. Go to the **Workflows** view.
+2. Click the **Run** (Play) icon on the desired workflow card.
+3. A new **Job** instance will start, and you will be redirected to the Job Monitor.
+
 ---
 
 ## 🕵️ Troubleshooting
@@ -154,7 +180,7 @@ The dashboard shows:
 Ready for more? Check out:
 
 - [CLI Reference](./CLI_REFERENCE.md) - Complete command-line documentation
-- [API Reference](./API_REFERENCE.md) - REST API for automation
+- [REST API Reference](./REST_API_REFERENCE.md) - REST API for automation
 - [Configuration](./CONFIGURATION.md) - Detailed configuration options
 - [Plugin Reference](./PLUGIN_REFERENCE.md) - Available plugins and tools
 - [Plugin Developer Guide](./PLUGIN_DEVELOPER_GUIDE.md) - Build your own plugins

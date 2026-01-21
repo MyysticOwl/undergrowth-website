@@ -23,7 +23,17 @@ Plugins are organized into functional categories defined in the `foundation` cra
 | **Storage / Data** | Persistence and databases. | `sqlite:sql_insert`, `file:write_file` |
 | **System / OS** | Local system interaction. | `system:cpu_metrics`, `process:run_command` |
 | **Monitoring** | Health & alerting. | `alert:threshold_alert`, `alert:heartbeat_watchdog` |
-| **Integrations**   | MCP Tools & Legacy APIs. | `mcp:call_tool` (Coming Soon), `google_sheets:read_sheet` |
+| **Integrations**   | MCP Tools & Legacy APIs. | `mcp:call_tool`, `google_sheets:read_sheet` |
+
+---
+
+## 🔀 Multi-Port Architecture
+
+Undergrowth supports components with **multiple input and output handles**. This allows for sophisticated branching logic and data flow within a single component.
+
+- **Dynamic Routing**: Some components can route data to specific named output ports (e.g., `logic:if_else` has `then` and `else`).
+- **Parallel Processing**: Multiple links can originate from or terminate at the same port for concurrent execution.
+- **Visual Clarity**: Named ports in the UI clearly indicate the purpose of each data pathway.
 
 ---
 
@@ -36,7 +46,11 @@ General-purpose AI assistant for text completion and chat. Supports Ollama, Open
 
 ### `ai:ai_agent`
 **Icon:** 🧠 | **Category:** `AI/LLM`
-Autonomous AI agent with ReAct tool-use loop. Can call tools and reason step-by-step to solve complex tasks.
+Autonomous AI agent with a sophisticated **ReAct (Reasoning + Acting) loop**.
+- **Autonomous Reasoning**: Plans and executes multi-step tasks independently.
+- **Tool Mastery**: Seamlessly invokes native plugins and MCP tools.
+- **Human-in-the-Loop**: Integrated with `gate:*` components for supervised execution of sensitive actions.
+- **State Recovery**: Maintains reasoning context across engine restarts.
 
 ### `ai:generate_workflow`
 **Icon:** ✨ | **Category:** `AI/LLM`
@@ -79,6 +93,9 @@ Triggers based on solar events (sunrise, sunset) for a given latitude/longitude.
 ### `logic:if_else`
 **Icon:** ❓ | **Category:** `Logic`
 Standard If/Then/Else branch. Routes data based on a boolean condition.
+- **Outputs**:
+  - `then`: Emits if condition is true.
+  - `else`: Emits if condition is false.
 
 ### `logic:switch`
 **Icon:** 🔀 | **Category:** `Logic`
@@ -86,11 +103,78 @@ Content-based router. Routes messages to different outputs based on field value 
 
 ### `logic:compare_values`
 **Icon:** ⚖️ | **Category:** `Logic`
-Compares two fields using standard operators (==, !=, \<, >, etc.).
+Compares two fields using standard operators (==, !=, <, >, etc.).
+- **Outputs**:
+  - `true`: Emits if comparison is true.
+  - `false`: Emits if comparison is false.
 
 ### `logic:iterate_list`
 **Icon:** 🔁 | **Category:** `Logic/Flow`
 Iterates over a list of items from the input JSON and emits them one by one.
+- **Outputs**:
+  - `item`: Emits individual items.
+  - `completed`: Emits `true` when iteration finishes.
+
+---
+
+## 🛑 Human-in-the-Loop Gates
+*Pause workflows for human decisions.*
+
+### `gate:await_approval`
+**Icon:** 🛑 | **Category:** `HITL/Gate`
+Pauses workflow execution until a human approves or rejects the request. Routes data to `approved` or `rejected` output ports based on the decision.
+
+**Key Features:**
+- Real-time approval dashboard with SSE updates
+- Configurable timeout with auto-approve/reject
+- Template support for dynamic descriptions (`{{field}}`)
+- Severity levels for urgency indication
+- Comment support on rejection
+
+**Configuration:**
+| Field | Type | Required | Description |
+|:------|:-----|:---------|:------------|
+| `title` | string | ✅ | Human-readable approval title |
+| `description` | string | ❌ | Description with `{{field}}` templating |
+| `severity` | enum | ❌ | `info`, `normal`, `warning`, `critical` |
+| `timeout_seconds` | number | ❌ | Seconds before timeout (0 = no timeout) |
+| `timeout_action` | enum | ❌ | `approve`, `reject`, `wait` |
+
+- **Outputs**:
+  - `approved`: Emits original payload when approved.
+  - `rejected`: Emits rejection info with reason and responder.
+
+### `gate:await_confirmation`
+**Icon:** ⚠️ | **Category:** `HITL/Confirmation`
+Simple binary choice (Confirm/Cancel). Ideal for dangerous actions.
+- **Outputs**:
+  - `confirmed`: Emits payload if confirmed.
+  - `cancelled`: Emits payload if cancelled (or timeout).
+
+### `gate:await_review`
+**Icon:** 🔎 | **Category:** `HITL/Review`
+Content review with three options: Approve, Reject, or Request Changes (Feedback).
+- **Outputs**:
+  - `approved`: Emits payload if approved.
+  - `rejected`: Emits reason if blocked.
+  - `feedback`: Emits feedback details if changes requested.
+
+### `gate:await_choice`
+**Icon:** 🤔 | **Category:** `HITL/Choice`
+Present a list of pre-defined options to the user.
+- **Config**:
+  - `options`: List of strings (options).
+- **Outputs**:
+  - `out`: Emits JSON `{ "choice": "selected_option", "input": payload }`.
+
+### `gate:await_input`
+**Icon:** ⌨️ | **Category:** `HITL/Input`
+Request structured data input from the user using a JSON Schema form.
+- **Config**:
+  - `item_schema`: JSON Schema defining the form.
+- **Outputs**:
+  - `submitted`: Emits the user-provided data.
+  - `cancelled`: Emits if user cancels.
 
 ---
 

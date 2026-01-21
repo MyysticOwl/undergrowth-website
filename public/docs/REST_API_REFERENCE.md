@@ -749,7 +749,84 @@ Delete a file or directory.
 
 ---
 
-## System Setup
+## 👥 User Management
+*Requires `admin` role.*
+
+### List Users
+`GET /api/users`
+
+### Create User
+`POST /api/users`
+```json
+{
+  "username": "jdoe",
+  "email": "jdoe@example.com",
+  "role": "operator"
+}
+```
+
+### Get User
+`GET /api/users/:id`
+
+### Update User
+`PUT /api/users/:id`
+
+### Delete User
+`DELETE /api/users/:id`
+
+---
+
+## 🛡️ Role Management
+*Requires `admin` role.*
+
+### List Roles
+`GET /api/roles`
+
+### Create Role
+`POST /api/roles`
+
+### Get Role
+`GET /api/roles/:id`
+
+---
+
+## 🛑 HITL Approvals
+
+### List Pending Approvals
+`GET /api/approvals`
+
+### Respond to Approval
+`POST /api/approvals/:id/respond`
+```json
+{
+  "action": "approve",
+  "comment": "Looks good",
+  "data": {}
+}
+```
+
+### Approval History
+`GET /api/approvals/history`
+
+---
+
+## 🔌 MCP Management
+
+### Discover Tools
+`POST /api/mcp/discover`
+Connects to an MCP server and lists available tools.
+
+```json
+{
+  "connection_type": "stdio",
+  "command": "npx",
+  "args": ["-y", "@modelcontextprotocol/server-postgres"]
+}
+```
+
+---
+
+## ⚙️ System Settings
 
 ### GET /api/setup/status
 

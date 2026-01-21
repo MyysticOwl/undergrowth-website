@@ -252,6 +252,9 @@ pub struct PluginContext<C> {
 | `send_blocking(Value)` | Async send with backpressure (waits if channel full) |
 | `send_batch_blocking(Vec<Value>)` | Batch send with backpressure |
 | `publish_dashboard(key, value)` | Send data to the Live Monitor (WebSocket) |
+| `output("name").send(value)` | Send data to a specific named output port |
+| `request_approval(req)` | Pause execution and request human approval |
+| `register_dynamic_tool(...)` | Register an external tool (e.g., from MCP) |
 | `queue_depth() -> usize` | Current output queue depth |
 
 **Example:**
@@ -324,6 +327,52 @@ ctx.alert(AlertSeverity::Error, "API request failed")
 |--------|-------------|
 | `list_models() -> Vec<(String, ModelConfig)>` | List available AI models |
 | `model_service() -> Option<Box<dyn ModelService>>` | Get model service interface |
+
+### Named Output Ports
+
+For more complex logic, you can send data to specific named ports instead of the default `out` port.
+
+```rust
+// Send to "error" port
+ctx.output("error").send(json!({"msg": "Something failed"})).await;
+
+// Send to "then" port
+ctx.output("then").send(data).await;
+```
+
+---
+
+### Human-in-the-Loop (HITL) Approvals
+
+Plugins can pause execution and request human intervention.
+
+```rust
+use foundation::io::approval::{ApprovalRequest, ApprovalSeverity};
+
+async fn process(ctx: &PluginContext<MyConfig>, data: Option<Vec<u8>>) -> Result<(), String> {
+    // create request
+    let request = ApprovalRequest::new(
+        "Deploy to Production?",
+        ApprovalSeverity::Critical
+    ).with_description("This will update the live database.");
+
+    // This block waits until the user clicks Approve/Reject in the UI
+    match ctx.request_approval(&request, 3600).await {
+        Ok(response) if response.is_approved() => {
+            ctx.info("User approved deployment");
+            // proceed...
+        }
+        Ok(response) => {
+            ctx.warn("User rejected deployment");
+            // abort...
+        }
+        Err(e) => {
+            ctx.error(format!("Approval failed/timed out: {}", e));
+        }
+    }
+    Ok(())
+}
+```
 
 ---
 

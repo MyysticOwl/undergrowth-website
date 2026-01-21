@@ -1,0 +1,31 @@
+# Undergrowth
+
+> The Universal Nervous System for Automation.
+
+Undergrowth is a lightweight, cross-platform automation engine written in Rust. It allows you to connect, govern, and orchestrate local and remote MCP (Model Context Protocol) servers, giving your AI agents the power to see, read, and act on real-world data.
+
+## Key Features
+- **MCP-Native**: First-class support for the Model Context Protocol.
+- **Local Control**: Runs on your machine. One binary, zero dependencies.
+- **RBAC & Governance**: Role-Based Access Control and Human-in-the-Loop gates.
+- **Multi-Port Workflows**: Visual workflow builder with complex routing logic.
+- **Sprout CLI**: Headless execution and "watch mode" hot-reloading.
+
+## Installation
+Download the latest release for your platform from our GitHub releases page.
+- **Windows**: `.msi` installer
+- **Linux/macOS**: `tar.gz` binary
+
+## Documentation
+- [Getting Started](https://undergrowth.io/docs/customer_facing/GETTING_STARTED.md)
+- [Plugin Reference](https://undergrowth.io/docs/customer_facing/PLUGIN_REFERENCE.md)
+- [REST API](https://undergrowth.io/docs/customer_facing/REST_API_REFERENCE.md)
+
+## Architecture
+Undergrowth is built on a modular "Everything is a Plugin" architecture. The core engine is minimal, with functionality provided by interchangeable plugins (`.dll`/`.so`).
+
+## Licensing
+- **Community**: Free forever. 3 active workflows.
+- **starter**: $49/year. 10 workflows.
+- **Pro**: $99/year. Unlimited workflows.
+- **Team**: $249/year. RBAC, Audit Logs, 5 seats.

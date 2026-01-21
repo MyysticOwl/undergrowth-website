@@ -84,21 +84,15 @@ Pastel (-200)        Base (-500)          Black (-950)
 ### Visual Anatomy
 
 ```
-┌─────────────────────────────┐
-█│ 🔍  SQL Query          ○───→
-└─────────────────────────────┘
- ↑                        ↑
- │                        └── Output handle (8px circle)
- └── Color bar (4px, category color)
+┌─────────────────────────────────┐
+│         🔍  SQL Query           │
+○ input                           ○ out
+│                                 ○ error
+└─────────────────────────────────┘
+ ↑                                ↑
+ └── Input handle                 └── Named Output handles
 ```
 
-### CSS Classes
-
-| Class | Purpose |
-|-------|---------|
-| `.editable-node` | Container with border, radius |
-| `.node-color-bar` | 10px left edge, category color |
-| `.node-content` | Flexbox layout for icon + name |
 | `.node-icon-compact` | Emoji icon (16px) |
 | `.node-name` | Text label (13px) |
 | `.react-flow__handle` | Connection handles (8px circles) |
@@ -112,6 +106,25 @@ Pastel (-200)        Base (-500)          Black (-950)
 | Icon-name gap | `6px` |
 | Handle size | `8px` |
 | Min width | `120px` |
+
+### Multi-Port UX Guidelines
+
+For nodes with multiple inputs or outputs (e.g., Logic Gates, Routers), follow these rules:
+
+1.  **Placement**:
+    *   **Inputs**: Always on the **left** edge.
+    *   **Outputs**: Always on the **right** edge.
+    *   **Vertical Spacing**: Distribute handles evenly to prevent connection overlap.
+
+2.  **Labeling**:
+    *   **Input Labels**: Place inside the node, aligned left.
+    *   **Output Labels**: Place inside the node, aligned right.
+    *   **Brevity**: Use 1-2 words max (e.g., `then`, `else`, `error`, `success`).
+
+3.  **Semantics**:
+    *   **Primary Output**: Top-most output handle (often unnamed or `out`).
+    *   **Error Output**: Bottom-most output handle, labeled `error`.
+    *   **Conditional Outputs**: Clearly label branching logic (e.g., `true`/`false`).
 
 ---
 

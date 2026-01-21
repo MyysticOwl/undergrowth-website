@@ -59,6 +59,25 @@ workflows: []
 > [!NOTE]
 > On first boot with local auth enabled, the engine generates an initial admin password and displays it in the console. Store this securely!
 
+#### 🛡️ Roles & Permissions (RBAC)
+
+When authentication is enabled, users are assigned one of the following roles:
+
+| Role | Access Level |
+|------|--------------|
+| **`admin`** | **Full Access**. Can manage users, system settings, plugins, and all resources. |
+| **`operator`** | **Operational Access**. Can manage workflows, jobs, alerts, and blueprints. Cannot manage users or system settings. |
+| **`viewer`** | **Read-Only**. Can view status, logs, and configurations but cannot make changes. |
+
+### 🎟️ Licensing
+
+Undergrowth offers a tiered licensing model. The engine checks for a license file at startup.
+
+| Tier | Key Features |
+|------|--------------|
+| **Community** (Free) | Unlimited local usage, Standard Plugins, Single User (Admin). |
+| **Team** | All Community features + **Multi-User RBAC**, **Audit Logs**, Priority Support. |
+
 ---
 
 ## 🌍 Environment Variables
@@ -71,6 +90,7 @@ The engine supports environment variable overrides using the `UNDERGROWTH_` pref
 | `UNDERGROWTH_SERVER_ADDRESS`| `webserver.address`| `127.0.0.1` |
 | `UNDERGROWTH_LOG_LEVEL` | (Internal) | `debug` |
 | `UNDERGROWTH_PLUGINS_DIR` | (Command Line) | `/opt/plugins` |
+| `UNDERGROWTH_AUTH_SECRET` | `local_auth.secret_key` | `my-secret-key` |
 
 ---
 

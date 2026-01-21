@@ -51,9 +51,43 @@ path = "../../../foundation"
 
 ## Core Types
 
-### PluginContext\<C\>
+### `PluginContext`
 
-The primary interface for tool handlers. Provides typed configuration, output sending, logging, and alerting.
+Primary interface for tool execution.
+
+- **`new(...)`**: Create new context.
+- **`send(Value)`**: Send data to default output.
+- **`output(name)`**: Get an `OutputBuilder` for a named output port.
+- **`input(name)`**: Get an `InputBuilder` for a named input port.
+- **`request_approval(req, timeout)`**: Request HITL approval.
+- **`register_dynamic_tool(...)`**: Register external tool.
+- **`publish_dashboard(key, value)`**: Send data to dashboard.
+
+### `OutputBuilder`
+Fluent interface for sending messages to named ports.
+
+- **`send(Value)`**: Send JSON data.
+- **`with_correlation(id)`**: Attach correlation ID.
+- **`with_metadata(key, val)`**: Attach custom metadata.
+
+### `InputBuilder`
+Fluent interface for receiving messages from named ports.
+
+- **`recv()`**: Await next message (async).
+- **`with_timeout(duration)`**: Set receive timeout.
+- **`with_correlation_filter(id)`**: Only accept messages with matching ID.
+- **`request_approval(req)`**: Request HITL approval.
+- **`register_dynamic_tool(...)`**: Register external tool.
+- **`publish_dashboard(key, value)`**: Send data to dashboard.
+
+### `OutputBuilder`
+Fluent interface for sending messages.
+
+- **`send(Value)`**: Send JSON data.
+- **`with_correlation(id)`**: Attach correlation ID.
+- **`with_metadata(key, val)`**: Attach custom metadata.
+
+### PluginContext\<C\>
 
 ```rust
 pub struct PluginContext<C> {
@@ -87,6 +121,41 @@ ctx.send_value(&MyOutput { count: 42 }).await;
 let items = vec![json!(1), json!(2), json!(3)];
 let sent = ctx.send_batch(items).await;
 ```
+
+#### Input Methods
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `input` | `fn input(&self, port: &str) -> InputBuilder` | Get interface for named input |
+
+**Example**:
+```rust
+// Receive from "in" port with timeout
+let msg = ctx.input("in")
+    .with_timeout(Duration::from_secs(5))
+    .recv()
+    .await?;
+```
+
+#### Dynamic Tool Methods
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `register_dynamic_tool` | `fn register_dynamic_tool(...) -> bool` | Register an external tool |
+| `unregister_dynamic_tool` | `fn unregister_dynamic_tool(pkg, tool) -> bool` | Remove a tool |
+| `unregister_dynamic_package` | `fn unregister_dynamic_package(pkg) -> u32` | Remove all tools for package |
+
+#### Approval Methods (HITL)
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `request_approval` | `async fn request_approval(&self, req: &ApprovalRequest, timeout_sec: u64) -> Result<ApprovalResponse, String>` | Pause and wait for human decision |
+
+#### Dashboard Methods
+
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `publish_dashboard` | `fn publish_dashboard(&self, widget: &str, data: Value)` | Push real-time data to Web UI |
 
 #### Logging Methods
 
@@ -888,4 +957,4 @@ pub use base64;
 
 ---
 
-*Foundation API v0.1.1 | Undergrowth Plugin SDK*
+*Foundation API v0.1.0 | Undergrowth Plugin SDK*
