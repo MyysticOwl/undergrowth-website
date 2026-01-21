@@ -18,9 +18,15 @@ const Hero = () => {
                     transition={{ duration: 0.8 }}
                     className="hero-content"
                 >
-                    <div className="hero-badge">
-                        <span>v0.1.1 — Community Preview. Free Forever. Start in 30 seconds.</span>
-                    </div>
+                    <a
+                        href="https://github.com/MyysticOwl/undergrowth-website/releases"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hero-badge"
+                    >
+                        <span>v0.1.2 — Community Preview. New Teams Tier & Governance.</span>
+                        <ArrowRight size={14} className="hero-badge-icon" />
+                    </a>
 
                     <h1 className="hero-title">
                         The Universal Nervous System.

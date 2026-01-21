@@ -7,8 +7,8 @@ const roles = [
         id: 'developers',
         title: 'For Developers',
         icon: <Code size={24} />,
-        description: 'Plugin SDK in Rust • WebAssembly sandbox • Full REST API',
-        details: 'Build on a foundation of Rust and WebAssembly. Extend with your own plugins using a stable, public API. No proprietary lock-in—you own your automation.'
+        description: 'Plugin SDK in Rust • Sprout CLI • Full REST API',
+        details: 'Build on a solid foundation of Rust. Extend with your own plugins using a stable, public API. No proprietary lock-in—you own your automation.'
     },
     {
         id: 'it-pros',

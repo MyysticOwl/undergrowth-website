@@ -468,6 +468,64 @@
     "category": "primitives"
   },
   {
+    "name": "Gate",
+    "description": "Human-in-the-Loop (HITL) tools for workflow governance and decision-making",
+    "version": "0.1.2",
+    "tools": [
+      {
+        "id": "await_approval",
+        "icon": "\ud83d\uded1",
+        "description": "Pauses workflow until a human approves or rejects the request.",
+        "tags": [
+          "HITL",
+          "Logic",
+          "Gate"
+        ]
+      },
+      {
+        "id": "await_review",
+        "icon": "\ud83d\udd0e",
+        "description": "Content review gate with Approve, Reject, or Request Changes options.",
+        "tags": [
+          "HITL",
+          "Logic",
+          "Gate"
+        ]
+      },
+      {
+        "id": "await_input",
+        "icon": "\u2328\ufe0f",
+        "description": "Request structured data input from a human via JSON Schema form.",
+        "tags": [
+          "HITL",
+          "Logic",
+          "Gate"
+        ]
+      },
+      {
+        "id": "await_confirmation",
+        "icon": "\u26a0\ufe0f",
+        "description": "Simple binary choice (Confirm/Cancel) for critical actions.",
+        "tags": [
+          "HITL",
+          "Logic",
+          "Gate"
+        ]
+      },
+      {
+        "id": "await_choice",
+        "icon": "\ud83e\udd14",
+        "description": "Present a list of pre-defined options for human selection.",
+        "tags": [
+          "HITL",
+          "Logic",
+          "Gate"
+        ]
+      }
+    ],
+    "category": "primitives"
+  },
+  {
     "name": "JSON",
     "description": "Transform and emit JSON objects",
     "version": "0.1.0",
@@ -964,10 +1022,11 @@
       {
         "id": "ai_agent",
         "icon": "\ud83e\udde0",
-        "description": "Autonomous AI agent with ReAct tool-use loop. Can call tools and reason step-by-step.",
+        "description": "Autonomous AI agent with ReAct loop, tool-use capability, and HITL gate integration.",
         "tags": [
           "AI",
-          "LLM"
+          "LLM",
+          "Agent"
         ]
       },
       {

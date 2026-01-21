@@ -1,5 +1,5 @@
 import React from 'react';
-import { Palette, Puzzle, Rocket, Lock, Terminal, Shield } from 'lucide-react';
+import { Palette, Puzzle, Rocket, Lock, Terminal, Shield, UserCheck, GitBranch, RefreshCw } from 'lucide-react';
 import './Features.css';
 
 const features = [
@@ -10,8 +10,9 @@ const features = [
     },
     {
         icon: <Palette size={32} />,
-        title: 'Visual Workflow Builder',
-        description: 'Build complex automations without writing code. Drag-and-drop components onto a canvas, connect them visually, and deploy immediately.'
+        title: 'Multi-Port Workflow Builder',
+        description: 'Design complex logic with multiple input and output handles. Drag-and-drop components, branch based on data, and build parallel pathways visually.',
+        isNew: true
     },
     {
         icon: <Puzzle size={32} />,
@@ -30,13 +31,21 @@ const features = [
     },
     {
         icon: <Terminal size={32} />,
-        title: 'Sprout CLI',
-        description: 'Automate your automation. Headless execution for CI/CD pipelines. Run workflows from cron, deploy via scripts, validate configs before production.'
+        title: 'Sprout CLI & Hot Reload',
+        description: 'Automate your automation. Headless execution, CI/CD support, and instant feedback with "sprout watch" hot-reloading for rapid development loops.',
+        isNew: true
+    },
+    {
+        icon: <UserCheck size={32} />,
+        title: 'HITL Governance',
+        description: 'Pause critical workflows for human approval, review, or input. Integrated dashboard ensures sensitive operations are always supervised.',
+        isNew: true
     },
     {
         icon: <Shield size={32} />,
         title: 'Enterprise Security',
-        description: 'Built for compliance. Future-proof security with RBAC, SSO, and OIDC (Coming Soon). Designed for planned audit logging and encrypted asset protection.'
+        description: 'Built for compliance. Future-proof security with local RBAC. Designed for audit logging.',
+        isNew: true
     }
 ];
 
@@ -57,7 +66,10 @@ const Features = () => {
                             <div className="feature-icon">
                                 {feature.icon}
                             </div>
-                            <h3 className="feature-title">{feature.title}</h3>
+                            <h3 className="feature-title">
+                                {feature.title}
+                                {feature.isNew && <span className="new-badge">New</span>}
+                            </h3>
                             <p className="feature-description">{feature.description}</p>
                         </div>
                     ))}
